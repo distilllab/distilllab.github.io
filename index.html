@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DistillLab · 分身自动化制作系统</title>
+<meta name="description" content="不做平台，做分身劳动力。四分身流水线（选题→蒸馏→审校→归档），主人只在一头下指令、一头收成果。">
+<style>
+:root{--ink:#26215C;--muted:#5F5E5A;--line:#D3D1C7;--bg:#FFFFFF;--soft:#F1EFE8;--accent:#534AB7;--accent-soft:#EEEDFE}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:"Segoe UI","Microsoft YaHei",system-ui,sans-serif;color:var(--ink);background:var(--bg);line-height:1.7}
+.wrap{max-width:960px;margin:0 auto;padding:0 24px}
+header{padding:48px 0 32px;border-bottom:1px solid var(--line)}
+h1{font-size:30px;font-weight:600;letter-spacing:.5px}
+h1 .lab{color:var(--accent)}
+.tagline{margin-top:8px;color:var(--muted);font-size:15px}
+.badges{margin-top:16px;display:flex;gap:10px;flex-wrap:wrap}
+.badge{display:inline-block;padding:3px 12px;border-radius:999px;font-size:13px;background:var(--accent-soft);color:var(--accent);text-decoration:none;border:1px solid var(--accent)}
+.badge.ghost{background:var(--soft);color:var(--muted);border-color:var(--line)}
+h2{font-size:20px;margin:40px 0 16px;font-weight:600}
+p.lead{color:var(--muted)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px}
+.card{border:1px solid var(--line);border-radius:12px;padding:16px 18px;background:#fff}
+.card b{display:block;font-size:15px;margin-bottom:4px}
+.card span{font-size:13px;color:var(--muted)}
+.card .ok{color:#0F6E56;font-weight:500}
+img{max-width:100%;border:1px solid var(--line);border-radius:12px}
+figure{margin:0}
+figcaption{font-size:12px;color:var(--muted);margin-top:8px;text-align:center}
+footer{margin-top:56px;padding:24px 0;border-top:1px solid var(--line);color:var(--muted);font-size:13px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+a{color:var(--accent)}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <h1>Distill<span class="lab">Lab</span></h1>
+  <p class="tagline">分身自动化制作系统 · 不做平台，做"分身劳动力"供给侧</p>
+  <div class="badges">
+    <a class="badge" href="https://github.com/distilllab/yanbao-distill">开源 · yanbao-distill</a>
+    <span class="badge ghost">四分身流水线</span>
+    <span class="badge ghost">核验记录公开</span>
+    <span class="badge ghost">开放文件交付</span>
+  </div>
+</header>
+
+<section>
+  <h2>我们在做什么</h2>
+  <p class="lead">全自动四分身流水线：选题 → 蒸馏 → 审校 → 归档（审校打回闭环，同一件累计打回 ≥2 次即停单）。主人只在一头下指令、一头收成果——把"读不完的资料"蒸成"带核验的知识资产"。</p>
+</section>
+
+<section>
+  <h2>服务场景（九大场景 · 三簇）</h2>
+  <div class="grid">
+    <div class="card"><b>01 研报蒸馏 <span class="ok">✓ 已验证两单</span></b><span>量化研报 → 3-5 张知识卡，逐条核验（31/31 命中）</span></div>
+    <div class="card"><b>02 深度研究 <span class="ok">✓ 已验证首单</span></b><span>问题驱动调研 → 证据分级报告（17/19 核验）</span></div>
+    <div class="card"><b>03 书籍蒸馏</b><span>一本书 → 原件笔记 + 可复用知识卡（"不读原书"模式）</span></div>
+    <div class="card"><b>04 真人分身复刻</b><span>博客/文章全集 → 人格知识卡 + SKILL + SOUL 三件套</span></div>
+    <div class="card"><b>05 第二人格实体</b><span>深度访谈 → 分身三件套 + 3D 模型文件（打印自理）</span></div>
+    <div class="card"><b>06 老师傅经验萃取</b><span>制造业隐性经验 → 故障案例卡库 + 排查决策树 + 新人分身</span></div>
+    <div class="card"><b>07 口述家史 · 家族分身</b><span>老人访谈 → 家族记忆册 + "问爷爷"问答分身</span></div>
+    <div class="card"><b>08 账号蒸馏选题库</b><span>对标账号爆款拆解 → 30 天选题库（引流品）</span></div>
+    <div class="card"><b>09 去 AI 味文案改写</b><span>AI 稿 → 人话稿（排队中）</span></div>
+  </div>
+</section>
+
+<section>
+  <h2>系统全景</h2>
+  <figure>
+    <img src="panorama.svg" alt="分身自动化制作系统全景构架图">
+    <figcaption>主人层 · 运营层 · 场景层 · 共享流水线 · 底座 · 商业原则</figcaption>
+  </figure>
+</section>
+
+<section>
+  <h2>为什么可信</h2>
+  <p class="lead">每一单公开核验记录与成本曲线；产线自身以开源方式发布（MIT）。知识资产以开放文件交付——不被任何平台锁定。</p>
+</section>
+
+<footer>
+  <span>© 2026 DistillLab · distilllab.cn</span>
+  <span><a href="https://github.com/distilllab">GitHub @distilllab</a></span>
+</footer>
+</div>
+</body>
+</html>
