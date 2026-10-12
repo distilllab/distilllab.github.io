@@ -129,7 +129,8 @@ footer a{color:var(--green);text-decoration:none}
   <h1>八个场景，都是真的</h1>
   <p class="sub">没有一个概念性条目——每张卡背后都有可运行的能力或已开源的产出。输入关键词，直接筛你要的场景。</p>
   <div class="searchline">
-    <input id="q" type="text" placeholder="试试：焊接 / 看板 / 研报 / 手艺 / AI……" autocomplete="off">
+    <input id="q" type="text" placeholder="输入关键词，下方场景卡实时筛选：焊接 / 看板 / 研报……" autocomplete="off">
+    <button id="clearq" type="button" style="padding:11px 22px;border-radius:9px;border:1px solid var(--line);background:#fff;color:var(--muted);font-size:13.5px;cursor:pointer">清空</button>
   </div>
   <div class="count" id="count"></div>
   <p style="margin:-12px 0 18px;font-size:13px"><a href="#nomatch" id="custom-link" style="color:var(--green);font-weight:700;text-decoration:none;border-bottom:2px solid var(--green)">没找到想要的场景？描述一下，我们定制 →</a></p>
@@ -164,17 +165,17 @@ footer a{color:var(--green);text-decoration:none}
 
     <details class="scard" data-k="书籍 蒸馏 读书 知识卡 引流 学习">
       <summary><span class="head"><span class="no">场景 04</span></span><h3>书籍蒸馏</h3><div class="one">一本厚书，蒸成几张能用的知识卡——为你自己，也为内容素材。</div><span class="more">展开细节 ▾</span></summary>
-      <div class="body">三块结构（核心结论/可复用方法/关键数据）+ 源页码 + 迁移注记。支持制造业主题定制：把一本管理书蒸成<b>贵厂场景</b>的行动清单。<a class="cta" href="mailto:hello@distilllab.cn?subject=书籍蒸馏咨询">咨询 →</a></div>
+      <div class="body">三块结构（核心结论/可复用方法/关键数据）+ 源页码 + 迁移注记。支持制造业主题定制：把一本管理书蒸成<b>贵厂场景</b>的行动清单。<a class="cta" href="#contact">咨询 →</a></div>
     </details>
 
     <details class="scard" data-k="知识库 整理 维护 文档 资产 更新 企业">
       <summary><span class="head"><span class="no">场景 05</span></span><h3>企业知识库整理与维护</h3><div class="one">文件很多，关键判断仍得问人——整理成能查、能更新、能用的结构。</div><span class="more">展开细节 ▾</span></summary>
-      <div class="body">散落的文档/记录收拢成结构化知识库，明确<b>版本、负责人、失效规则</b>。常作为经验萃取交付后的续费服务。<a class="cta" href="mailto:hello@distilllab.cn?subject=知识库整理咨询">咨询 →</a></div>
+      <div class="body">散落的文档/记录收拢成结构化知识库，明确<b>版本、负责人、失效规则</b>。常作为经验萃取交付后的续费服务。<a class="cta" href="#contact">咨询 →</a></div>
     </details>
 
     <details class="scard" data-k="AI 味 改写 文案 内容 品牌 语气 小红书">
       <summary><span class="head"><span class="no">场景 06</span><span class="no">交付附项</span></span><h3>去 AI 味内容</h3><div class="one">让内容像人话——作为交付附项，也可单独谈。</div><span class="more">展开细节 ▾</span></summary>
-      <div class="body">附项定位：交接包、看板的文案部分默认打磨到"像人话"。独立需求（账号内容、品牌语气调音）按项目谈。<a class="cta" href="mailto:hello@distilllab.cn?subject=内容服务咨询">咨询 →</a></div>
+      <div class="body">附项定位：交接包、看板的文案部分默认打磨到"像人话"。独立需求（账号内容、品牌语气调音）按项目谈。<a class="cta" href="#contact">咨询 →</a></div>
     </details>
 
     <details class="scard" data-k="AI 工作流 定制 技能 agent 自动化 智能体">
@@ -184,17 +185,21 @@ footer a{color:var(--green);text-decoration:none}
 
     <details class="scard dim" data-k="设备 握手 平台 仪器 协议 在建">
       <summary><span class="head"><span class="no">场景 08</span><span class="no">在建 · 预告</span></span><h3>设备握手平台</h3><div class="one">让 AI 与传统设备、仪器直接对话——下一站。</div><span class="more">展开细节 ▾</span></summary>
-      <div class="body"><span class="tbd">架构设计中（3 路接入 + 8 层协议栈）。此卡为预告，暂不接单——想聊聊的厂家，我们愿意听。</span><a class="cta" href="mailto:hello@distilllab.cn?subject=设备握手平台交流">交流 →</a></div>
+      <div class="body"><span class="tbd">架构设计中（3 路接入 + 8 层协议栈）。此卡为预告，暂不接单——想聊聊的厂家，我们愿意听。</span><a class="cta" href="#contact">交流 →</a></div>
     </details>
   </div>
   <p class="count" id="empty" style="display:none">没找到匹配的场景——没关系，下面就是为你准备的定制入口。</p>
   <div id="nomatch" style="display:none" class="card">
     <h3>描述一下你目前的场景，我们定制</h3>
     <p class="one" style="margin-bottom:12px">你的留言会由 AI 后台分析，48 小时内回你一份定制建议：适不适合做、从哪下手、需要准备什么。</p>
-    <input id="s-process" type="text" placeholder="场景：厂里哪个环节、什么工序或事务" style="display:block;width:100%;margin-bottom:8px;padding:11px 13px;border-radius:9px;border:1px solid var(--line);background:#fff;color:var(--ink);font:inherit;font-size:13.5px">
-    <textarea id="s-pain" placeholder="现在卡在哪：为什么这件事总做不好 / 总要问人 / 总出错" style="display:block;width:100%;margin-bottom:8px;padding:11px 13px;border-radius:9px;border:1px solid var(--line);background:#fff;color:var(--ink);font:inherit;font-size:13.5px;min-height:64px;resize:vertical"></textarea>
-    <input id="s-target" type="text" placeholder="这事最终要交给谁、给谁看" style="display:block;width:100%;margin-bottom:8px;padding:11px 13px;border-radius:9px;border:1px solid var(--line);background:#fff;color:var(--ink);font:inherit;font-size:13.5px">
-    <input id="s-contact" type="text" placeholder="联系方式：微信号或邮箱（二选一，必填）" style="display:block;width:100%;margin-bottom:10px;padding:11px 13px;border-radius:9px;border:1px solid var(--green);background:#fff;color:var(--ink);font:inherit;font-size:13.5px">
+    <div style="font-size:12.5px;color:var(--muted);margin:2px 0 4px">① 场景：厂里哪个环节、什么工序或事务</div>
+    <input id="s-process" type="text" style="display:block;width:100%;margin-bottom:8px;padding:11px 13px;border-radius:9px;border:1px solid var(--line);background:#fff;color:var(--ink);font:inherit;font-size:13.5px">
+    <div style="font-size:12.5px;color:var(--muted);margin:8px 0 4px">② 现在卡在哪</div>
+    <textarea id="s-pain" style="display:block;width:100%;margin-bottom:8px;padding:11px 13px;border-radius:9px;border:1px solid var(--line);background:#fff;color:var(--ink);font:inherit;font-size:13.5px;min-height:64px;resize:vertical"></textarea>
+    <div style="font-size:12.5px;color:var(--muted);margin:8px 0 4px">③ 这事最终交给谁、给谁看</div>
+    <input id="s-target" type="text" style="display:block;width:100%;margin-bottom:8px;padding:11px 13px;border-radius:9px;border:1px solid var(--line);background:#fff;color:var(--ink);font:inherit;font-size:13.5px">
+    <div style="font-size:12.5px;color:var(--muted);margin:8px 0 4px">④ 联系方式：微信号或邮箱（必填，用于回复你）</div>
+    <input id="s-contact" type="text" style="display:block;width:100%;margin-bottom:10px;padding:11px 13px;border-radius:9px;border:1px solid var(--green);background:#fff;color:var(--ink);font:inherit;font-size:13.5px">
     <button id="s-send" type="button" style="padding:11px 30px;border-radius:9px;border:none;background:var(--green);color:#fff;font-weight:700;font-size:14px;cursor:pointer">发留言</button>
     <p id="s-st" style="min-height:18px;font-size:13px;color:var(--green);margin-top:10px"></p>
   </div>
@@ -220,9 +225,12 @@ footer a{color:var(--green);text-decoration:none}
   <div class="ctaband" id="contact">
     <h2>没找到你的场景？留言给我们</h2>
     <p>四格填好，点「发留言」——48 小时内免费回复适不适合做；不合适直接告诉你。</p>
-    <input id="f-process" type="text" placeholder="工序：做什么、用什么设备" style="display:block;width:100%;max-width:560px;margin:0 auto 10px;padding:12px 14px;border-radius:10px;border:1px solid #4d6b58;background:#fffef9;color:var(--ink);font:inherit;font-size:13.5px">
-    <input id="f-contact" type="text" placeholder="联系方式：微信号或邮箱（二选一，必填）" style="display:block;width:100%;max-width:560px;margin:0 auto 10px;padding:12px 14px;border-radius:10px;border:1px solid #4d6b58;background:#fffef9;color:var(--ink);font:inherit;font-size:13.5px">
-    <textarea id="f-pain" placeholder="最难交接的地方 + 交接给谁" style="display:block;width:100%;max-width:560px;margin:0 auto 14px;padding:12px 14px;border-radius:10px;border:1px solid #4d6b58;background:#fffef9;color:var(--ink);font:inherit;font-size:13.5px;resize:vertical;min-height:70px"></textarea>
+    <div style="font-size:12.5px;color:#bcd8c8;margin:0 auto 6px;max-width:560px;text-align:left">① 工序：做什么、用什么设备</div>
+    <input id="f-process" type="text" style="display:block;width:100%;max-width:560px;margin:0 auto 10px;padding:12px 14px;border-radius:10px;border:1px solid #4d6b58;background:#fffef9;color:var(--ink);font:inherit;font-size:13.5px">
+    <div style="font-size:12.5px;color:#bcd8c8;margin:0 auto 6px;max-width:560px;text-align:left">② 最难交接的地方 + 交接给谁</div>
+    <textarea id="f-pain" style="display:block;width:100%;max-width:560px;margin:0 auto 10px;padding:12px 14px;border-radius:10px;border:1px solid #4d6b58;background:#fffef9;color:var(--ink);font:inherit;font-size:13.5px;resize:vertical;min-height:70px"></textarea>
+    <div style="font-size:12.5px;color:#bcd8c8;margin:0 auto 6px;max-width:560px;text-align:left">③ 联系方式：微信号或邮箱（必填，用于回复你）</div>
+    <input id="f-contact" type="text" style="display:block;width:100%;max-width:560px;margin:0 auto 14px;padding:12px 14px;border-radius:10px;border:1px solid #4d6b58;background:#fffef9;color:var(--ink);font:inherit;font-size:13.5px">
     <button id="send" type="button" style="padding:13px 40px;border-radius:11px;border:none;background:var(--white);color:var(--deep);font-weight:700;font-size:15px;cursor:pointer">发留言</button>
     <p id="st" style="min-height:20px;font-size:13px;color:#cde8d8;margin:12px 0 0"></p>
     <small>留言后 48 小时内回复 ｜ 全程线上完成，无需见面 ｜ 每单附核验记录</small>
@@ -292,6 +300,7 @@ footer a{color:var(--green);text-decoration:none}
     .then(function(j){if(j.success==="true"){sst.textContent="留言已发出。48 小时内回你一份定制建议。";sbtn.textContent="已发送 ✓"}else{throw 0}})
     .catch(function(){sbtn.disabled=false;sbtn.textContent="发留言";sst.textContent="网络不通。备用：hello@distilllab.cn"});
   });
+  document.getElementById("clearq").addEventListener("click",function(){input.value="";apply();input.focus()});
   fromURL();
   window.addEventListener("hashchange",fromURL);
 })();
