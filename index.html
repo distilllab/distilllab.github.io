@@ -1,284 +1,38 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="zh-CN">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>DistillLab 蒸馏研究室 · 把老师傅的经验，做成新人接得住的交接包</title>
-<meta name="description" content="DistillLab 蒸馏研究室：专注制造业老师傅经验萃取。把关键工序的操作要点、异常判断、易错处整理成新人能照着用、工厂能持续更新的交接包。每张卡带来源、适用条件和现场验证记录。">
-<script type="application/ld+json">
-{"@context":"https://schema.org","@type":"Organization","name":"DistillLab 蒸馏研究室","alternateName":"distilllab","url":"https://distilllab.cn/","email":"hello@distilllab.cn","sameAs":["https://github.com/distilllab"],"description":"制造业老师傅经验萃取：把关键工序的老师傅经验做成新人能照着用、工厂能持续更新的交接包。","slogan":"老师傅会做，新人接得住"}
-</script>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>蒸馏研究室｜老师傅经验交接包</title>
+<meta name="description" content="面向工厂的老师傅经验萃取交接包。视频访谈、图文整理、远程复核，全程线上交付。48小时免费诊断一个交接难题。">
 <style>
-:root{--ink:#26215C;--muted:#5F5E5A;--accent:#534AB7;--accent-soft:#EEEDFE;--line:#D8D6E8;--bg:#F7F6FC;--warn:#8A4B3B}
-*{margin:0;padding:0;box-sizing:border-box}
-body{font-family:"Segoe UI","Microsoft YaHei",system-ui,sans-serif;background:#fff;color:var(--ink);line-height:1.75}
-.wrap{max-width:900px;margin:0 auto;padding:0 22px}
-.sec{padding:56px 0}
-.sec.alt{background:var(--bg)}
-.label{font-size:13px;letter-spacing:4px;color:var(--accent);font-weight:600;margin-bottom:10px}
-h2{font-size:26px;font-weight:700;margin-bottom:8px}
-.lead{font-size:15px;color:var(--muted);margin-bottom:24px;max-width:640px}
-
-/* ---- header ---- */
-header{padding:20px 0}
-header .wrap{display:flex;align-items:center;justify-content:space-between}
-.brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--ink)}
-.mark{width:38px;height:38px;border-radius:10px;background:var(--accent);color:#fff;font-size:16px;font-weight:700;display:flex;align-items:center;justify-content:center}
-.brand b{font-size:16px;letter-spacing:1px}
-.brand span{font-size:12px;color:var(--muted);display:block;line-height:1.2}
-header .nav{font-size:13.5px;color:var(--muted)}
-
-/* ---- hero ---- */
-.hero{padding:64px 0 56px;text-align:center}
-.hero .tag{display:inline-block;font-size:13px;letter-spacing:3px;color:var(--accent);border:1px solid var(--accent);border-radius:999px;padding:3px 16px;margin-bottom:22px;font-weight:600}
-.hero h1{font-size:46px;line-height:1.25;font-weight:800;letter-spacing:1px}
-.hero h1 .q{color:var(--accent)}
-.hero .sub{margin:18px auto 30px;max-width:600px;font-size:16.5px;color:var(--muted)}
-.hero .cta{display:inline-block;padding:15px 38px;border-radius:14px;background:var(--accent);color:#fff;text-decoration:none;font-size:16.5px;font-weight:600;letter-spacing:1px;box-shadow:0 6px 18px rgba(83,74,183,.30)}
-.hero .cta:hover{transform:translateY(-1px)}
-.hero .alt{display:block;margin-top:14px;font-size:13.5px;color:var(--muted);text-decoration:none}
-.hero .alt:hover{color:var(--accent)}
-.trust{margin-top:20px;font-size:12.5px;color:var(--muted)}
-
-/* ---- stats strip ---- */
-.stats{background:var(--ink);padding:34px 0}
-.stats .wrap{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;text-align:center}
-.stat b{display:block;font-size:36px;font-weight:800;color:#fff;letter-spacing:1px}
-.stat b i{font-style:normal;color:#B9B3F0}
-.stat span{font-size:13px;color:#C9C5E8}
-.stats .src{grid-column:1/-1;font-size:11.5px;color:#8F8AC0;text-align:center}
-
-/* ---- cards ---- */
-.grids{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}
-.card{background:#fff;border-radius:16px;padding:22px 20px;box-shadow:0 2px 10px rgba(38,33,92,.07)}
-.sec.alt .card{border:1px solid var(--line);box-shadow:none}
-.card .no{font-size:13px;font-weight:700;color:var(--accent);letter-spacing:1px;margin-bottom:6px;display:block}
-.card h3{font-size:16.5px;margin-bottom:6px}
-.card p{font-size:13.8px;color:var(--muted)}
-
-/* ---- samples ---- */
-.sam{display:block;text-decoration:none;color:var(--ink);background:#fff;border-radius:14px;overflow:hidden;box-shadow:0 2px 10px rgba(38,33,92,.08);transition:transform .15s,box-shadow .15s}
-.sam:hover{transform:translateY(-3px);box-shadow:0 8px 22px rgba(38,33,92,.14)}
-.sam .paper{padding:16px 18px 14px}
-.sam .ph{display:flex;justify-content:space-between;align-items:center;border-bottom:2px solid var(--accent);padding-bottom:8px;margin-bottom:10px}
-.sam .ph b{font-size:15px;color:var(--ink)}
-.sam .ph em{font-style:normal;font-size:11px;color:var(--warn);border:1px solid var(--warn);border-radius:5px;padding:1px 7px}
-.sam .row{display:flex;justify-content:space-between;font-size:12.5px;color:var(--muted);padding:4px 0;border-bottom:1px dashed var(--line)}
-.sam .row b{color:var(--ink);font-weight:600}
-.sam .foot{padding:10px 18px 14px;font-size:13.5px;color:var(--accent);font-weight:600}
-.note{font-size:12.5px;color:var(--warn);margin-top:14px}
-
-/* ---- steps ---- */
-.stepgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px}
-.step{background:#fff;border-radius:16px;padding:20px;box-shadow:0 2px 10px rgba(38,33,92,.07)}
-.step b{display:block;font-size:26px;font-weight:800;color:var(--accent-soft);-webkit-text-stroke:1.5px var(--accent);letter-spacing:1px;margin-bottom:6px}
-.step h3{font-size:15.5px;margin-bottom:5px}
-.step p{font-size:13.3px;color:var(--muted)}
-
-/* ---- deliver ---- */
-.split{display:grid;grid-template-columns:1.15fr .85fr;gap:16px}
-.panel{background:#fff;border-radius:16px;padding:22px;box-shadow:0 2px 10px rgba(38,33,92,.07)}
-.panel h3{font-size:16px;margin-bottom:10px;color:var(--accent)}
-.panel ul{padding-left:18px;font-size:14px}
-.panel li{margin:6px 0}
-.panel .kv{font-size:13.5px;color:var(--muted)}
-
-/* ---- why ---- */
-.why{background:var(--ink);border-radius:22px;padding:36px 34px;color:#fff}
-.why h2{color:#fff}
-.why .label{color:#B9B3F0}
-.why .grids .card{background:rgba(255,255,255,.06);box-shadow:none;color:#fff}
-.why .card h3{color:#fff}
-.why .card p{color:#C9C5E8}
-
-/* ---- contact ---- */
-.contact{text-align:center}
-.contact h2{font-size:30px}
-.contact .sub{font-size:15px;color:var(--muted);margin-bottom:24px}
-.contact .cta{display:inline-block;padding:15px 38px;border-radius:14px;background:var(--accent);color:#fff;text-decoration:none;font-size:16.5px;font-weight:600;box-shadow:0 6px 18px rgba(83,74,183,.30)}
-.contact .mail{display:block;margin-top:16px;font-size:14px;color:var(--ink)}
-.contact .wx{margin-top:14px;font-size:13px;color:var(--muted)}
-
-footer{padding:24px;text-align:center;color:var(--muted);font-size:12.5px;border-top:1px solid var(--line)}
-footer a{color:var(--accent);text-decoration:none}
-
-@media(max-width:680px){
-.hero h1{font-size:32px}
-.stats .wrap{grid-template-columns:1fr;gap:12px}
-.split{grid-template-columns:1fr}
-.sec{padding:40px 0}
-}
+:root{--paper:#f4f2eb;--ink:#25352e;--green:#335d49;--muted:#68726a;--line:#cbd0c6;--orange:#b6532b;--white:#fffef9}*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:30px}body{margin:0;background:var(--paper);color:var(--ink);font-family:"Microsoft YaHei","PingFang SC",sans-serif;line-height:1.7}a{color:inherit}button,input,textarea{font:inherit}button,a{touch-action:manipulation}a:focus-visible,button:focus-visible,textarea:focus-visible{outline:3px solid var(--orange);outline-offset:5px}button{cursor:pointer}.wrap{max-width:1240px;margin:auto;padding:0 40px}header{border-bottom:1px solid var(--line)}header .wrap{height:88px;display:flex;align-items:center;justify-content:space-between}.brand{text-decoration:none;display:flex;gap:14px;align-items:center}.mark{font-size:26px;letter-spacing:-3px;font-weight:900;border:2px solid var(--green);padding:0 8px;color:var(--green)}.brand b{font-size:17px}.brand small{display:block;color:var(--muted);font-size:10px;letter-spacing:2px}nav{display:flex;gap:28px;font-size:13px}nav a{text-decoration:none}nav a:last-child{color:var(--green);font-weight:700}.hero{padding-top:65px;padding-bottom:60px;display:grid;grid-template-columns:1fr 1fr;gap:52px;align-items:center}.eyebrow{font-size:12px;letter-spacing:2px;color:var(--green);font-weight:700;display:flex;gap:10px;align-items:center}.eyebrow:before{content:"";height:2px;width:26px;background:var(--green)}h1{font-size:clamp(36px,4.1vw,58px);line-height:1.25;letter-spacing:-2px;margin:23px 0}h1 span{color:var(--green)}.intro{font-size:16px;max-width:490px;color:#536056;margin-bottom:26px}.actions{display:flex;gap:18px;align-items:center;flex-wrap:wrap}.btn{display:inline-flex;align-items:center;justify-content:center;gap:24px;padding:14px 23px;background:var(--green);color:white;border:1px solid var(--green);text-decoration:none;font-weight:700;font-size:14px;border-radius:3px}.btn:hover{background:#234332}.textlink{font-size:14px;text-underline-offset:5px}.facts{font-size:12px;color:var(--muted);margin-top:18px}.workbench{background:#dce2d7;border:1px solid #b9c4b7;padding:20px;position:relative;box-shadow:9px 9px 0 #e7e6de}.benchhead{display:flex;justify-content:space-between;font-size:11px;letter-spacing:1px;margin-bottom:14px}.live{color:var(--green)}.live:before{content:"";display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--green);margin-right:6px}.viewport{height:338px;background:var(--white);position:relative;overflow:hidden;border:1px solid #bfc8bc}.stage{position:absolute;inset:0;padding:24px;display:none}.stage.active{display:block;animation:enter .5s ease}.step-label{font-size:11px;color:var(--orange);letter-spacing:2px}.stage h3{font-size:21px;margin:7px 0 18px}.quote{border-left:3px solid var(--green);padding:10px 15px;background:#edf0e8;margin-bottom:10px;font-size:15px}.quote small{display:block;font-size:11px;color:var(--muted);margin-bottom:5px}.stage p{font-size:13px;color:var(--muted)}.wave{display:flex;align-items:center;gap:4px;height:28px;margin-top:14px}.wave i{width:3px;background:var(--green);height:8px;animation:wave 1s ease-in-out infinite alternate}.wave i:nth-child(3n){animation-delay:-.3s;height:20px}.wave i:nth-child(2n){animation-delay:-.7s;height:14px}.record{display:flex;align-items:center;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--line);font-size:13px}.record em{font-style:normal;font-size:11px;color:var(--orange)}.sheet-title{display:flex;justify-content:space-between;border-bottom:2px solid var(--green);padding:5px 0 10px;align-items:center}.sheet-title b{font-size:16px}.tag{font-size:10px;border:1px solid var(--orange);padding:1px 5px;color:var(--orange)}.validation{margin:14px 0;padding-left:20px;font-size:14px}.validation li{padding:6px}.scenefoot{position:absolute;bottom:17px;left:24px;right:24px;border-top:1px solid var(--line);padding-top:10px;font-size:11px;color:var(--muted)}.controls{display:flex;align-items:center;gap:6px;margin-top:15px}.controls button{background:transparent;border:1px solid #aab8a5;padding:5px 10px;font-size:11px;color:var(--ink)}.controls button[aria-pressed="true"]{background:var(--green);color:#fff;border-color:var(--green)}.controls #play{margin-left:auto;border:0;font-size:12px}.progress{height:2px;background:#b9c5b4;margin-top:13px}.progress span{height:100%;background:var(--green);display:block;width:0}.progress.running span{animation:progress 5s linear infinite}.demo-note{font-size:10px;color:#596654;margin:12px 0 0}.strip{border-top:1px solid var(--line);border-bottom:1px solid var(--line);display:grid;grid-template-columns:repeat(3,1fr);padding-top:22px;padding-bottom:22px;gap:28px}.strip p{font-size:14px;margin:0}.strip span{display:block;font-size:11px;color:var(--muted);margin-bottom:5px}.section{padding-top:78px;padding-bottom:78px}.section-head{display:flex;justify-content:space-between;gap:35px;align-items:flex-end;margin-bottom:35px}h2{font-size:clamp(26px,3vw,38px);letter-spacing:-1px;line-height:1.35;margin:12px 0 0}.section-head p{max-width:370px;font-size:14px;color:var(--muted);margin:0}.sample-list{border-top:2px solid var(--ink)}.sample{display:grid;grid-template-columns:55px 1fr 1.3fr 130px;gap:20px;align-items:center;padding:25px 0;border-bottom:1px solid var(--line);text-decoration:none}.sample:hover{background:#eaece2}.sample .n{color:var(--orange);font-size:12px;font-family:monospace}.sample h3{font-size:20px;margin:0}.sample p{font-size:13px;color:var(--muted);margin:0}.sample .open{font-size:12px;text-align:right}.sample-note{font-size:12px;color:var(--muted);margin-top:17px}.process{background:var(--ink);color:#fffef9}.process .eyebrow{color:#bdcdbb}.process .eyebrow:before{background:#bdcdbb}.process .section-head p{color:#bdc8bd}.timeline{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid #617264;gap:25px}.timeline article{padding-top:24px}.timeline .number{font-family:monospace;font-size:13px;color:#c2b999}.timeline h3{font-size:18px;margin:15px 0 10px}.timeline p{font-size:13px;color:#c2ccc1;margin:0}.scope{display:grid;grid-template-columns:1fr 1fr;gap:65px}.scope ul{list-style:none;padding:0;margin:25px 0 0}.scope li{padding:12px 0;border-bottom:1px solid var(--line);font-size:14px}.scope li:before{content:"—";color:var(--green);margin-right:12px}.scope-note{background:#e5e8df;padding:28px;border-left:3px solid var(--green)}.scope-note h3{font-size:20px;margin:0 0 14px}.scope-note p{font-size:14px;color:#536056}.scope-note small{font-size:12px;color:var(--muted)}.about{border-top:1px solid var(--line);padding-top:35px;margin-top:48px;display:grid;grid-template-columns:1fr 1fr;gap:65px}.about h3{margin:0;font-size:20px}.about p{font-size:14px;color:var(--muted);margin:0}.contact{background:#e2e6db}.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:65px}.contact p{font-size:14px;color:#536056}.contact-form{padding:26px;background:var(--white);border:1px solid var(--line)}.contact-form label{display:block;font-size:13px;font-weight:700;margin-bottom:10px}textarea{width:100%;height:146px;resize:vertical;border:1px solid #b8c2b5;border-radius:0;background:#fafbf6;padding:12px;color:var(--ink);font-size:14px}.form-actions{display:flex;gap:16px;align-items:center;margin-top:14px;flex-wrap:wrap}.form-actions a{font-size:12px}.contact .status{font-size:12px;color:var(--orange);margin:10px 0 0}.contact .small{font-size:11px;color:var(--muted)}details{border-bottom:1px solid #bac3b4;padding:16px 0}summary{cursor:pointer;font-size:14px;font-weight:700}details p{font-size:13px}footer{display:flex;justify-content:space-between;gap:20px;padding-top:26px!important;padding-bottom:26px!important;color:var(--muted);font-size:11px}.mobile-cta{display:none}@keyframes enter{from{opacity:0;transform:translateY(7px)}to{opacity:1;transform:translateY(0)}}@keyframes wave{to{height:5px}}@keyframes progress{to{width:100%}}@media(max-width:950px){.wrap{padding-left:25px;padding-right:25px}.hero{gap:28px}h1{font-size:40px}.controls button{padding:5px 6px}.scope,.contact-grid{gap:30px}.stage{padding:18px}.scenefoot{left:18px;right:18px}.sample{grid-template-columns:30px 1fr 1fr 85px;gap:12px}}@media(max-width:700px){header .wrap{height:73px}.brand b{font-size:14px}nav a:not(:last-child){display:none}nav{gap:0}.wrap{padding-left:20px;padding-right:20px}.hero{grid-template-columns:1fr;padding-top:35px;gap:35px;padding-bottom:36px}h1{font-size:40px;letter-spacing:-1px;margin:18px 0}.intro{font-size:15px}.workbench{padding:14px;box-shadow:5px 5px 0 #e7e6de}.viewport{height:335px}.strip{grid-template-columns:1fr;gap:17px}.strip p{font-size:13px}.strip span{display:inline;margin-right:14px}.section{padding-top:48px;padding-bottom:48px}.section-head{display:block;margin-bottom:25px}.section-head p{margin-top:18px}.sample{grid-template-columns:25px 1fr 70px;padding:20px 0;gap:10px}.sample h3{font-size:18px}.sample p{grid-column:2;grid-row:2}.sample .open{grid-column:3;grid-row:1 / 3}.timeline{grid-template-columns:1fr 1fr;gap:26px}.scope,.about,.contact-grid{grid-template-columns:1fr;gap:30px}.scope-note{padding:23px}.about{margin-top:30px}.contact-form{padding:20px}footer{padding-bottom:90px!important}.mobile-cta{display:flex;position:fixed;bottom:12px;left:20px;right:20px;z-index:10;box-shadow:0 3px 15px #25352e25}.controls button{padding:5px 8px;font-size:10px}.controls #play{font-size:11px}}@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{animation:none!important;transition:none!important}.progress{display:none}}
 </style>
 </head>
 <body>
-
-<header>
-  <div class="wrap">
-    <a class="brand" href="/">
-      <span class="mark">DL</span>
-      <span><b>DistillLab 蒸馏研究室</b><span>制造业老师傅经验萃取</span></span>
-    </a>
-    <div class="nav">每单附核验记录 · 数字带来源</div>
-  </div>
-</header>
-
-<div class="hero wrap">
-  <div class="tag">制造业经验萃取</div>
-  <h1>老师傅会做，<br><span class="q">新人接不住？</span></h1>
-  <p class="sub">从一个反复出问题的关键工序开始，把操作要点、异常判断、易错处整理成<b>可现场验证</b>的交接包——师傅退休了，手艺留在厂里。</p>
-  <a class="cta" href="mailto:hello@distilllab.cn?subject=免费评估：一个交接难题&body=工序（做什么、用什么设备）：&%2310;%0D%0A卡点（新人最容易错/师傅最不放心的地方）：&%2310;%0D%0A交接给谁（新员工/接班人）：">免费评估一个交接难题</a>
-  <a class="alt" href="#samples">先看三张演示样例 ↓</a>
-  <p class="trust">48 小时内免费回复适不适合做 · 全程线上完成，不必跑现场 · 每单附核验记录</p>
-</div>
-
-<div class="stats">
-  <div class="wrap">
-    <div class="stat"><b>31<i>/31</i></b><span>实战关键数字核验命中， methodology 已开源</span></div>
-    <div class="stat"><b>20<i> 个</i></b><span>真实问题交付验收——按结果交，不按张数卖</span></div>
-    <div class="stat"><b>2<i> 版</i></b><span>每张卡人读版 + 机器可读版，喂得进厂内 AI</span></div>
-    <div class="src">* 核验数据来自开源方法论的两次实战交付记录，可公开复核</div>
-  </div>
-</div>
-
-<section class="sec" id="pain">
-  <div class="wrap">
-    <div class="label">厂里的痛点</div>
-    <h2>手艺在师傅脑子里，一走就清零</h2>
-    <p class="lead">不是新人笨，是他只能靠问——问到多少会多少。这三件事，每家厂都在重复。</p>
-    <div class="grids">
-      <div class="card"><span class="no">痛点 01</span><h3>老师傅快退休了</h3><p>调机手感、异常处理、参数修正表，全在他脑子里。人一走，返工率立涨。</p></div>
-      <div class="card"><span class="no">痛点 02</span><h3>同一个返工反复发生</h3><p>上次怎么判断、怎么处理的，没人记下来。下次新人从头再错一遍。</p></div>
-      <div class="card"><span class="no">痛点 03</span><h3>新人三个月顶不上岗</h3><p>带徒弟全靠口口相传，教到哪算哪——永远差最后一层"为什么"。</p></div>
-    </div>
-  </div>
-</section>
-
-<section class="sec alt" id="samples">
-  <div class="wrap">
-    <div class="label">交付长什么样</div>
-    <h2>三张演示交接卡</h2>
-    <p class="lead">这就是交付物本身的样子：要点、异常判断表、易错处、适用条件与例外，一张卡全齐。</p>
-    <div class="grids">
-      <a class="sam" href="samples/bending.html">
-        <div class="paper">
-          <div class="ph"><b>折弯工序 · 交接卡</b><em>演示</em></div>
-          <div class="row"><b>回弹补偿</b><span>SPCC 2°–3° / 304 要 5°–8°</span></div>
-          <div class="row"><b>V 槽选择</b><span>板厚 × 8，薄板 × 6</span></div>
-          <div class="row"><b>核心资产</b><span>师傅的展开修正表</span></div>
-        </div>
-        <div class="foot">看完整卡 →</div>
-      </a>
-      <a class="sam" href="samples/injection-molding.html">
-        <div class="paper">
-          <div class="ph"><b>注塑调机 · 交接卡</b><em>演示</em></div>
-          <div class="row"><b>调机口诀</b><span>先压力后速度、先温度后时间</span></div>
-          <div class="row"><b>铁的纪律</b><span>一次只动一个参数</span></div>
-          <div class="row"><b>核心资产</b><span>每副模具的参数卡</span></div>
-        </div>
-        <div class="foot">看完整卡 →</div>
-      </a>
-      <a class="sam" href="samples/welding.html">
-        <div class="paper">
-          <div class="ph"><b>焊接工序 · 交接卡</b><em>演示</em></div>
-          <div class="row"><b>变形控制</b><span>跳焊 / 对称焊 / 反变形</span></div>
-          <div class="row"><b>气孔三步</b><span>查气量 → 擦板材 → 挡风</span></div>
-          <div class="row"><b>核心资产</b><span>熔池与声音的判断</span></div>
-        </div>
-        <div class="foot">看完整卡 →</div>
-      </a>
-      <a class="sam" href="samples/ops-dashboard.html">
-        <div class="paper">
-          <div class="ph"><b>小厂经营 · 一页看板</b><em>试验田</em></div>
-          <div class="row"><b>返工 / 废品率</b><span>台账汇总，涨跌一眼见</span></div>
-          <div class="row"><b>停机 / 交期</b><span>每个数字带来源可追溯</span></div>
-          <div class="row"><b>核心资产</b><span>老板五分钟看懂全厂</span></div>
-        </div>
-        <div class="foot">看完整卡 →</div>
-      </a>
-    </div>
-    <p class="note">以上为演示样例（通用行业知识整理，非客户数据）。真实交付以贵厂实际工序为准，每张卡带负责人与更新时间。</p>
-  </div>
-</section>
-
-<section class="sec">
-  <div class="wrap">
-    <div class="label">怎么做成一张卡</div>
-    <h2>四步，每步都有验证</h2>
-    <p class="lead">懂行的人来问，才问得出真东西。写下来的每一条，都回到现场核对过。</p>
-    <div class="stepgrid">
-      <div class="step"><b>01</b><h3>访谈老师傅</h3><p>问参数、问异常、问"什么情况下不能按常规来"。</p></div>
-      <div class="step"><b>02</b><h3>现场验证</h3><p>每条回到现场核对：是不是这么干的，有没有漏例外。</p></div>
-      <div class="step"><b>03</b><h3>成卡</h3><p>要点 + 异常判断表 + 易错处 + 例外条件，每条带来源。</p></div>
-      <div class="step"><b>04</b><h3>新人验证</h3><p>新人按卡独立干首件，老师傅抽检——过不了就打回重写。</p></div>
-    </div>
-  </div>
-</section>
-
-<section class="sec alt">
-  <div class="wrap">
-    <div class="label">交付与验收</div>
-    <h2>按结果交，不按张数卖</h2>
-    <div class="split">
-      <div class="panel">
-        <h3>单工序交接包包含</h3>
-        <ul>
-          <li>工序交接卡：人读版 + 机器可读版（喂得进厂内 AI/知识库）</li>
-          <li>异常判断速查表：可打印，贴现场</li>
-          <li>新人验证记录与通过标准</li>
-          <li>负责人、更新时间、复核周期——写进卡里</li>
-        </ul>
-      </div>
-      <div class="panel">
-        <h3>怎么算合格</h3>
-        <p class="kv">拿贵厂 <b style="color:var(--accent);font-size:18px">20 个真实问题</b>问新人：按卡能不能答对、答上来。</p>
-        <p class="kv" style="margin-top:10px">交付后进入季度复核：每季度核对卡片与现场是否一致，明确每张卡的更新责任人——卡不更新，就会变成误导。</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="sec">
-  <div class="wrap">
-    <div class="label">怎么开始</div>
-    <h2>全程线上，四步走完</h2>
-    <p class="lead">不用跑现场、不用见面——访谈用视频，资料靠拍照回传，新人验证交记录。每一步都留痕。</p>
-    <div class="stepgrid">
-      <div class="step"><b>①</b><h3>留言说工序</h3><p>点页首按钮或发邮件：工序、卡点、交接给谁，三样说清就行。</p></div>
-      <div class="step"><b>②</b><h3>48 小时免费诊断</h3><p>我们回复适不适合做、难点在哪、大概怎么做——不合适直接说，分文不收。</p></div>
-      <div class="step"><b>③</b><h3>单工序付费试点</h3><p>视频访谈老师傅 + 现场资料拍照回传 + 新人首件验证，全流程远程。</p></div>
-      <div class="step"><b>④</b><h3>季度复核续费</h3><p>每季度核对卡片与现场一致性，持续更新，经验一直是活的。</p></div>
-    </div>
-  </div>
-</section>
-
-<section class="sec">
-  <div class="wrap">
-    <div class="why">
-      <div class="label">为什么是我们</div>
-      <h2>懂工厂的人来做，AI 提效人担责</h2>
-      <p class="lead" style="color:#C9C5E8">我们不做泛泛的"AI 总结"，只做经得起现场验证的经验萃取。</p>
-      <div class="grids">
-        <div class="card"><h3>懂工厂的人来问</h3><p>主理人钣金机加工行业多年，能跟师傅对上话——问的是行话，接的是干货。</p></div>
-        <div class="card"><h3>核验纪律</h3><p>四分身流水线已开源，实战核验 31/31 全命中。卡上每个数字都有出处。</p></div>
-        <div class="card"><h3>机器快，人负责</h3><p>AI 提高整理速度，访谈与现场验证保证真实——对结果负责的是人，不是模型。</p></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="sec contact" id="contact">
-  <div class="wrap">
-    <div class="label" style="letter-spacing:4px">开始</div>
-    <h2>聊一个你厂里最难交接的工序</h2>
-    <p class="sub">说清工序、卡点、交接给谁——我们先判断适不适合做，不合适直接告诉你。</p>
-    <a class="cta" href="mailto:hello@distilllab.cn?subject=免费评估：一个交接难题&body=工序（做什么、用什么设备）：&%2310;%0D%0A卡点（新人最容易错/师傅最不放心的地方）：&%2310;%0D%0A交接给谁（新员工/接班人）：">留言免费评估</a>
-    <p class="mail">hello@distilllab.cn</p>
-    <p class="wx">全程线上完成，无需见面 ｜ 留言写清：工序、卡点、交接给谁 ｜ 微信入口即将开放</p>
-  </div>
-</section>
-
-<footer>
-  <a href="https://github.com/distilllab">GitHub · 全部开源项目</a> ｜ © 2026 DistillLab 蒸馏研究室
-</footer>
+<header><div class="wrap"><a class="brand" href="#"><span class="mark" aria-hidden="true">DL</span><span><b>蒸馏研究室</b><small>DISTILLLAB / 工厂经验交接</small></span></a><nav aria-label="主导航"><a href="#samples">看交付样例</a><a href="#process">怎么做</a><a href="#contact">免费诊断 ↗</a></nav></div></header>
+<main>
+<section class="hero wrap" aria-labelledby="hero-title"><div><div class="eyebrow">给工厂主、厂长与车间主任</div><h1 id="hero-title">老师傅的经验，<br>做成<span>交得出去的<br>工序手册。</span></h1><p class="intro">视频访谈老师傅，把操作要点、异常判断和易错处整理成<strong>工序交接包</strong>。从一个难交接的工序开始，全程线上交付。</p><div class="actions"><a class="btn" href="#contact">48 小时免费诊断 <span aria-hidden="true">↗</span></a><a class="textlink" href="#samples">先看四张演示卡</a></div><p class="facts">钣金机加工背景 · 记录来源与例外 · 配合贵厂远程复核</p></div>
+<div class="workbench" aria-label="交接包制作过程动画演示"><div class="benchhead"><span>工序交接工作台</span><span class="live">流程演示 / 非客户案例</span></div><div class="viewport">
+<article class="stage active"><div class="step-label">01 / 把经验问出来</div><h3>不只问“怎么做”，<br>还问“什么时候不能这么做”。</h3><div class="quote"><small>访谈追问 · 示意</small>上次出现异常时，你先看哪里？</div><div class="quote"><small>继续追问 · 示意</small>换了材料或设备，这套判断还适用吗？</div><div class="wave" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><div class="scenefoot">视频访谈 + 贵厂提供的图纸、照片与记录</div></article>
+<article class="stage" hidden><div class="step-label">02 / 把依据对清楚</div><h3>不清楚的地方，<br>留待确认，不替师傅猜。</h3><div class="record"><b>操作要点</b><em>标注访谈来源</em></div><div class="record"><b>参数与适用条件</b><em>请贵厂复核</em></div><div class="record"><b>异常与处理例外</b><em>补充判断依据</em></div><div class="record"><b>未确认内容</b><em>单列待核验项</em></div><div class="scenefoot">演示的是核验方式，不代表已有现场核验结果</div></article>
+<article class="stage" hidden><div class="step-label">03 / 把经验写成可查手册</div><h3>到用的时候，找得到。</h3><div class="sheet-title"><b>折弯工序 / 交接包</b><span class="tag">结构示意</span></div><div class="record"><b>开始前</b><span>适用范围 / 准备检查</span></div><div class="record"><b>操作时</b><span>关键步骤 / 易错位置</span></div><div class="record"><b>遇到异常</b><span>判断线索 / 向谁确认</span></div><div class="record"><b>完成后</b><span>检查要求 / 版本记录</span></div><div class="scenefoot">把长资料组织为操作顺序，保留必要条件与例外</div></article>
+<article class="stage" hidden><div class="step-label">04 / 把交接缺口找出来</div><h3>写完不是终点，<br>接班人能不能用才是。</h3><ol class="validation"><li>贵厂选出真实交接问题</li><li>接班人按手册查找与回答</li><li>师傅确认，记录遗漏与歧义</li><li>修订手册，保留版本记录</li></ol><div class="scenefoot">现场操作与安全验收由贵厂负责，我们线上配合复核</div></article>
+</div><div class="controls" role="group" aria-label="演示控制"><button type="button" aria-pressed="true" data-step="0">01 访谈</button><button type="button" aria-pressed="false" data-step="1">02 核对</button><button type="button" aria-pressed="false" data-step="2">03 手册</button><button type="button" aria-pressed="false" data-step="3">04 复核</button><button type="button" id="play">暂停</button></div><div class="progress running" aria-hidden="true"><span></span></div><p class="demo-note">可点击步骤切换；本动画仅展示工作方法，不提供生产参数。</p></div></section>
+<div class="strip wrap"><p><span>人要交接</span>师傅会做，接班人不知道为什么</p><p><span>问题要留档</span>同类异常，上次的处理找不到</p><p><span>资料要能用</span>文件很多，关键判断仍得问人</p></div>
+<section class="section wrap" id="samples"><div class="section-head"><div><div class="eyebrow">先看实物，再谈服务</div><h2>交接包不是一份漂亮总结。</h2></div><p>看操作要点怎么组织，异常怎么查，条件与例外放在哪里。以下四张均为演示卡，不是客户成果。</p></div><div class="sample-list">
+<a class="sample" href="samples/bending.html"><span class="n">01</span><h3>折弯工序</h3><p>操作要点、异常判断与易错处的组织方式</p><span class="open">打开演示 ↗</span></a>
+<a class="sample" href="samples/injection-molding.html"><span class="n">02</span><h3>注塑调机</h3><p>调机经验与参数记录的表达方式</p><span class="open">打开演示 ↗</span></a>
+<a class="sample" href="samples/welding.html"><span class="n">03</span><h3>焊接工序</h3><p>异常线索与经验判断的表达方式</p><span class="open">打开演示 ↗</span></a>
+<a class="sample" href="samples/ops-dashboard.html"><span class="n">04</span><h3>小厂经营看板</h3><p>经营数据演示，供参考，不属于标准工序交接包</p><span class="open">打开演示 ↗</span></a>
+</div><p class="sample-note">演示内容不直接替代贵厂工艺要求。真实交付需结合材料、设备、工况与厂内复核。</p></section>
+<section class="process" id="process"><div class="section wrap"><div class="section-head"><div><div class="eyebrow">线上做，现场配合核对</div><h2>不用一次整理整座工厂。<br>先接住一个关键工序。</h2></div><p>我们远程访谈与整理，贵厂提供必要资料，并安排师傅和接班人复核。范围、配合方式和验收要求先说清楚。</p></div><div class="timeline"><article><span class="number">01 / 诊断</span><h3>说清交接难题</h3><p>什么工序、哪里卡住、交给谁。48 小时内免费诊断是否适合做。</p></article><article><span class="number">02 / 访谈</span><h3>追问条件与例外</h3><p>线上访谈老师傅，结合贵厂提供的照片、资料与实际问题。</p></article><article><span class="number">03 / 整理</span><h3>形成交接包初稿</h3><p>组织步骤、判断与易错点，列明来源及待确认项。</p></article><article><span class="number">04 / 复核</span><h3>用真实问题查缺口</h3><p>配合贵厂远程复核，修订遗漏，记录负责人与更新时间。</p></article></div></div></section>
+<section class="section wrap"><div class="scope"><div><div class="eyebrow">交付范围</div><h2>留下手册，也留下依据。</h2><ul><li>工序图文手册：操作要点、条件与例外</li><li>异常判断速查：线索、易错处与确认对象</li><li>核验记录：来源、待确认项与复核意见</li><li>版本信息：负责人、更新时间与修订记录</li></ul></div><aside class="scope-note"><h3>交接之后，资料也要跟着变。</h3><p>设备、材料或工艺变了，旧手册需要复核。后续可单独约定知识库整理与定期维护，持续记录变更。</p><p>先确定一个工序的交付范围，再讨论维护；不把整理整厂资料作为起步条件。</p><small>具体交付形式、周期与费用，诊断后按实际范围约定。</small></aside></div><div class="about"><h3>钣金机加工出身。<br>知道该追问哪些细节。</h3><p>主理人杨冬青（阿蒙）有钣金机加工背景。AI 用于辅助整理，关键事实按资料和师傅意见核对；无法确认的内容明确标注，不拿模型答案冒充现场经验。</p></div></section>
+<section class="contact" id="contact"><div class="section wrap contact-grid"><div><div class="eyebrow">从一个问题开始</div><h2>你厂里哪个工序，<br>最怕只有一个人会？</h2><p>说清三件事，我们在 48 小时内给出免费诊断：适不适合做、需要哪些资料、下一步怎么配合。诊断不等于免费制作完整交接包。</p><details><summary>全程线上，怎么核对现场？</summary><p>通过视频访谈、资料回传和远程复核。贵厂安排师傅与接班人配合；现场操作和安全验收仍由贵厂负责。</p></details><details><summary>可以先做一个工序吗？</summary><p>可以先围绕一个明确的交接难题确定范围，不必从整厂知识库开始。</p></details></div><div class="contact-form"><label for="brief">把这三件事说清楚</label><textarea id="brief" spellcheck="false">工序：
+最难交接的地方：
+交接给谁：</textarea><div class="form-actions"><button class="btn" type="button" id="copy">复制咨询内容</button><a id="email" href="mailto:hello@distilllab.cn?subject=工序交接免费诊断">备用：邮件咨询 ↗</a></div><p class="status" id="copy-status" role="status">微信咨询入口待配置，目前可通过邮件联系。</p><p class="small">此页不自动上传内容。首次咨询无需发送图纸、客户名单或其他敏感资料。</p></div></div></section>
+</main><footer class="wrap"><span>© 2026 DistillLab 蒸馏研究室</span><span><a href="https://github.com/distilllab" style="color:var(--green)">GitHub · 方法论开源</a> ｜ 制造业经验交接 / 全程线上交付</span></footer><a class="btn mobile-cta" href="#contact">48 小时免费诊断 <span aria-hidden="true">↗</span></a>
+<script>
+(()=>{'use strict';const stages=[...document.querySelectorAll('.stage')],tabs=[...document.querySelectorAll('[data-step]')],play=document.getElementById('play'),bar=document.querySelector('.progress'),reduce=window.matchMedia('(prefers-reduced-motion: reduce)');let current=0,playing=!reduce.matches,timer;function show(i){current=i;stages.forEach((s,k)=>{s.hidden=k!==i;s.classList.toggle('active',k===i)});tabs.forEach((b,k)=>b.setAttribute('aria-pressed',String(k===i)));bar.classList.remove('running');void bar.offsetWidth;if(playing&&!document.hidden)bar.classList.add('running')}function schedule(){clearInterval(timer);play.textContent=playing?'暂停':'播放';bar.classList.toggle('running',playing&&!document.hidden);if(playing&&!document.hidden)timer=setInterval(()=>show((current+1)%stages.length),5000)}tabs.forEach(b=>b.addEventListener('click',()=>{show(Number(b.dataset.step));schedule()}));play.addEventListener('click',()=>{playing=!playing;show(current);schedule()});document.addEventListener('visibilitychange',schedule);reduce.addEventListener('change',()=>{if(reduce.matches){playing=false;schedule()}});schedule();const brief=document.getElementById('brief'),email=document.getElementById('email');function updateEmail(){email.href='mailto:hello@distilllab.cn?subject='+encodeURIComponent('工序交接免费诊断')+'&body='+encodeURIComponent(brief.value)}brief.addEventListener('input',updateEmail);updateEmail();document.getElementById('copy').addEventListener('click',async()=>{const status=document.getElementById('copy-status');try{if(!navigator.clipboard)throw new Error('unavailable');await navigator.clipboard.writeText(brief.value);status.textContent='已复制。微信入口待配置；目前请通过邮件发送咨询。'}catch(e){brief.focus();brief.select();status.textContent='请手动复制选中的内容，或点击邮件咨询。'}})})();
+</script>
 </body>
 </html>
