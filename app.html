@@ -207,17 +207,14 @@ footer a{color:var(--green);text-decoration:none}
   </div>
 
   <div class="ctaband" id="contact">
-    <h2>没找到你的场景？说出来</h2>
-    <p>说清三件事——工序、卡点、交接给谁。48 小时内免费回复适不适合做；不合适直接告诉你。</p>
-    <textarea id="brief" style="width:100%;max-width:560px;min-height:84px;border-radius:10px;border:1px solid #4d6b58;background:#fffef9;color:var(--ink);padding:12px 14px;font:inherit;font-size:13.5px;resize:vertical;margin-bottom:14px">工序（做什么、用什么设备）：
-最难交接的地方：
-交接给谁：</textarea>
-    <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;align-items:center">
-      <button id="copy" type="button" style="padding:12px 28px;border-radius:10px;border:none;background:var(--white);color:var(--deep);font-weight:700;font-size:14.5px;cursor:pointer">① 复制留言内容</button>
-      <a class="btn" href="mailto:hello@distilllab.cn?subject=免费评估：一个交接难题">② 邮件发送 ↗</a>
-    </div>
-    <p id="st" style="min-height:20px;font-size:13px;color:#cde8d8;margin:10px 0 0"></p>
-    <small>复制后粘贴到微信或邮箱发给我们即可 ｜ 全程线上完成，无需见面 ｜ 每单附核验记录</small>
+    <h2>没找到你的场景？留言给我们</h2>
+    <p>四格填好，点「发留言」——48 小时内免费回复适不适合做；不合适直接告诉你。</p>
+    <input id="f-process" type="text" placeholder="工序：做什么、用什么设备" style="display:block;width:100%;max-width:560px;margin:0 auto 10px;padding:12px 14px;border-radius:10px;border:1px solid #4d6b58;background:#fffef9;color:var(--ink);font:inherit;font-size:13.5px">
+    <input id="f-contact" type="text" placeholder="联系方式：微信号或邮箱（二选一，必填）" style="display:block;width:100%;max-width:560px;margin:0 auto 10px;padding:12px 14px;border-radius:10px;border:1px solid #4d6b58;background:#fffef9;color:var(--ink);font:inherit;font-size:13.5px">
+    <textarea id="f-pain" placeholder="最难交接的地方 + 交接给谁" style="display:block;width:100%;max-width:560px;margin:0 auto 14px;padding:12px 14px;border-radius:10px;border:1px solid #4d6b58;background:#fffef9;color:var(--ink);font:inherit;font-size:13.5px;resize:vertical;min-height:70px"></textarea>
+    <button id="send" type="button" style="padding:13px 40px;border-radius:11px;border:none;background:var(--white);color:var(--deep);font-weight:700;font-size:15px;cursor:pointer">发留言</button>
+    <p id="st" style="min-height:20px;font-size:13px;color:#cde8d8;margin:12px 0 0"></p>
+    <small>留言后 48 小时内回复 ｜ 全程线上完成，无需见面 ｜ 每单附核验记录</small>
   </div>
 </div>
 
@@ -231,14 +228,19 @@ footer a{color:var(--green);text-decoration:none}
 
 <script>
 (function(){
-  var d=document.getElementById("brief"),c=document.getElementById("copy"),s=document.getElementById("st");
-  c.addEventListener("click",function(){
-    var t=d.value;
-    function done(){s.textContent="已复制。去微信或邮箱粘贴发送即可，48 小时内回复。";}
-    if(navigator.clipboard&&navigator.clipboard.writeText){
-      navigator.clipboard.writeText(t).then(done).catch(function(){d.focus();d.select();s.textContent="自动复制不可用——已全选，请手动 Ctrl+C / 长按复制。";});
-    }else{d.focus();d.select();s.textContent="已全选，请手动 Ctrl+C / 长按复制。";}
+  var btn=document.getElementById("send"),st=document.getElementById("st");
+  function g(id){return document.getElementById(id).value.trim()}
+  btn.addEventListener("click",function(){
+    var p={"工序":g("f-process"),"最难交接的地方":g("f-pain"),"交接给谁":g("f-target"),"联系方式（微信或邮箱）":g("f-contact"),"_subject":"官网留言：交接难题免费诊断","_captcha":"false","_honey":""};
+    if(!p["联系方式（微信或邮箱）"]){st.textContent="留个联系方式（微信号或邮箱），我们才能回复你。";return}
+    if(!p["工序"]){st.textContent="先说说工序：做什么、用什么设备。";return}
+    btn.disabled=true;btn.textContent="发送中…";st.textContent="";
+    fetch("https://formsubmit.co/ajax/hello@distilllab.cn",{method:"POST",headers:{"Content-Type":"application/json",Accept:"application/json"},body:JSON.stringify(p)})
+    .then(function(r){return r.json()})
+    .then(function(j){if(j.success==="true"){st.textContent="留言已发出。48 小时内回复——不合适直接说。";btn.textContent="已发送 ✓";}else{throw 0}})
+    .catch(function(){btn.disabled=false;btn.textContent="发留言";st.textContent="网络不通。备用：复制留言内容发到 hello@distilllab.cn";});
   });
+  var dd=document.getElementById("assess");if(dd)dd.addEventListener("toggle",function(){if(dd.open){st.textContent=""}});
 })();
 (function(){
   var cards=[].slice.call(document.querySelectorAll(".scard"));
