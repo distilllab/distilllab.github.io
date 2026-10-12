@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>场景 03 · 研报蒸馏 · DistillLab 蒸馏研究室</title>
+<meta name="description" content="百页研报蒸成一页干货，每条标源页码，附核验记录。四分身流水线，方法论已开源。">
+<style>
+:root{--paper:#f4f2eb;--ink:#25352e;--green:#639922;--deep:#1f3a2c;--muted:#68726a;--line:#cbd0c6;--white:#fffef9;--soft:#e9efe8}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{overflow-x:clip}
+body{background:var(--paper);color:var(--ink);font-family:"Microsoft YaHei","PingFang SC",sans-serif;line-height:1.75}
+a{color:inherit}
+.wrap{max-width:860px;margin:0 auto;padding:0 24px;width:100%}
+header{border-bottom:1px solid var(--line);padding:16px 0}
+header .wrap{display:flex;align-items:center;justify-content:space-between}
+.brand{display:flex;align-items:center;gap:12px;text-decoration:none;color:var(--ink)}
+.mark{font-size:20px;letter-spacing:-2px;font-weight:900;border:2px solid var(--green);padding:0 8px;color:var(--green)}
+.brand b{font-size:15px;display:block;line-height:1.2}
+.brand small{display:block;font-size:10px;color:var(--muted);letter-spacing:2px}
+header .links a{text-decoration:none;color:var(--muted);font-size:13.5px}
+header .links a:hover{color:var(--green)}
+.crumbs{font-size:12.5px;margin:18px 0 0;color:var(--muted)}
+.crumbs a{color:var(--muted);text-decoration:none}
+h1{font-size:27px;margin:14px 0 8px}
+.lead{color:var(--muted);font-size:15px;margin-bottom:24px}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:30px}
+.chip{font-size:12.5px;background:var(--soft);border:1px solid var(--line);border-radius:999px;padding:5px 14px}
+.sec{margin-bottom:34px}
+.sec h2{font-size:19px;margin-bottom:12px;border-left:4px solid var(--green);padding-left:12px}
+.card{background:var(--white);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin-bottom:10px;font-size:14px}
+.card b{color:var(--green)}
+ol.steps{padding-left:0;list-style:none;counter-reset:s}
+ol.steps li{counter-increment:s;background:var(--white);border:1px solid var(--line);border-radius:12px;padding:13px 16px 13px 52px;margin-bottom:8px;font-size:14px;position:relative}
+ol.steps li::before{content:counter(s,decimal-leading-zero);position:absolute;left:16px;top:13px;font-weight:900;color:var(--green);font-size:15px}
+.note{font-size:13px;color:var(--muted);border-top:1px dashed var(--line);padding-top:10px;margin-top:14px}
+.form{background:var(--white);border:1px solid var(--line);border-radius:14px;padding:22px 20px 18px}
+.lbl{font-size:13px;color:var(--muted);margin:0 0 5px}
+.lbl em{font-style:normal;color:var(--green);font-weight:700}
+.form input,.form textarea{width:100%;border:1px solid var(--line);border-radius:9px;padding:12px 14px;font:inherit;font-size:14px;color:var(--ink);background:#fff;margin-bottom:14px}
+.form textarea{min-height:70px;resize:vertical}
+.form input:focus,.form textarea:focus{outline:none;border-color:var(--green)}
+.form .req{border-color:var(--green)}
+#send{display:block;width:100%;padding:14px 0;border-radius:11px;border:none;background:var(--green);color:#fff;font-size:16px;font-weight:700;cursor:pointer;letter-spacing:2px}
+#send:hover{background:#3b6d11}
+#send[disabled]{opacity:.6;cursor:default}
+#st{min-height:20px;font-size:13.5px;color:var(--green);margin-top:10px;text-align:center}
+.alink{color:var(--green);font-weight:700;text-decoration:none;border-bottom:2px solid var(--green);font-size:14px}
+footer{margin-top:44px;border-top:1px solid var(--line);padding:18px 0 26px;font-size:12px;color:var(--muted)}
+footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+footer a{color:var(--green);text-decoration:none}
+@media(max-width:560px){.brand small{display:none}}
+</style>
+</head>
+<body>
+<header><div class="wrap">
+  <a class="brand" href="/"><span class="mark">DL</span><span><b>DistillLab 蒸馏研究室</b><small>AI 与企业握手的地方</small></span></a>
+  <div class="links"><a href="app.html">← 全部场景</a></div>
+</div></header>
+
+<div class="wrap">
+  <div class="crumbs"><a href="/">封面</a> / <a href="app.html">全部场景</a> / 场景 03</div>
+  <h1>研报蒸馏</h1>
+  <p class="lead">百页研报蒸成一页干货，每条标源页码，附核验记录。</p>
+  <div class="chips">四分身流水线 · 31/31 核验命中 · 方法论开源</div>
+
+  <div class="sec"><h2>包含什么</h2>
+  <div class="card">一页知识卡，固定三块结构：<b>核心结论 / 可复用方法 / 关键数据</b>。</div>
+  <div class="card"><b>每条信息标源页码</b>，附核验记录——可回溯、可复核。</div>
+  <div class="card">适合：投研个人复盘、企业情报简报。</div>
+  </div>
+
+  <div class="sec"><h2>怎么做（全程线上）</h2>
+  <ol class="steps">
+  <li>选题：定边界——这份研报解决什么问题</li>
+  <li>蒸馏：抽取内容，逐条带源页码</li>
+  <li>审校：独立复核，不合格打回重蒸（闭环）</li>
+  <li>归档：成卡入库，人读版 + 机器可读版</li>
+  </ol>
+  <div class="note">四分身流水线：选题 → 蒸馏 → 审校 → 归档。</div>
+  </div>
+
+  <div class="sec"><h2>交付与验收</h2>
+  <div class="card">一页知识卡（三块结构）+ 源页码 + 核验记录。</div>
+  <div class="card"><b>验收标准：</b>卡上每条信息都能翻回研报原文页码；方法论已在 GitHub 开源，流程透明可查。</div>
+    <div class="card"><b>战绩依据：</b>实战核验 31/31 全命中（方法论核验记录，非客户案例）。</div>
+  <div class="card"><a class="alink" href="https://github.com/distilllab/yanbao-distill">方法论开源仓库 →</a></div>
+  </div>
+
+  <div class="sec"><h2>留言给我们</h2>
+  <div class="form">
+    <div class="lbl"><em>①</em> 你想蒸哪类研报、给谁看？（选填也可以）</div>
+    <input id="f-process" type="text">
+    <div class="lbl"><em>②</em> 现在卡在哪 / 最难的地方</div>
+    <textarea id="f-pain"></textarea>
+    <div class="lbl"><em>③</em> 其他想说的（选填）</div>
+    <textarea id="f-other"></textarea>
+    <div class="lbl"><em>④</em> 联系方式：微信号或邮箱（必填，用于回复你）</div>
+    <input id="f-contact" type="text" class="req">
+    <button id="send" type="button">发留言</button>
+    <p id="st"></p>
+    <div class="note" style="border:0;padding:0;margin-top:8px">48 小时内免费回复 ｜ 全程线上，无需见面</div>
+  </div>
+  </div>
+</div>
+
+<footer><div class="wrap">
+  <span>© 2026 DistillLab 蒸馏研究室</span>
+  <span>「蒸」——把厚的，蒸成薄的。</span>
+  <a href="https://github.com/distilllab">GitHub 开源</a>
+</div></footer>
+
+<script>
+(function(){
+  var btn=document.getElementById("send"),st=document.getElementById("st");
+  function g(id){return document.getElementById(id).value.trim()}
+  btn.addEventListener("click",function(){
+    var p={"场景":g("f-process"),"卡在哪":g("f-pain"),"其他想说的":g("f-other"),"联系方式（微信或邮箱）":g("f-contact"),"_subject":"官网留言：场景03·研报蒸馏","_captcha":"false","_honey":""};
+    if(!p["联系方式（微信或邮箱）"]){st.textContent="留个联系方式（微信号或邮箱），我们才能回复你。";return}
+    if(!p["场景"]){st.textContent="先说说你的情况。";return}
+    btn.disabled=true;btn.textContent="发送中…";st.textContent="";
+    fetch("https://formsubmit.co/ajax/hello@distilllab.cn",{method:"POST",headers:{"Content-Type":"application/json",Accept:"application/json"},body:JSON.stringify(p)})
+    .then(function(r){return r.json()})
+    .then(function(j){if(j.success==="true"){st.textContent="留言已发出。48 小时内回复——不合适直接说。";btn.textContent="已发送 ✓";}else{throw 0}})
+    .catch(function(){btn.disabled=false;btn.textContent="发留言";st.textContent="网络不通。备用：hello@distilllab.cn";});
+  });
+})();
+</script>
+</body>
+</html>
