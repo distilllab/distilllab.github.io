@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>DistillLab 蒸馏研究室 · 拥抱 AI，蒸出未来</title>
+<title>DistillLab 蒸馏研究室 · 拥抱 AI 蒸出未来</title>
 <meta name="description" content="AI 与企业握手的地方。我们把老师傅的手艺、企业的数据、厚厚的资料，蒸馏成一页一页用得上的知识。第一个落地场景：制造业老师傅经验萃取。全程线上交付。">
 <style>
 :root{--paper:#fffef9;--ink:#25352e;--green:#639922;--green2:#3B6D11;--muted:#68726a;--line:#d9d6c8;--tint:#eaf0ea}
@@ -38,14 +38,10 @@ h1 .zheng{color:var(--green)}
 .searchbar input:focus{border-color:var(--green)}
 .searchbar button{padding:14px 26px;border-radius:10px;border:none;background:var(--green);color:#fff;font-size:15px;font-weight:700;cursor:pointer}
 .searchbar button:hover{background:#3b6d11}
-.quick{max-width:560px;margin:12px auto 0;overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 10%,#000 90%,transparent);mask-image:linear-gradient(90deg,transparent,#000 10%,#000 90%,transparent)}
-.track{display:flex;gap:10px;width:max-content;padding-right:10px;animation:mq 24s linear infinite}
-.quick:hover .track{animation-play-state:paused}
-.track a{font-size:12.5px;color:var(--muted);text-decoration:none;border:1px solid var(--line);border-radius:999px;padding:4px 14px;background:#fff;white-space:nowrap}
-.track a:hover{border-color:var(--green);color:var(--green)}
-.track a.flag{color:var(--green);border-color:var(--green);font-weight:700;background:var(--tint)}
-@keyframes mq{to{transform:translateX(-50%)}}
-@media(prefers-reduced-motion:reduce){.track{animation:none;flex-wrap:wrap;width:auto;justify-content:center}}
+.quick{max-width:640px;margin:12px auto 0;display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.quick a{font-size:12.5px;color:var(--muted);text-decoration:none;border:1px solid var(--line);border-radius:999px;padding:4px 14px;background:#fff}
+.quick a:hover{border-color:var(--green);color:var(--green)}
+.quick a.flag{color:var(--green);border-color:var(--green);font-weight:700;background:var(--tint)}
 
 /* 免费评估展开面板 */
 .assess{max-width:560px;margin:18px auto 0;text-align:left}
@@ -106,7 +102,7 @@ footer a:hover{text-decoration:underline}
 
 <main class="wrap">
   <div class="eyebrow">DISTILLLAB · 握手平台第一站</div>
-  <h1>拥抱 AI，<span class="zheng">蒸</span>出未来</h1>
+  <h1>拥抱 AI <span class="zheng">蒸</span>出未来</h1>
   <p class="vision">互联网连接了人与人；AI 时代，AI 要与企业、设备、经验握手。<br>我们把老师傅的手艺、企业的细节数据、厚厚的资料，<b>蒸馏成一页一页用得上的知识</b>。</p>
 
   <form class="searchbar" action="app.html" method="get">
@@ -114,24 +110,13 @@ footer a:hover{text-decoration:underline}
     <button type="submit">搜索场景</button>
   </form>
   <div class="quick">
-    <div class="track">
-      <a class="flag" href="scenarios/experience.html">今日主打：老师傅经验萃取</a>
-      <a href="app.html#k=焊接">焊接工序</a>
-      <a href="app.html#k=看板">经营看板</a>
-      <a href="app.html#k=研报">研报蒸馏</a>
-      <a href="app.html#k=书籍">书籍蒸馏</a>
-      <a href="app.html#k=知识库">知识库整理</a>
-      <a href="app.html#k=AI">AI 工作流定制</a>
-      <span aria-hidden="true" style="display:flex;gap:10px">
-        <a class="flag" href="scenarios/experience.html" tabindex="-1">今日主打：老师傅经验萃取</a>
-        <a href="app.html#k=焊接" tabindex="-1">焊接工序</a>
-        <a href="app.html#k=看板" tabindex="-1">经营看板</a>
-        <a href="app.html#k=研报" tabindex="-1">研报蒸馏</a>
-        <a href="app.html#k=书籍" tabindex="-1">书籍蒸馏</a>
-        <a href="app.html#k=知识库" tabindex="-1">知识库整理</a>
-        <a href="app.html#k=AI" tabindex="-1">AI 工作流定制</a>
-      </span>
-    </div>
+    <a class="flag" href="scenarios/experience.html">今日主打：老师傅经验萃取</a>
+    <a href="app.html#k=焊接">焊接工序</a>
+    <a href="app.html#k=看板">经营看板</a>
+    <a href="app.html#k=研报">研报蒸馏</a>
+    <a href="app.html#k=书籍">书籍蒸馏</a>
+    <a href="app.html#k=知识库">知识库整理</a>
+    <a href="app.html#k=AI">AI 工作流定制</a>
   </div>
 
   <details class="assess" id="assess">
@@ -201,7 +186,7 @@ footer a:hover{text-decoration:underline}
     if(document.activeElement===inp||inp.value){inp.placeholder=rest;return;}
     inp.placeholder=full.slice(pos)+full.slice(0,pos);
     pos=(pos+1)%full.length;
-  },280);
+  },600);
   inp.addEventListener("focus",function(){inp.placeholder=rest;});
 })();
 </script>
