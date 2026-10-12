@@ -132,6 +132,7 @@ footer a{color:var(--green);text-decoration:none}
     <input id="q" type="text" placeholder="试试：焊接 / 看板 / 研报 / 手艺 / AI……" autocomplete="off">
   </div>
   <div class="count" id="count"></div>
+  <p style="margin:-12px 0 18px;font-size:13px"><a href="#nomatch" id="custom-link" style="color:var(--green);font-weight:700;text-decoration:none;border-bottom:2px solid var(--green)">没找到想要的场景？描述一下，我们定制 →</a></p>
 
   <a class="flagship scard" href="scenarios/experience.html" data-k="老师傅 经验 交接 传承 手册 折弯 焊接 注塑 师傅 退休 上岗 培训 旗舰 主打" style="display:block">
     <div class="fl">
@@ -186,7 +187,17 @@ footer a{color:var(--green);text-decoration:none}
       <div class="body"><span class="tbd">架构设计中（3 路接入 + 8 层协议栈）。此卡为预告，暂不接单——想聊聊的厂家，我们愿意听。</span><a class="cta" href="mailto:hello@distilllab.cn?subject=设备握手平台交流">交流 →</a></div>
     </details>
   </div>
-  <p class="count" id="empty" style="display:none">没找到匹配的场景——直接发邮件说你的需求，我们判断能不能做：hello@distilllab.cn</p>
+  <p class="count" id="empty" style="display:none">没找到匹配的场景——没关系，下面就是为你准备的定制入口。</p>
+  <div id="nomatch" style="display:none" class="card">
+    <h3>描述一下你目前的场景，我们定制</h3>
+    <p class="one" style="margin-bottom:12px">你的留言会由 AI 后台分析，48 小时内回你一份定制建议：适不适合做、从哪下手、需要准备什么。</p>
+    <input id="s-process" type="text" placeholder="场景：厂里哪个环节、什么工序或事务" style="display:block;width:100%;margin-bottom:8px;padding:11px 13px;border-radius:9px;border:1px solid var(--line);background:#fff;color:var(--ink);font:inherit;font-size:13.5px">
+    <textarea id="s-pain" placeholder="现在卡在哪：为什么这件事总做不好 / 总要问人 / 总出错" style="display:block;width:100%;margin-bottom:8px;padding:11px 13px;border-radius:9px;border:1px solid var(--line);background:#fff;color:var(--ink);font:inherit;font-size:13.5px;min-height:64px;resize:vertical"></textarea>
+    <input id="s-target" type="text" placeholder="这事最终要交给谁、给谁看" style="display:block;width:100%;margin-bottom:8px;padding:11px 13px;border-radius:9px;border:1px solid var(--line);background:#fff;color:var(--ink);font:inherit;font-size:13.5px">
+    <input id="s-contact" type="text" placeholder="联系方式：微信号或邮箱（二选一，必填）" style="display:block;width:100%;margin-bottom:10px;padding:11px 13px;border-radius:9px;border:1px solid var(--green);background:#fff;color:var(--ink);font:inherit;font-size:13.5px">
+    <button id="s-send" type="button" style="padding:11px 30px;border-radius:9px;border:none;background:var(--green);color:#fff;font-weight:700;font-size:14px;cursor:pointer">发留言</button>
+    <p id="s-st" style="min-height:18px;font-size:13px;color:var(--green);margin-top:10px"></p>
+  </div>
 
   <div class="demos">
     <div class="label">会动的演示</div>
@@ -255,6 +266,7 @@ footer a{color:var(--green);text-decoration:none}
     });
     count.textContent=q?("筛选 \""+q+"\"：命中 "+shown+" 个场景"):("共 8 个场景 · 01 为今日主打");
     empty.style.display=shown?"none":"block";
+    nomatch.style.display=(q&&shown===0)?"block":"none";
   }
   input.addEventListener("input",apply);
   function fromURL(){
@@ -263,6 +275,23 @@ footer a{color:var(--green);text-decoration:none}
     if(q){input.value=q;}
     apply();
   }
+  document.getElementById("custom-link").addEventListener("click",function(e){
+    e.preventDefault();
+    nomatch.style.display=(nomatch.style.display==="block")?"none":"block";
+    if(nomatch.style.display==="block")document.getElementById("s-process").focus();
+  });
+  var sbtn=document.getElementById("s-send"),sst=document.getElementById("s-st");
+  sbtn.addEventListener("click",function(){
+    var gv=function(id){var e=document.getElementById(id);return e?e.value.trim():""};
+    var payload={"场景描述":gv("s-process"),"现在卡在哪":gv("s-pain"),"要交给谁":gv("s-target"),"联系方式（微信或邮箱）":gv("s-contact"),"_subject":"官网留言：搜索无匹配 · 场景定制","_captcha":"false","_honey":""};
+    if(!payload["联系方式（微信或邮箱）"]){sst.textContent="留个联系方式（微信号或邮箱），我们才能回复你。";return}
+    if(!payload["场景描述"]){sst.textContent="先描述一下场景：哪个环节、什么事。";return}
+    sbtn.disabled=true;sbtn.textContent="发送中…";sst.textContent="";
+    fetch("https://formsubmit.co/ajax/hello@distilllab.cn",{method:"POST",headers:{"Content-Type":"application/json",Accept:"application/json"},body:JSON.stringify(payload)})
+    .then(function(r){return r.json()})
+    .then(function(j){if(j.success==="true"){sst.textContent="留言已发出。48 小时内回你一份定制建议。";sbtn.textContent="已发送 ✓"}else{throw 0}})
+    .catch(function(){sbtn.disabled=false;sbtn.textContent="发留言";sst.textContent="网络不通。备用：hello@distilllab.cn"});
+  });
   fromURL();
   window.addEventListener("hashchange",fromURL);
 })();
