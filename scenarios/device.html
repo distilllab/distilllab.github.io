@@ -117,7 +117,7 @@ footer a{color:var(--green);text-decoration:none}
     if(!p["联系方式（微信或邮箱）"]){st.textContent="留个联系方式（微信号或邮箱），我们才能回复你。";return}
     if(!p["场景"]){st.textContent="先说说你的情况。";return}
     btn.disabled=true;btn.textContent="发送中…";st.textContent="";
-    fetch("https://formsubmit.co/ajax/hello@distilllab.cn",{method:"POST",headers:{"Content-Type":"application/json",Accept:"application/json"},body:JSON.stringify(p)})
+    fetch("https://formsubmit.co/ajax/0f6a24b0bad51243e86954dcf52b8dae",{method:"POST",headers:{"Content-Type":"application/json",Accept:"application/json"},body:JSON.stringify(p)})
     .then(function(r){return r.json()})
     .then(function(j){if(j.success==="true"){st.textContent="留言已发出。48 小时内回复——不合适直接说。";btn.textContent="已发送 ✓";}else{throw 0}})
     .catch(function(){btn.disabled=false;btn.textContent="发留言";st.textContent="网络不通。备用：hello@distilllab.cn";});
