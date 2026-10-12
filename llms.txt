@@ -24,5 +24,6 @@ DistillLab 蒸馏研究室（distilllab.cn）是一家面向企业与个人的�
 ## 联系
 
 - 邮箱：hello@distilllab.cn
-- 开源方法论：https://github.com/distilllab/yanbao-distill
+- 开源方法论（研报蒸馏）：https://github.com/distilllab/yanbao-distill
+- 开源工具（AI 防失忆技能）：https://github.com/distilllab/workbuddy-memory-kit
 - 工作日 24 小时内必回
