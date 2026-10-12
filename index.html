@@ -9,9 +9,11 @@
 :root{--paper:#fffef9;--ink:#25352e;--green:#639922;--green2:#3B6D11;--muted:#68726a;--line:#d9d6c8;--tint:#eaf0ea}
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
+html,body{overflow-x:clip}
 body{margin:0;background:var(--paper);color:var(--ink);font-family:"Microsoft YaHei","PingFang SC",sans-serif;line-height:1.75;min-height:100vh;display:flex;flex-direction:column}
 a{color:inherit}
 .wrap{max-width:980px;margin:0 auto;padding:0 26px;width:100%}
+@media(max-width:560px){.brand small{display:none}header .links{gap:14px}}
 
 header{padding:20px 0}
 header .wrap{display:flex;align-items:center;justify-content:space-between}
@@ -32,7 +34,7 @@ h1 .zheng{color:var(--green)}
 .vision b{color:var(--ink)}
 
 .searchbar{max-width:560px;margin:0 auto;display:flex;gap:10px}
-.searchbar input{flex:1;padding:14px 18px;border-radius:10px;border:1px solid var(--line);background:#fff;color:var(--ink);font-size:15px;outline:none}
+.searchbar input{flex:1;min-width:0;padding:14px 18px;border-radius:10px;border:1px solid var(--line);background:#fff;color:var(--ink);font-size:15px;outline:none}
 .searchbar input:focus{border-color:var(--green)}
 .searchbar button{padding:14px 26px;border-radius:10px;border:none;background:var(--green);color:#fff;font-size:15px;font-weight:700;cursor:pointer}
 .searchbar button:hover{background:#3b6d11}
@@ -187,6 +189,20 @@ footer a:hover{text-decoration:underline}
     }else{b.focus();b.select();s.textContent="已全选，请手动 Ctrl+C / 长按复制。";}
   });
   d.addEventListener("toggle",function(){if(d.open){b.focus();s.textContent="";}});
+})();
+/* 搜索框底字流动字幕：未聚焦且为空时缓慢左移，聚焦即停 */
+(function(){
+  var inp=document.querySelector(".searchbar input");
+  if(!inp||window.matchMedia("(prefers-reduced-motion: reduce)").matches)return;
+  var full="搜索场景：焊接 · 看板 · 研报 · 书籍 · 知识库 · AI 工作流……　　";
+  var rest="搜索场景：焊接、看板、研报、知识库……";
+  var pos=0;
+  setInterval(function(){
+    if(document.activeElement===inp||inp.value){inp.placeholder=rest;return;}
+    inp.placeholder=full.slice(pos)+full.slice(0,pos);
+    pos=(pos+1)%full.length;
+  },280);
+  inp.addEventListener("focus",function(){inp.placeholder=rest;});
 })();
 </script>
 </body>
