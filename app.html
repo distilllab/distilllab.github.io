@@ -202,7 +202,9 @@ footer a{color:var(--green);text-decoration:none}
     <input id="f-process" type="text" style="display:block;width:100%;max-width:560px;margin:0 auto 10px;padding:12px 14px;border-radius:10px;border:1px solid #4d6b58;background:#fffef9;color:var(--ink);font:inherit;font-size:13.5px">
     <div style="font-size:12.5px;color:#bcd8c8;margin:0 auto 6px;max-width:560px;text-align:left">② 最难交接的地方 + 交接给谁</div>
     <textarea id="f-pain" style="display:block;width:100%;max-width:560px;margin:0 auto 10px;padding:12px 14px;border-radius:10px;border:1px solid #4d6b58;background:#fffef9;color:var(--ink);font:inherit;font-size:13.5px;resize:vertical;min-height:70px"></textarea>
-    <div style="font-size:12.5px;color:#bcd8c8;margin:0 auto 6px;max-width:560px;text-align:left">③ 联系方式：微信号或邮箱（必填，用于回复你）</div>
+    <div style="font-size:12.5px;color:#bcd8c8;margin:0 auto 6px;max-width:560px;text-align:left">③ 其他想说的（选填：设备型号、师傅人数、已有资料、想做成什么样……）</div>
+    <textarea id="f-other" style="display:block;width:100%;max-width:560px;margin:0 auto 10px;padding:12px 14px;border-radius:10px;border:1px solid #4d6b58;background:#fffef9;color:var(--ink);font:inherit;font-size:13.5px;resize:vertical;min-height:60px"></textarea>
+    <div style="font-size:12.5px;color:#bcd8c8;margin:0 auto 6px;max-width:560px;text-align:left">④ 联系方式：微信号或邮箱（必填，用于回复你）</div>
     <input id="f-contact" type="text" style="display:block;width:100%;max-width:560px;margin:0 auto 14px;padding:12px 14px;border-radius:10px;border:1px solid #4d6b58;background:#fffef9;color:var(--ink);font:inherit;font-size:13.5px">
     <button id="send" type="button" style="padding:13px 40px;border-radius:11px;border:none;background:var(--white);color:var(--deep);font-weight:700;font-size:15px;cursor:pointer">发留言</button>
     <p id="st" style="min-height:20px;font-size:13px;color:#cde8d8;margin:12px 0 0"></p>
@@ -223,7 +225,7 @@ footer a{color:var(--green);text-decoration:none}
   var btn=document.getElementById("send"),st=document.getElementById("st");
   function g(id){return document.getElementById(id).value.trim()}
   btn.addEventListener("click",function(){
-    var p={"工序":g("f-process"),"最难交接的地方":g("f-pain"),"交接给谁":g("f-target"),"联系方式（微信或邮箱）":g("f-contact"),"_subject":"官网留言：交接难题免费诊断","_captcha":"false","_honey":""};
+    var p={"工序":g("f-process"),"最难交接的地方":g("f-pain"),"交接给谁":g("f-target"),"其他想说的":g("f-other"),"联系方式（微信或邮箱）":g("f-contact"),"_subject":"官网留言：交接难题免费诊断","_captcha":"false","_honey":""};
     if(!p["联系方式（微信或邮箱）"]){st.textContent="留个联系方式（微信号或邮箱），我们才能回复你。";return}
     if(!p["工序"]){st.textContent="先说说工序：做什么、用什么设备。";return}
     btn.disabled=true;btn.textContent="发送中…";st.textContent="";
