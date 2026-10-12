@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>演示样例：注塑调机交接卡 · DistillLab 蒸馏研究室</title>
+<style>
+:root{--ink:#26215C;--muted:#5F5E5A;--accent:#534AB7;--soft:#EEEDFE;--line:#D3D1C7;--warn:#8A4B3B}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:"Segoe UI","Microsoft YaHei",system-ui,sans-serif;background:#fff;color:var(--ink);line-height:1.8}
+.wrap{max-width:760px;margin:0 auto;padding:36px 22px 60px}
+.tag{display:inline-block;font-size:12.5px;color:var(--warn);border:1px solid var(--warn);border-radius:6px;padding:2px 10px;margin-bottom:14px}
+h1{font-size:26px;margin-bottom:6px}
+.sub{color:var(--muted);font-size:14px;margin-bottom:26px}
+h2{font-size:17px;margin:26px 0 10px;padding-left:10px;border-left:4px solid var(--accent)}
+p,li{font-size:14.5px}
+ul{padding-left:20px}
+li{margin:5px 0}
+table{width:100%;border-collapse:collapse;font-size:13.5px;margin:8px 0}
+th,td{border:1px solid var(--line);padding:7px 9px;text-align:left;vertical-align:top}
+th{background:var(--soft);color:var(--accent)}
+.meta{margin-top:30px;padding:14px 16px;background:#F7F6FC;border-radius:10px;font-size:13px;color:var(--muted)}
+.footer{margin-top:34px;padding-top:16px;border-top:1px solid var(--line);font-size:12.5px;color:var(--muted)}
+.footer a{color:var(--accent);text-decoration:none}
+b{color:var(--accent)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <p class="tag">演示样例 · 通用行业知识整理 · 非真实客户数据</p>
+  <h1>注塑调机 · 老师傅交接卡</h1>
+  <p class="sub">工序：注塑成型调机 ｜ 典型材料：PP / ABS / PA ｜ 交付形态：单工序交接包（演示版 v0.1）</p>
+
+  <h2>一、操作要点（调机师傅的顺序和分寸）</h2>
+  <ul>
+    <li><b>调机顺序口诀</b>：先压力后速度、先温度后时间——一次只动一个参数，动完记下数值再试下一刀。<b>师傅和普通操作工的分水岭就在"记不记"。</b></li>
+    <li><b>缩水处理</b>：优先拉长保压和冷却时间，而不是一味加射胶压力；保压曲线比保压单点更管用。</li>
+    <li><b>烘料纪律</b>：PA、PC 不烘够时间直接开机，出来的料花怎么调机都救不了——先查烘料记录再动参数。</li>
+    <li><b>模温机</b>：开工前先确认模温实际到值（看表，不看设定），温差 10°C 以上产品尺寸就不认账。</li>
+  </ul>
+
+  <h2>二、异常判断（症状 → 第一动作）</h2>
+  <table>
+    <tr><th>症状</th><th>常见原因（按概率排）</th><th>老师傅的第一动作</th></tr>
+    <tr><td>缺料（打不满）</td><td>射胶终点切换位置不对；储料背压低</td><td>先看螺杆行程刻度，微调切换点，别猛加压力</td></tr>
+    <tr><td>披锋（飞边）</td><td>射胶压力/保压过高；分型面有异物</td><td>分批降压，每次降 5%；同时清模面</td></tr>
+    <tr><td>顶白/顶高</td><td>顶出速度过快；脱模斜度不足</td><td>降顶出速度分两段顶；仍不行报告模具问题</td></tr>
+    <tr><td>烧焦/银纹</td><td>排气不良；烘料不足</td><td>查烘料时间温度记录 → 再查模具排气槽</td></tr>
+  </table>
+
+  <h2>三、易错处（新人最容易踩）</h2>
+  <ul>
+    <li>凭手感一次改三个参数——改完好了也不知道是哪个起效，<b>下次照样抓瞎</b>。</li>
+    <li>换模具不建参数卡，同副模具每次重新摸，一摸半天。</li>
+    <li>只看设定值不看实际值（温度、模温、射速曲线都有实际反馈）。</li>
+  </ul>
+
+  <h2>四、适用条件与例外</h2>
+  <ul>
+    <li>不同吨位机台、不同厂牌的参数<b>不可照搬</b>；每副模具必须建自己的参数卡并随模具走。</li>
+    <li>例外：新品试模阶段按试模报告执行；换料品牌（同牌号不同厂）先按原参数 90% 试跑。</li>
+  </ul>
+
+  <h2>五、现场验证（怎么才算学会了）</h2>
+  <p>给新人一台已归档参数卡的模具：要求 30 分钟内按参数卡开机并产出合格首件；中途允许翻卡，但每动一个参数必须口头说明"为什么动它"。说不出理由的调整，即使件合格也不算过。</p>
+
+  <div class="meta">
+    负责人：＿＿＿＿ ｜ 卡片版本：演示 v0.1 ｜ 更新时间：＿＿＿＿ ｜ 下次复核：＿＿＿＿<br>
+    本卡为演示样例：内容来自通用行业知识整理，用于展示交接包形态，非任何真实客户数据。
+  </div>
+
+  <div class="footer">
+    <a href="/">← 返回 DistillLab 蒸馏研究室</a> ｜ 把你厂里最难交接的工序发给我们，先判断适不适合做
+  </div>
+</div>
+</body>
+</html>

@@ -3,145 +3,282 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>DistillLab 蒸馏研究室 · 数字带来源，结论可复核</title>
-<meta name="description" content="DistillLab 蒸馏研究室：把厚资料蒸成薄知识，把人的经验蒸成可对话的资产。每单交付附核验记录——数字带来源，结论可复核。研报蒸馏/老师傅经验萃取/企业知识资产整理/口述家史。">
+<title>DistillLab 蒸馏研究室 · 把老师傅的经验，做成新人接得住的交接包</title>
+<meta name="description" content="DistillLab 蒸馏研究室：专注制造业老师傅经验萃取。把关键工序的操作要点、异常判断、易错处整理成新人能照着用、工厂能持续更新的交接包。每张卡带来源、适用条件和现场验证记录。">
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"Organization","name":"DistillLab 蒸馏研究室","alternateName":"distilllab","url":"https://distilllab.cn/","email":"hello@distilllab.cn","sameAs":["https://github.com/distilllab"],"description":"知识蒸馏工作室：研报蒸馏、老师傅经验萃取、企业知识资产整理、口述家史与分身复刻。每单交付附核验记录。","slogan":"数字带来源，结论可复核"}
-</script>
-<script type="application/ld+json">
-{"@context":"https://schema.org","@type":"WebSite","name":"DistillLab 蒸馏研究室","url":"https://distilllab.cn/","inLanguage":"zh-CN"}
-</script>
-<script type="application/ld+json">
-{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
-{"@type":"Question","name":"老师傅退休了，经验怎么留下来？","acceptedAnswer":{"@type":"Answer","text":"通过结构化访谈（故障复盘法）采集老师傅的判断依据与处理步骤，蒸馏成案例卡、排查决策树和问答助手——新人查得到、问得着，经验不再只存在于某个人的脑子里。"}},
-{"@type":"Question","name":"研报太多读不完怎么办？","acceptedAnswer":{"@type":"Answer","text":"研报蒸馏服务将百页研报压缩为一页干货知识卡：核心结论、可复用方法、关键数据三块结构，每条标注源页码，附核验记录，原始素材归档可溯。"}},
-{"@type":"Question","name":"老师傅经验做成 AI 问答助手靠谱吗？","acceptedAnswer":{"@type":"Answer","text":"靠谱，前提是先做经验萃取与核验。问答助手的答案全部来自本人确认过的访谈记录，不虚构、不编造；安全相关内容以企业现行 SOP 为准。"}}]}
+{"@context":"https://schema.org","@type":"Organization","name":"DistillLab 蒸馏研究室","alternateName":"distilllab","url":"https://distilllab.cn/","email":"hello@distilllab.cn","sameAs":["https://github.com/distilllab"],"description":"制造业老师傅经验萃取：把关键工序的老师傅经验做成新人能照着用、工厂能持续更新的交接包。","slogan":"老师傅会做，新人接得住"}
 </script>
 <style>
-:root{--ink:#26215C;--muted:#5F5E5A;--accent:#534AB7;--accent-soft:#EEEDFE;--line:#D3D1C7;--warn:#8A4B3B}
+:root{--ink:#26215C;--muted:#5F5E5A;--accent:#534AB7;--accent-soft:#EEEDFE;--line:#D8D6E8;--bg:#F7F6FC;--warn:#8A4B3B}
 *{margin:0;padding:0;box-sizing:border-box}
 body{font-family:"Segoe UI","Microsoft YaHei",system-ui,sans-serif;background:#fff;color:var(--ink);line-height:1.75}
-.wrap{max-width:880px;margin:0 auto;padding:0 24px}
-header{padding:44px 0 30px;text-align:center;border-bottom:1px solid var(--line)}
-.mark{width:64px;height:64px;border-radius:16px;background:var(--accent);color:#fff;font-size:28px;font-weight:600;display:flex;align-items:center;justify-content:center;margin:0 auto 18px;letter-spacing:1px}
-h1{font-size:32px;font-weight:600;letter-spacing:1px}
-h1 .lab{color:var(--accent)}
-.tagline{margin-top:12px;font-size:16px;color:var(--muted)}
-.tagline b{color:var(--ink)}
-section{padding:34px 0}
-section + section{border-top:1px solid var(--line)}
-h2{font-size:20px;font-weight:600;margin-bottom:18px;letter-spacing:1px}
-h2 .en{font-size:13px;color:var(--muted);font-weight:400;margin-left:10px;letter-spacing:2px}
-.pillars{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}
-.pillar{background:var(--accent-soft);border:1px solid var(--accent);border-radius:14px;padding:20px 18px}
-.pillar h3{font-size:16px;color:var(--accent);margin-bottom:8px}
-.pillar p{font-size:14px;color:var(--ink)}
-.pillar p b{color:var(--accent)}
-.lines{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}
-.line h3{font-size:16px;margin-bottom:6px}
-.line .items{font-size:14px;color:var(--accent);margin-bottom:6px}
-.line .doc{font-size:12px;color:var(--muted);margin:2px 0 6px}
-.line p{font-size:13.5px;color:var(--muted)}
-.redlines{background:#FBF7F5;border:1px solid var(--warn);border-radius:14px;padding:20px 22px}
-.redlines h3{font-size:16px;color:var(--warn);margin-bottom:10px}
-.redlines ul{list-style:none}
-.redlines li{font-size:14px;color:var(--ink);padding-left:20px;position:relative;margin:4px 0}
-.redlines li::before{content:"×";position:absolute;left:0;color:var(--warn);font-weight:700}
+.wrap{max-width:900px;margin:0 auto;padding:0 22px}
+.sec{padding:56px 0}
+.sec.alt{background:var(--bg)}
+.label{font-size:13px;letter-spacing:4px;color:var(--accent);font-weight:600;margin-bottom:10px}
+h2{font-size:26px;font-weight:700;margin-bottom:8px}
+.lead{font-size:15px;color:var(--muted);margin-bottom:24px;max-width:640px}
+
+/* ---- header ---- */
+header{padding:20px 0}
+header .wrap{display:flex;align-items:center;justify-content:space-between}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--ink)}
+.mark{width:38px;height:38px;border-radius:10px;background:var(--accent);color:#fff;font-size:16px;font-weight:700;display:flex;align-items:center;justify-content:center}
+.brand b{font-size:16px;letter-spacing:1px}
+.brand span{font-size:12px;color:var(--muted);display:block;line-height:1.2}
+header .nav{font-size:13.5px;color:var(--muted)}
+
+/* ---- hero ---- */
+.hero{padding:64px 0 56px;text-align:center}
+.hero .tag{display:inline-block;font-size:13px;letter-spacing:3px;color:var(--accent);border:1px solid var(--accent);border-radius:999px;padding:3px 16px;margin-bottom:22px;font-weight:600}
+.hero h1{font-size:46px;line-height:1.25;font-weight:800;letter-spacing:1px}
+.hero h1 .q{color:var(--accent)}
+.hero .sub{margin:18px auto 30px;max-width:600px;font-size:16.5px;color:var(--muted)}
+.hero .cta{display:inline-block;padding:15px 38px;border-radius:14px;background:var(--accent);color:#fff;text-decoration:none;font-size:16.5px;font-weight:600;letter-spacing:1px;box-shadow:0 6px 18px rgba(83,74,183,.30)}
+.hero .cta:hover{transform:translateY(-1px)}
+.hero .alt{display:block;margin-top:14px;font-size:13.5px;color:var(--muted);text-decoration:none}
+.hero .alt:hover{color:var(--accent)}
+.trust{margin-top:20px;font-size:12.5px;color:var(--muted)}
+
+/* ---- stats strip ---- */
+.stats{background:var(--ink);padding:34px 0}
+.stats .wrap{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;text-align:center}
+.stat b{display:block;font-size:36px;font-weight:800;color:#fff;letter-spacing:1px}
+.stat b i{font-style:normal;color:#B9B3F0}
+.stat span{font-size:13px;color:#C9C5E8}
+.stats .src{grid-column:1/-1;font-size:11.5px;color:#8F8AC0;text-align:center}
+
+/* ---- cards ---- */
+.grids{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}
+.card{background:#fff;border-radius:16px;padding:22px 20px;box-shadow:0 2px 10px rgba(38,33,92,.07)}
+.sec.alt .card{border:1px solid var(--line);box-shadow:none}
+.card .no{font-size:13px;font-weight:700;color:var(--accent);letter-spacing:1px;margin-bottom:6px;display:block}
+.card h3{font-size:16.5px;margin-bottom:6px}
+.card p{font-size:13.8px;color:var(--muted)}
+
+/* ---- samples ---- */
+.sam{display:block;text-decoration:none;color:var(--ink);background:#fff;border-radius:14px;overflow:hidden;box-shadow:0 2px 10px rgba(38,33,92,.08);transition:transform .15s,box-shadow .15s}
+.sam:hover{transform:translateY(-3px);box-shadow:0 8px 22px rgba(38,33,92,.14)}
+.sam .paper{padding:16px 18px 14px}
+.sam .ph{display:flex;justify-content:space-between;align-items:center;border-bottom:2px solid var(--accent);padding-bottom:8px;margin-bottom:10px}
+.sam .ph b{font-size:15px;color:var(--ink)}
+.sam .ph em{font-style:normal;font-size:11px;color:var(--warn);border:1px solid var(--warn);border-radius:5px;padding:1px 7px}
+.sam .row{display:flex;justify-content:space-between;font-size:12.5px;color:var(--muted);padding:4px 0;border-bottom:1px dashed var(--line)}
+.sam .row b{color:var(--ink);font-weight:600}
+.sam .foot{padding:10px 18px 14px;font-size:13.5px;color:var(--accent);font-weight:600}
+.note{font-size:12.5px;color:var(--warn);margin-top:14px}
+
+/* ---- steps ---- */
+.stepgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px}
+.step{background:#fff;border-radius:16px;padding:20px;box-shadow:0 2px 10px rgba(38,33,92,.07)}
+.step b{display:block;font-size:26px;font-weight:800;color:var(--accent-soft);-webkit-text-stroke:1.5px var(--accent);letter-spacing:1px;margin-bottom:6px}
+.step h3{font-size:15.5px;margin-bottom:5px}
+.step p{font-size:13.3px;color:var(--muted)}
+
+/* ---- deliver ---- */
+.split{display:grid;grid-template-columns:1.15fr .85fr;gap:16px}
+.panel{background:#fff;border-radius:16px;padding:22px;box-shadow:0 2px 10px rgba(38,33,92,.07)}
+.panel h3{font-size:16px;margin-bottom:10px;color:var(--accent)}
+.panel ul{padding-left:18px;font-size:14px}
+.panel li{margin:6px 0}
+.panel .kv{font-size:13.5px;color:var(--muted)}
+
+/* ---- why ---- */
+.why{background:var(--ink);border-radius:22px;padding:36px 34px;color:#fff}
+.why h2{color:#fff}
+.why .label{color:#B9B3F0}
+.why .grids .card{background:rgba(255,255,255,.06);box-shadow:none;color:#fff}
+.why .card h3{color:#fff}
+.why .card p{color:#C9C5E8}
+
+/* ---- contact ---- */
 .contact{text-align:center}
-.contact .mail{display:inline-block;margin-top:14px;padding:12px 34px;border-radius:12px;background:var(--accent);color:#fff;text-decoration:none;font-size:15px;letter-spacing:1px}
-.contact .mail:hover{opacity:.9}
-.contact .sub{margin-top:12px;font-size:13px;color:var(--muted)}
-footer{padding:22px;text-align:center;color:var(--muted);font-size:13px;border-top:1px solid var(--line)}
+.contact h2{font-size:30px}
+.contact .sub{font-size:15px;color:var(--muted);margin-bottom:24px}
+.contact .cta{display:inline-block;padding:15px 38px;border-radius:14px;background:var(--accent);color:#fff;text-decoration:none;font-size:16.5px;font-weight:600;box-shadow:0 6px 18px rgba(83,74,183,.30)}
+.contact .mail{display:block;margin-top:16px;font-size:14px;color:var(--ink)}
+.contact .wx{margin-top:14px;font-size:13px;color:var(--muted)}
+
+footer{padding:24px;text-align:center;color:var(--muted);font-size:12.5px;border-top:1px solid var(--line)}
 footer a{color:var(--accent);text-decoration:none}
-footer .en{margin-top:6px;font-size:12px;color:var(--muted)}
-@media(max-width:600px){h1{font-size:26px}section{padding:26px 0}}
+
+@media(max-width:680px){
+.hero h1{font-size:32px}
+.stats .wrap{grid-template-columns:1fr;gap:12px}
+.split{grid-template-columns:1fr}
+.sec{padding:40px 0}
+}
 </style>
 </head>
 <body>
-<header class="wrap">
-  <div class="mark">DL</div>
-  <h1>Distill<span class="lab">Lab</span> 蒸馏研究室</h1>
-  <p class="tagline">把厚资料蒸成薄知识，把人的经验蒸成可对话的资产。<br>每单交付附<b>核验记录</b>：数字带来源，结论可复核。</p>
+
+<header>
+  <div class="wrap">
+    <a class="brand" href="/">
+      <span class="mark">DL</span>
+      <span><b>DistillLab 蒸馏研究室</b><span>制造业老师傅经验萃取</span></span>
+    </a>
+    <div class="nav">每单附核验记录 · 数字带来源</div>
+  </div>
 </header>
 
-<section class="wrap">
-  <h2>为什么可以信我们<span class="en">TRUST, BY DESIGN</span></h2>
-  <div class="pillars">
-    <div class="pillar">
-      <h3>公正 · 我们不做判断</h3>
-      <p>蒸馏不是创作。研报的观点归研报，师傅的手艺归师傅——我们只做结构化整理与忠实转述。<b>不做投资建议，不给经营建议</b>，不替任何人下结论。</p>
-    </div>
-    <div class="pillar">
-      <h3>客观 · 数字带来源</h3>
-      <p>每单交付附《核验记录》：关键数字与引文全部标注出处，待核实的明确标注"待核"。<b>说到第几页就是第几页，核不上的不写。</b></p>
-    </div>
-    <div class="pillar">
-      <h3>专业 · 制度流水线</h3>
-      <p>四分身流水线：选题 → 蒸馏 → 审校 → 归档，审校打回闭环——同一张卡打回两次即停单。<b>方法论全部开源</b>，实战核验记录公开可查。</p>
+<div class="hero wrap">
+  <div class="tag">制造业经验萃取</div>
+  <h1>老师傅会做，<br><span class="q">新人接不住？</span></h1>
+  <p class="sub">从一个反复出问题的关键工序开始，把操作要点、异常判断、易错处整理成<b>可现场验证</b>的交接包——师傅退休了，手艺留在厂里。</p>
+  <a class="cta" href="mailto:hello@distilllab.cn?subject=免费评估：一个交接难题&body=工序（做什么、用什么设备）：&%2310;%0D%0A卡点（新人最容易错/师傅最不放心的地方）：&%2310;%0D%0A交接给谁（新员工/接班人）：">免费评估一个交接难题</a>
+  <a class="alt" href="#samples">先看三张演示样例 ↓</a>
+  <p class="trust">48 小时内免费回复适不适合做 · 全程线上完成，不必跑现场 · 每单附核验记录</p>
+</div>
+
+<div class="stats">
+  <div class="wrap">
+    <div class="stat"><b>31<i>/31</i></b><span>实战关键数字核验命中， methodology 已开源</span></div>
+    <div class="stat"><b>20<i> 个</i></b><span>真实问题交付验收——按结果交，不按张数卖</span></div>
+    <div class="stat"><b>2<i> 版</i></b><span>每张卡人读版 + 机器可读版，喂得进厂内 AI</span></div>
+    <div class="src">* 核验数据来自开源方法论的两次实战交付记录，可公开复核</div>
+  </div>
+</div>
+
+<section class="sec" id="pain">
+  <div class="wrap">
+    <div class="label">厂里的痛点</div>
+    <h2>手艺在师傅脑子里，一走就清零</h2>
+    <p class="lead">不是新人笨，是他只能靠问——问到多少会多少。这三件事，每家厂都在重复。</p>
+    <div class="grids">
+      <div class="card"><span class="no">痛点 01</span><h3>老师傅快退休了</h3><p>调机手感、异常处理、参数修正表，全在他脑子里。人一走，返工率立涨。</p></div>
+      <div class="card"><span class="no">痛点 02</span><h3>同一个返工反复发生</h3><p>上次怎么判断、怎么处理的，没人记下来。下次新人从头再错一遍。</p></div>
+      <div class="card"><span class="no">痛点 03</span><h3>新人三个月顶不上岗</h3><p>带徒弟全靠口口相传，教到哪算哪——永远差最后一层"为什么"。</p></div>
     </div>
   </div>
 </section>
 
-<section class="wrap">
-  <h2>业务范围<span class="en">WHAT WE DO</span></h2>
-  <div class="lines">
-    <div class="line">
-      <h3>知识蒸馏</h3>
-      <div class="items">研报蒸馏 ｜ 深度研究 ｜ 书籍蒸馏</div>
-      <p>百页资料蒸成一页干货，原始素材归档可溯。</p>
+<section class="sec alt" id="samples">
+  <div class="wrap">
+    <div class="label">交付长什么样</div>
+    <h2>三张演示交接卡</h2>
+    <p class="lead">这就是交付物本身的样子：要点、异常判断表、易错处、适用条件与例外，一张卡全齐。</p>
+    <div class="grids">
+      <a class="sam" href="samples/bending.html">
+        <div class="paper">
+          <div class="ph"><b>折弯工序 · 交接卡</b><em>演示</em></div>
+          <div class="row"><b>回弹补偿</b><span>SPCC 2°–3° / 304 要 5°–8°</span></div>
+          <div class="row"><b>V 槽选择</b><span>板厚 × 8，薄板 × 6</span></div>
+          <div class="row"><b>核心资产</b><span>师傅的展开修正表</span></div>
+        </div>
+        <div class="foot">看完整卡 →</div>
+      </a>
+      <a class="sam" href="samples/injection-molding.html">
+        <div class="paper">
+          <div class="ph"><b>注塑调机 · 交接卡</b><em>演示</em></div>
+          <div class="row"><b>调机口诀</b><span>先压力后速度、先温度后时间</span></div>
+          <div class="row"><b>铁的纪律</b><span>一次只动一个参数</span></div>
+          <div class="row"><b>核心资产</b><span>每副模具的参数卡</span></div>
+        </div>
+        <div class="foot">看完整卡 →</div>
+      </a>
+      <a class="sam" href="samples/welding.html">
+        <div class="paper">
+          <div class="ph"><b>焊接工序 · 交接卡</b><em>演示</em></div>
+          <div class="row"><b>变形控制</b><span>跳焊 / 对称焊 / 反变形</span></div>
+          <div class="row"><b>气孔三步</b><span>查气量 → 擦板材 → 挡风</span></div>
+          <div class="row"><b>核心资产</b><span>熔池与声音的判断</span></div>
+        </div>
+        <div class="foot">看完整卡 →</div>
+      </a>
+      <a class="sam" href="samples/ops-dashboard.html">
+        <div class="paper">
+          <div class="ph"><b>小厂经营 · 一页看板</b><em>试验田</em></div>
+          <div class="row"><b>返工 / 废品率</b><span>台账汇总，涨跌一眼见</span></div>
+          <div class="row"><b>停机 / 交期</b><span>每个数字带来源可追溯</span></div>
+          <div class="row"><b>核心资产</b><span>老板五分钟看懂全厂</span></div>
+        </div>
+        <div class="foot">看完整卡 →</div>
+      </a>
     </div>
-    <div class="line">
-      <h3>人格与记忆</h3>
-      <div class="items">企业过往 ｜ 创业之路 ｜ 口述家史与家族分身 ｜ 真人分身复刻 ｜ 老师傅经验萃取</div>
-      <p>让老师傅的手艺、创始人的来时路、家族的记忆——留下来、问得着。</p>
-    </div>
-    <div class="line">
-      <h3>内容与增长</h3>
-      <div class="items">账号蒸馏与选题库 ｜ 去 AI 味改写</div>
-      <p>让内容有据可依、像人话。</p>
+    <p class="note">以上为演示样例（通用行业知识整理，非客户数据）。真实交付以贵厂实际工序为准，每张卡带负责人与更新时间。</p>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="wrap">
+    <div class="label">怎么做成一张卡</div>
+    <h2>四步，每步都有验证</h2>
+    <p class="lead">懂行的人来问，才问得出真东西。写下来的每一条，都回到现场核对过。</p>
+    <div class="stepgrid">
+      <div class="step"><b>01</b><h3>访谈老师傅</h3><p>问参数、问异常、问"什么情况下不能按常规来"。</p></div>
+      <div class="step"><b>02</b><h3>现场验证</h3><p>每条回到现场核对：是不是这么干的，有没有漏例外。</p></div>
+      <div class="step"><b>03</b><h3>成卡</h3><p>要点 + 异常判断表 + 易错处 + 例外条件，每条带来源。</p></div>
+      <div class="step"><b>04</b><h3>新人验证</h3><p>新人按卡独立干首件，老师傅抽检——过不了就打回重写。</p></div>
     </div>
   </div>
 </section>
 
-<section class="wrap">
-  <h2>开源项目<span class="en">OPEN SOURCE</span></h2>
-  <div class="lines">
-    <div class="line">
-      <h3>yanbao-distill</h3>
-      <div class="items">研报蒸馏流水线</div>
-      <div class="doc">文档：中文 / English 双语</div>
-      <p>四分身工作流：选题 → 蒸馏 → 审校 → 归档，产出带源页码、附核验记录的知识卡。方法论全开源。</p>
-    </div>
-    <div class="line">
-      <h3>workbuddy-memory-kit</h3>
-      <div class="items">AI 防失忆技能包</div>
-      <div class="doc">文档：中文 / English 双语</div>
-      <p>两个 WorkBuddy 技能：记忆治理（memory-anchor）+ 跨窗口交接（cross-window-handoff），解决 AI 换窗口就失忆、对话不持久的问题。</p>
+<section class="sec alt">
+  <div class="wrap">
+    <div class="label">交付与验收</div>
+    <h2>按结果交，不按张数卖</h2>
+    <div class="split">
+      <div class="panel">
+        <h3>单工序交接包包含</h3>
+        <ul>
+          <li>工序交接卡：人读版 + 机器可读版（喂得进厂内 AI/知识库）</li>
+          <li>异常判断速查表：可打印，贴现场</li>
+          <li>新人验证记录与通过标准</li>
+          <li>负责人、更新时间、复核周期——写进卡里</li>
+        </ul>
+      </div>
+      <div class="panel">
+        <h3>怎么算合格</h3>
+        <p class="kv">拿贵厂 <b style="color:var(--accent);font-size:18px">20 个真实问题</b>问新人：按卡能不能答对、答上来。</p>
+        <p class="kv" style="margin-top:10px">交付后进入季度复核：每季度核对卡片与现场是否一致，明确每张卡的更新责任人——卡不更新，就会变成误导。</p>
+      </div>
     </div>
   </div>
 </section>
 
-<section class="wrap">
-  <div class="redlines">
-    <h3>我们不做什么</h3>
-    <ul>
-      <li>不做投资建议，不写投资价值报告</li>
-      <li>不承诺流量效果与商业结果</li>
-      <li>无核验记录的交付不出门</li>
-      <li>未获本人书面授权，不做人格复刻</li>
-    </ul>
+<section class="sec">
+  <div class="wrap">
+    <div class="label">怎么开始</div>
+    <h2>全程线上，四步走完</h2>
+    <p class="lead">不用跑现场、不用见面——访谈用视频，资料靠拍照回传，新人验证交记录。每一步都留痕。</p>
+    <div class="stepgrid">
+      <div class="step"><b>①</b><h3>留言说工序</h3><p>点页首按钮或发邮件：工序、卡点、交接给谁，三样说清就行。</p></div>
+      <div class="step"><b>②</b><h3>48 小时免费诊断</h3><p>我们回复适不适合做、难点在哪、大概怎么做——不合适直接说，分文不收。</p></div>
+      <div class="step"><b>③</b><h3>单工序付费试点</h3><p>视频访谈老师傅 + 现场资料拍照回传 + 新人首件验证，全流程远程。</p></div>
+      <div class="step"><b>④</b><h3>季度复核续费</h3><p>每季度核对卡片与现场一致性，持续更新，经验一直是活的。</p></div>
+    </div>
   </div>
 </section>
 
-<section class="wrap contact">
-  <h2>联系我们<span class="en">CONTACT</span></h2>
-  <a class="mail" href="mailto:hello@distilllab.cn">hello@distilllab.cn</a>
-  <p class="sub">工作日 24 小时内必回 · 材料可邮件直达（附件 20MB 内）</p>
+<section class="sec">
+  <div class="wrap">
+    <div class="why">
+      <div class="label">为什么是我们</div>
+      <h2>懂工厂的人来做，AI 提效人担责</h2>
+      <p class="lead" style="color:#C9C5E8">我们不做泛泛的"AI 总结"，只做经得起现场验证的经验萃取。</p>
+      <div class="grids">
+        <div class="card"><h3>懂工厂的人来问</h3><p>主理人钣金机加工行业多年，能跟师傅对上话——问的是行话，接的是干货。</p></div>
+        <div class="card"><h3>核验纪律</h3><p>四分身流水线已开源，实战核验 31/31 全命中。卡上每个数字都有出处。</p></div>
+        <div class="card"><h3>机器快，人负责</h3><p>AI 提高整理速度，访谈与现场验证保证真实——对结果负责的是人，不是模型。</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec contact" id="contact">
+  <div class="wrap">
+    <div class="label" style="letter-spacing:4px">开始</div>
+    <h2>聊一个你厂里最难交接的工序</h2>
+    <p class="sub">说清工序、卡点、交接给谁——我们先判断适不适合做，不合适直接告诉你。</p>
+    <a class="cta" href="mailto:hello@distilllab.cn?subject=免费评估：一个交接难题&body=工序（做什么、用什么设备）：&%2310;%0D%0A卡点（新人最容易错/师傅最不放心的地方）：&%2310;%0D%0A交接给谁（新员工/接班人）：">留言免费评估</a>
+    <p class="mail">hello@distilllab.cn</p>
+    <p class="wx">全程线上完成，无需见面 ｜ 留言写清：工序、卡点、交接给谁 ｜ 微信入口即将开放</p>
+  </div>
 </section>
 
 <footer>
   <a href="https://github.com/distilllab">GitHub · 全部开源项目</a> ｜ © 2026 DistillLab 蒸馏研究室
-  <div class="en">DistillLab distills thick materials into thin knowledge — every number sourced, every claim checkable. We organize, we don't judge. We distill, we don't advise.</div>
 </footer>
 </body>
 </html>

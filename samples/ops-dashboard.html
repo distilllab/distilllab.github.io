@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>演示样例：小厂经营一页看板 · DistillLab 蒸馏研究室</title>
+<style>
+:root{--ink:#26215C;--muted:#5F5E5A;--accent:#534AB7;--soft:#EEEDFE;--line:#D3D1C7;--warn:#8A4B3B;--ok:#2E7D57}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:"Segoe UI","Microsoft YaHei",system-ui,sans-serif;background:#fff;color:var(--ink);line-height:1.8}
+.wrap{max-width:760px;margin:0 auto;padding:36px 22px 60px}
+.tag{display:inline-block;font-size:12.5px;color:var(--warn);border:1px solid var(--warn);border-radius:6px;padding:2px 10px;margin-bottom:14px}
+h1{font-size:26px;margin-bottom:6px}
+.sub{color:var(--muted);font-size:14px;margin-bottom:26px}
+h2{font-size:17px;margin:26px 0 10px;padding-left:10px;border-left:4px solid var(--accent)}
+p,li{font-size:14.5px}
+ul{padding-left:20px}
+li{margin:5px 0}
+b{color:var(--accent)}
+.dash{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin:14px 0}
+.kpi{border:1px solid var(--line);border-radius:12px;padding:14px;text-align:center}
+.kpi b{display:block;font-size:28px;font-weight:800;color:var(--ink)}
+.kpi b.warn{color:var(--warn)}
+.kpi b.ok{color:var(--ok)}
+.kpi span{font-size:12.5px;color:var(--muted)}
+.kpi small{display:block;font-size:11px;color:#9A97B5;margin-top:4px}
+table{width:100%;border-collapse:collapse;font-size:13.5px;margin:8px 0}
+th,td{border:1px solid var(--line);padding:7px 9px;text-align:left;vertical-align:top}
+th{background:var(--soft);color:var(--accent)}
+.meta{margin-top:30px;padding:14px 16px;background:#F7F6FC;border-radius:10px;font-size:13px;color:var(--muted)}
+.footer{margin-top:34px;padding-top:16px;border-top:1px solid var(--line);font-size:12.5px;color:var(--muted)}
+.footer a{color:var(--accent);text-decoration:none}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <p class="tag">演示样例 · 数据为虚构 · 展示看板形态</p>
+  <h1>小厂经营 · 一页看板</h1>
+  <p class="sub">对象：50 人以下机加工厂 ｜ 频率：每周一页 ｜ 交付形态：数据整理服务（试验田 · 演示版 v0.1）</p>
+
+  <h2>老板周一早上看这一页，五分钟了解全厂</h2>
+  <div class="dash">
+    <div class="kpi"><b class="warn">7 件</b><span>本周返工</span><small>来源：返工登记本</small></div>
+    <div class="kpi"><b>2.1%</b><span>废品率</span><small>来源：周报废单</small></div>
+    <div class="kpi"><b class="warn">3.5 h</b><span>设备停机</span><small>来源：设备运行记录</small></div>
+    <div class="kpi"><b>12 单</b><span>在制订单</span><small>来源：生产计划表</small></div>
+    <div class="kpi"><b class="ok">92%</b><span>准时交付</span><small>来源：出货单核对</small></div>
+  </div>
+
+  <h2>每个数字都带来源——看得懂，也查得到</h2>
+  <table>
+    <tr><th>数字</th><th>从哪来</th><th>老板该注意什么</th></tr>
+    <tr><td>返工 7 件</td><td>车间返工登记本拍照汇总</td><td>连续两周涨，集中在折弯——要查模具</td></tr>
+    <tr><td>废品率 2.1%</td><td>每周报废单（材料重量折算）</td><td>对比上月 1.6% 已抬升，看是不是新来料批次</td></tr>
+    <tr><td>停机 3.5 小时</td><td>设备运行台账（停机原因栏）</td><td>2 小时是等料——采购的锅，不是设备的锅</td></tr>
+    <tr><td>准时交付 92%</td><td>出货单 vs 订单交期逐单核对</td><td>8% 晚的 3 单里 2 单卡在外协——外协要盯</td></tr>
+  </table>
+
+  <h2>和"经验萃取"是什么关系</h2>
+  <ul>
+    <li>同一个内核：<b>把散落的、没人汇总的信息，整理成一页带来源、可复核的东西</b>。经验萃取整理的是老师傅脑子里的，看板整理的是厂里台账上的。</li>
+    <li>顺手的产品组合：做经验萃取访谈时，顺手就能把数据看板建起来——访谈一次，两样产出。</li>
+    <li>为什么现在只有演示：数据服务要碰厂里的真实台账，涉及隐私，等有信任基础的第一批客户再做真实版。</li>
+  </ul>
+
+  <h2>交付与频率</h2>
+  <ul>
+    <li>建板：收拢厂里现有台账/单据 → 设计 5–8 个关键数字 → 每周自动汇总成一页（微信推送给老板）。</li>
+    <li>更新：月度服务——每周一页，月底一页月度对比，数字全部带来源可追溯。</li>
+  </ul>
+
+  <div class="meta">
+    数据说明：本页所有数字均为虚构演示，用于展示看板形态。<br>
+    负责人：＿＿＿＿ ｜ 版本：演示 v0.1 ｜ 更新时间：＿＿＿＿
+  </div>
+
+  <div class="footer">
+    <a href="/">← 返回 DistillLab 蒸馏研究室</a> ｜ 想看看你厂里的数据能不能做成这一页？发邮件聊聊
+  </div>
+</div>
+</body>
+</html>

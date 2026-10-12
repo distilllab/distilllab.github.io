@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>演示样例：焊接工序交接卡 · DistillLab 蒸馏研究室</title>
+<style>
+:root{--ink:#26215C;--muted:#5F5E5A;--accent:#534AB7;--soft:#EEEDFE;--line:#D3D1C7;--warn:#8A4B3B}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:"Segoe UI","Microsoft YaHei",system-ui,sans-serif;background:#fff;color:var(--ink);line-height:1.8}
+.wrap{max-width:760px;margin:0 auto;padding:36px 22px 60px}
+.tag{display:inline-block;font-size:12.5px;color:var(--warn);border:1px solid var(--warn);border-radius:6px;padding:2px 10px;margin-bottom:14px}
+h1{font-size:26px;margin-bottom:6px}
+.sub{color:var(--muted);font-size:14px;margin-bottom:26px}
+h2{font-size:17px;margin:26px 0 10px;padding-left:10px;border-left:4px solid var(--accent)}
+p,li{font-size:14.5px}
+ul{padding-left:20px}
+li{margin:5px 0}
+table{width:100%;border-collapse:collapse;font-size:13.5px;margin:8px 0}
+th,td{border:1px solid var(--line);padding:7px 9px;text-align:left;vertical-align:top}
+th{background:var(--soft);color:var(--accent)}
+.meta{margin-top:30px;padding:14px 16px;background:#F7F6FC;border-radius:10px;font-size:13px;color:var(--muted)}
+.footer{margin-top:34px;padding-top:16px;border-top:1px solid var(--line);font-size:12.5px;color:var(--muted)}
+.footer a{color:var(--accent);text-decoration:none}
+b{color:var(--accent)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <p class="tag">演示样例 · 通用行业知识整理 · 非真实客户数据</p>
+  <h1>焊接工序 · 老师傅交接卡</h1>
+  <p class="sub">工序：CO2 气保焊（薄板） ｜ 典型材料：碳钢 1–3mm ｜ 交付形态：单工序交接包（演示版 v0.1）</p>
+
+  <h2>一、操作要点（师傅的手感，写进卡里）</h2>
+  <ul>
+    <li><b>变形控制三板斧</b>：跳焊（分段退焊）、对称焊、预留反变形量——长焊缝直不直，开工前就决定了，焊完再校是补救不是本事。</li>
+    <li><b>电流电压匹配</b>：0.8 焊丝常用（约 100–130A）配 18–20V 档；"一听二看"——声音噼啪脆是匹配，闷响多半电压低了。</li>
+    <li><b>定位焊顺序</b>：先定两头再定中间，间距按板厚 20–40 倍；定位焊本身就是缩小版的正式缝，别糊弄。</li>
+    <li><b>收弧弧坑</b>：用收弧电流填坑，不然弧坑裂纹留到客户手里。</li>
+  </ul>
+
+  <h2>二、异常判断（症状 → 第一动作）</h2>
+  <table>
+    <tr><th>症状</th><th>常见原因（按概率排）</th><th>老师傅的第一动作</th></tr>
+    <tr><td>密密麻麻气孔</td><td>气量不足/管路漏气；板材有油污锈；现场有风</td><td>看流量计 → 擦板材 → 挡风，三步走完才动电流</td></tr>
+    <tr><td>咬边</td><td>电压偏高或走速偏慢</td><td>压电压或提速度，单变量改</td></tr>
+    <tr><td>未熔合</td><td>电流偏小走速偏快；焊枪角度不对</td><td>看熔池宽度，加电流同时压低枪位</td></tr>
+    <tr><td>薄板烧穿</td><td>热量太集中</td><td>调小规范 + 加快走速 + 改跳焊</td></tr>
+  </table>
+
+  <h2>三、易错处（新人最容易踩）</h2>
+  <ul>
+    <li>坡口和焊缝两侧 20mm 内不清理就直接焊——油污锈水就是气孔制造机。</li>
+    <li>长焊缝一根焊到底，焊完弓形一目了然。</li>
+    <li>焊后不做打弯/渗漏自检就报交。</li>
+  </ul>
+
+  <h2>四、适用条件与例外</h2>
+  <ul>
+    <li>本卡适用碳钢薄板气保焊；铝材走交流氩弧焊、不锈钢走直流氩弧，<b>另卡处理</b>。</li>
+    <li>例外：有焊接工艺评定（WPS）的产品按 WPS 执行，本卡不替代工艺文件；持证要求按厂规与特种设备规范。</li>
+  </ul>
+
+  <h2>五、现场验证（怎么才算学会了）</h2>
+  <p>新人焊两块试板：一块做外观检（咬边/气孔/成形），一块折弯检验熔合。两项过，再上产品焊第一道定位缝。老师傅只看三样：熔池、声音、焊后变形。</p>
+
+  <div class="meta">
+    负责人：＿＿＿＿ ｜ 卡片版本：演示 v0.1 ｜ 更新时间：＿＿＿＿ ｜ 下次复核：＿＿＿＿<br>
+    本卡为演示样例：内容来自通用行业知识整理，用于展示交接包形态，非任何真实客户数据。
+  </div>
+
+  <div class="footer">
+    <a href="/">← 返回 DistillLab 蒸馏研究室</a> ｜ 把你厂里最难交接的工序发给我们，先判断适不适合做
+  </div>
+</div>
+</body>
+</html>
