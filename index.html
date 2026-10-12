@@ -65,7 +65,7 @@ h1 .zheng{color:var(--green)}
 @media(prefers-reduced-motion:no-preference){
  .pulse{animation:pl 2.6s ease-in-out infinite}
  @keyframes pl{0%,100%{opacity:.45;transform:scale(1)}50%{opacity:1;transform:scale(1.25)}}
- .flow{stroke-dasharray:6 8;animation:fl 1.6s linear infinite}
+ .flow{stroke-dasharray:6 8}
  @keyframes fl{to{stroke-dashoffset:-28}}
 }
 
@@ -186,7 +186,7 @@ footer a:hover{text-decoration:underline}
     if(document.activeElement===inp||inp.value){inp.placeholder=rest;return;}
     inp.placeholder=full.slice(pos)+full.slice(0,pos);
     pos=(pos+1)%full.length;
-  },600);
+  },900);
   inp.addEventListener("focus",function(){inp.placeholder=rest;});
 })();
 </script>
