@@ -34,10 +34,16 @@ h1 .zheng{color:var(--green)}
 .vision b{color:var(--ink)}
 
 .searchbar{max-width:560px;margin:0 auto;display:flex;gap:10px}
-.searchbar input{flex:1;min-width:0;padding:14px 18px;border-radius:10px;border:1px solid var(--line);background:#fff;color:var(--ink);font-size:15px;outline:none}
-.searchbar input:focus{border-color:var(--green)}
+.field{position:relative;flex:1;min-width:0;display:flex}
+.field input{position:relative;z-index:2;width:100%;min-width:0;padding:14px 18px;border-radius:10px;border:1px solid var(--line);background:transparent;color:var(--ink);font-size:15px;outline:none}
+.field input:focus{border-color:var(--green)}
+.field .ph{position:absolute;inset:0;z-index:1;display:flex;align-items:center;overflow:hidden;border-radius:10px;color:#8a938b;font-size:15px;pointer-events:none;transition:opacity .25s}
+.field .ph .ph-track{display:inline-block;white-space:nowrap;animation:phslide 26s linear infinite}
+@keyframes phslide{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.field.focus .ph,.field.hasval .ph{opacity:0}
+@media(prefers-reduced-motion:reduce){.field .ph .ph-track{animation:none}}
 .searchbar button{padding:14px 26px;border-radius:10px;border:none;background:var(--green);color:#fff;font-size:15px;font-weight:700;cursor:pointer}
-.searchbar button:hover{background:#3b6d11}
+.searchbar button:hover{background:#27500a}
 .quick{max-width:640px;margin:12px auto 0;display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
 .quick a{font-size:12.5px;color:var(--muted);text-decoration:none;border:1px solid var(--line);border-radius:999px;padding:4px 14px;background:#fff}
 .quick a:hover{border-color:var(--green);color:var(--green)}
@@ -106,7 +112,10 @@ footer a:hover{text-decoration:underline}
   <p class="vision">互联网连接了人与人；AI 时代，AI 要与企业、设备、经验握手。<br>我们把老师傅的手艺、企业的细节数据、厚厚的资料，<b>蒸馏成一页一页用得上的知识</b>。</p>
 
   <form class="searchbar" action="app.html" method="get">
-    <input type="text" name="q" placeholder="搜索场景：焊接、看板、研报、知识库……" autocomplete="off">
+    <span class="field">
+      <span class="ph" aria-hidden="true"><span class="ph-track">搜索场景：焊接 · 看板 · 研报 · 书籍 · 知识库 · AI 工作流……　　搜索场景：焊接 · 看板 · 研报 · 书籍 · 知识库 · AI 工作流……　　</span></span>
+      <input type="text" name="q" autocomplete="off" aria-label="搜索场景">
+    </span>
     <button type="submit">搜索场景</button>
   </form>
   <div class="quick">
@@ -175,19 +184,14 @@ footer a:hover{text-decoration:underline}
   });
   d.addEventListener("toggle",function(){if(d.open){b.focus();s.textContent="";}});
 })();
-/* 搜索框底字流动字幕：未聚焦且为空时缓慢左移，聚焦即停 */
+/* 搜索框：聚焦或有输入时隐藏底层滚动字幕 */
 (function(){
-  var inp=document.querySelector(".searchbar input");
-  if(!inp||window.matchMedia("(prefers-reduced-motion: reduce)").matches)return;
-  var full="搜索场景：焊接 · 看板 · 研报 · 书籍 · 知识库 · AI 工作流……　　";
-  var rest="搜索场景：焊接、看板、研报、知识库……";
-  var pos=0;
-  setInterval(function(){
-    if(document.activeElement===inp||inp.value){inp.placeholder=rest;return;}
-    inp.placeholder=full.slice(pos)+full.slice(0,pos);
-    pos=(pos+1)%full.length;
-  },900);
-  inp.addEventListener("focus",function(){inp.placeholder=rest;});
+  var field=document.querySelector(".searchbar .field"),inp=field.querySelector("input");
+  function upd(){field.classList.toggle("hasval",!!inp.value)}
+  inp.addEventListener("input",upd);
+  inp.addEventListener("focus",function(){field.classList.add("focus")});
+  inp.addEventListener("blur",function(){field.classList.remove("focus");upd()});
+  upd();
 })();
 </script>
 </body>
