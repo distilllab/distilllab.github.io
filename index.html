@@ -36,27 +36,12 @@ h1 .zheng{color:var(--green)}
 .actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin:0 0 6px}
 .cta{display:inline-block;padding:14px 34px;border-radius:12px;background:var(--green);color:#fff;text-decoration:none;font-size:15.5px;font-weight:700;letter-spacing:1px}
 .cta:hover{background:#27500a}
-.cta.ghost{background:#fff;color:var(--green);border:1.5px solid var(--green)}
-.cta.ghost:hover{background:var(--tint)}
 .quick{max-width:640px;margin:12px auto 0;display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
 .quick a{font-size:12.5px;color:var(--muted);text-decoration:none;border:1px solid var(--line);border-radius:999px;padding:4px 14px;background:#fff}
 .quick a:hover{border-color:var(--green);color:var(--green)}
 .quick a.flag{color:var(--green);border-color:var(--green);font-weight:700;background:var(--tint)}
 
-/* 免费评估展开面板 */
-.assess{max-width:560px;margin:18px auto 0;text-align:left}
-.assess summary{list-style:none;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;padding:13px 30px;border-radius:10px;border:1.5px solid var(--green);color:var(--green);font-size:15px;font-weight:700;background:#fff}
-.assess summary::-webkit-details-marker{display:none}
-.assess summary:hover{background:var(--tint)}
-.assess[open] summary{background:var(--tint)}
-.assess .panel{border:1px solid var(--line);border-radius:12px;background:#fff;padding:16px;margin-top:10px}
-.assess input,.assess textarea{width:100%;border:1px solid var(--line);border-radius:9px;padding:10px 12px;font:inherit;font-size:13.5px;color:var(--ink);background:#fff;margin-bottom:8px}
-.assess textarea{min-height:80px;resize:vertical}
-.assess textarea:focus{outline:none;border-color:var(--green)}
-.assess .row{display:flex;gap:10px;align-items:center;margin-top:10px;flex-wrap:wrap}
-.assess .copy{padding:9px 20px;border-radius:8px;border:none;background:var(--green);color:#fff;font-size:13.5px;font-weight:700;cursor:pointer}
-.assess .copy:hover{background:#3b6d11}
-.assess .mail{font-size:13.5px;color:var(--green);font-weight:600;word-break:break-all}
+assess .mail{font-size:13.5px;color:var(--green);font-weight:600;word-break:break-all}
 .assess .st{font-size:12.5px;color:var(--ok,#2E7D57);min-height:18px}
 .assess .hint{font-size:12px;color:var(--muted);margin-top:8px}
 
@@ -95,7 +80,7 @@ footer a:hover{text-decoration:underline}
     </a>
     <div class="links">
       <a href="app.html">全部场景</a>
-      <a class="free" href="#assess">免费诊断</a>
+      <a class="free" href="app.html#contact">免费诊断</a>
     </div>
   </div>
 </header>
@@ -107,7 +92,6 @@ footer a:hover{text-decoration:underline}
 
   <div class="actions">
     <a class="cta" href="app.html">浏览八个场景</a>
-    <a class="cta ghost" href="#assess">免费评估一个交接难题</a>
   </div>
   <div class="quick">
     <a class="flag" href="scenarios/experience.html">今日主打：老师傅经验萃取</a>
@@ -118,21 +102,6 @@ footer a:hover{text-decoration:underline}
     <a href="app.html#k=知识库">知识库整理</a>
     <a href="app.html#k=AI">AI 工作流定制</a>
   </div>
-
-  <details class="assess" id="assess">
-    <summary>免费评估一个交接难题</summary>
-    <div class="panel">
-      <input id="f-process" type="text" placeholder="场景：任何行业、任何工序——做什么、用什么设备">
-      <textarea id="f-pain" placeholder="最难交接的地方：新人最容易错、师傅最不放心的"></textarea>
-      <input id="f-target" type="text" placeholder="交接给谁：新员工 / 接班人">
-      <input id="f-contact" type="text" placeholder="联系方式：微信号或邮箱（二选一，必填）">
-      <div class="row" style="margin-bottom:4px">
-        <button class="copy" type="button" id="send">发留言</button>
-      </div>
-      <div class="st" id="st"></div>
-      <div class="hint">这是通用留言板——任何行业、任何工序都行，说不完整也没关系，先写大概。48 小时内免费回复。</div>
-    </div>
-  </details>
 
   <div class="bridge">
     <svg viewBox="0 0 640 150" width="100%" role="img" aria-label="AI 与企业经验握手的示意">
@@ -165,23 +134,5 @@ footer a:hover{text-decoration:underline}
   </div>
 </footer>
 
-<script>
-(function(){
-  var btn=document.getElementById("send"),st=document.getElementById("st");
-  function g(id){return document.getElementById(id).value.trim()}
-  btn.addEventListener("click",function(){
-    var p={"工序":g("f-process"),"最难交接的地方":g("f-pain"),"交接给谁":g("f-target"),"联系方式（微信或邮箱）":g("f-contact"),"_subject":"官网留言：交接难题免费诊断","_captcha":"false","_honey":""};
-    if(!p["联系方式（微信或邮箱）"]){st.textContent="留个联系方式（微信号或邮箱），我们才能回复你。";return}
-    if(!p["工序"]){st.textContent="先说说工序：做什么、用什么设备。";return}
-    btn.disabled=true;btn.textContent="发送中…";st.textContent="";
-    fetch("https://formsubmit.co/ajax/hello@distilllab.cn",{method:"POST",headers:{"Content-Type":"application/json",Accept:"application/json"},body:JSON.stringify(p)})
-    .then(function(r){return r.json()})
-    .then(function(j){if(j.success==="true"){st.textContent="留言已发出。48 小时内回复——不合适直接说。";btn.textContent="已发送 ✓";}else{throw 0}})
-    .catch(function(){btn.disabled=false;btn.textContent="发留言";st.textContent="网络不通。备用：复制留言内容发到 hello@distilllab.cn";});
-  });
-  var dd=document.getElementById("assess");if(dd)dd.addEventListener("toggle",function(){if(dd.open){st.textContent=""}});
-})();
-
-</script>
 </body>
 </html>
