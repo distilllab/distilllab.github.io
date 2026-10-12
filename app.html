@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>全部场景 · DistillLab 蒸馏研究室</title>
+<meta name="description" content="DistillLab 场景总览：老师傅经验萃取、小厂经营看板、研报蒸馏、书籍蒸馏、企业知识库整理、去AI味内容、AI 工作流定制。全程线上交付，48小时免费诊断。">
+<style>
+:root{--paper:#f4f2eb;--ink:#25352e;--green:#335d49;--deep:#1f3a2c;--muted:#68726a;--line:#cbd0c6;--white:#fffef9;--soft:#e9efe8}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:20px}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:"Microsoft YaHei","PingFang SC",sans-serif;line-height:1.7}
+a{color:inherit}
+.wrap{max-width:1080px;margin:0 auto;padding:0 26px;width:100%}
+
+header{border-bottom:1px solid var(--line);padding:16px 0}
+header .wrap{display:flex;align-items:center;justify-content:space-between}
+.brand{display:flex;align-items:center;gap:12px;text-decoration:none;color:var(--ink)}
+.mark{font-size:20px;letter-spacing:-2px;font-weight:900;border:2px solid var(--green);padding:0 8px;color:var(--green)}
+.brand b{font-size:15px;display:block;line-height:1.2}
+.brand small{display:block;font-size:10px;color:var(--muted);letter-spacing:2px}
+header .links{display:flex;gap:22px;font-size:13.5px}
+header .links a{text-decoration:none;color:var(--muted)}
+header .links a:hover{color:var(--green)}
+header .links a.free{color:var(--green);font-weight:700}
+
+h1{font-size:30px;margin:36px 0 6px}
+.sub{color:var(--muted);font-size:14.5px;margin-bottom:22px}
+.searchline{display:flex;gap:10px;max-width:560px;margin-bottom:10px}
+.searchline input{flex:1;padding:11px 16px;border-radius:9px;border:1px solid var(--line);background:var(--white);font-size:14.5px;outline:none}
+.searchline input:focus{border-color:var(--green)}
+.count{font-size:13px;color:var(--muted);margin-bottom:20px;min-height:20px}
+
+.flagship{display:grid;grid-template-columns:1.2fr .8fr;gap:0;background:var(--green);color:var(--white);border-radius:16px;overflow:hidden;margin-bottom:14px;text-decoration:none}
+.flagship .fl{padding:26px 28px}
+.flagship .tag{font-size:11.5px;letter-spacing:2px;color:#bcd8c8;margin-bottom:10px;display:block}
+.flagship h2{font-size:24px;line-height:1.35;margin-bottom:10px}
+.flagship p{font-size:14px;color:#d7e6dd;margin-bottom:14px}
+.flagship .go{font-size:14px;font-weight:700;color:#fff}
+.flagship .go:hover{text-decoration:underline}
+.flagship .fr{background:#2a4d3b;padding:26px 24px;display:flex;flex-direction:column;justify-content:center;gap:8px}
+.flagship .fr b{font-size:13px;color:#bcd8c8;letter-spacing:1px}
+.flagship .fr span{font-size:13px;color:#e2eee7;border-bottom:1px dashed #4d6b58;padding:5px 0}
+.flagship .fr small{font-size:11px;color:#9db3a6;margin-top:6px}
+
+.grids{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:14px;margin-bottom:8px}
+.scard{background:var(--white);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+.scard summary{list-style:none;cursor:pointer;padding:16px 18px;display:block}
+.scard summary::-webkit-details-marker{display:none}
+.scard summary .head{display:flex;justify-content:space-between;align-items:center}
+.scard summary .no{font-size:12px;color:var(--muted);letter-spacing:1px}
+.scard summary h3{font-size:16.5px;display:inline}
+.scard summary .one{font-size:13.3px;color:var(--muted);margin-top:5px}
+.scard summary .more{font-size:12.5px;color:var(--green);font-weight:700;margin-top:8px;display:block}
+.scard[open] summary .more::after{content:"（点此收起）";font-weight:400;color:var(--muted)}
+.scard .body{border-top:1px dashed var(--line);padding:14px 18px 16px;font-size:13.5px}
+.scard .body b{color:var(--green)}
+.scard .body .cta{display:inline-block;margin-top:10px;color:var(--green);font-weight:700;text-decoration:none;border-bottom:2px solid var(--green)}
+.scard .body .cta:hover{opacity:.8}
+.scard.dim{opacity:.72}
+.scard .body .tbd{font-size:12.5px;color:var(--muted);font-style:italic}
+
+/* 演示窗 */
+.demos{margin:44px 0 10px}
+.demos .label{font-size:13px;letter-spacing:3px;color:var(--green);font-weight:700;margin-bottom:8px}
+.demos h2{font-size:24px;margin-bottom:6px}
+.demos .lead{color:var(--muted);font-size:14.5px;margin-bottom:20px}
+.workbench{background:var(--ink);border-radius:18px;padding:18px 18px 14px;max-width:820px}
+.benchhead{display:flex;justify-content:space-between;color:#9db3a6;font-size:12px;margin-bottom:10px}
+.benchhead .live{color:#8fd6a9}
+.viewport{position:relative;height:265px;background:#fff;border-radius:10px;overflow:hidden;color:var(--ink)}
+.stage{position:absolute;inset:0;padding:18px 22px;opacity:0;transition:opacity .5s}
+.stage.active{opacity:1}
+.stage[hidden]{display:none}
+.step-label{font-size:12px;letter-spacing:2px;color:var(--green);font-weight:700;margin-bottom:8px}
+.stage h3{font-size:19px;line-height:1.4;margin-bottom:10px}
+.quote{background:var(--soft);border-radius:9px;padding:8px 13px;margin:8px 0;max-width:94%;font-size:13.3px}
+.quote small{display:block;color:var(--muted);font-size:10.5px;margin-bottom:2px}
+.record{display:flex;justify-content:space-between;border-bottom:1px dashed var(--line);padding:6px 2px;font-size:13.3px}
+.record b{min-width:120px}
+.record em{font-style:normal;color:var(--muted);font-size:12.3px}
+.sheet-title{display:flex;justify-content:space-between;align-items:center;border-bottom:2px solid var(--green);padding-bottom:6px;margin-bottom:8px}
+.sheet-title b{font-size:15px}
+.sheet-title .tag{font-size:10.5px;border:1px solid var(--green);color:var(--green);border-radius:5px;padding:1px 7px}
+.validation{margin:6px 0 0 18px;font-size:13.8px}
+.validation li{margin:6px 0}
+.scenefoot{position:absolute;bottom:8px;left:22px;right:22px;font-size:11.5px;color:var(--muted);border-top:1px solid var(--line);padding-top:5px}
+.controls{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap}
+.controls button{padding:7px 15px;border-radius:8px;border:1px solid var(--line);background:var(--white);cursor:pointer;font-size:13px;color:var(--ink)}
+.controls button[aria-pressed="true"]{background:var(--green);color:var(--white);border-color:var(--green);font-weight:700}
+.controls #play{margin-left:auto}
+.progress{height:3px;background:var(--line);border-radius:2px;margin-top:12px;overflow:hidden}
+.progress span{display:block;height:100%;width:0;background:var(--green)}
+.progress.running span{animation:pr 5s linear forwards}
+@keyframes pr{from{width:0}to{width:100%}}
+.demo-note{font-size:11.5px;color:var(--muted);margin-top:8px}
+
+/* CTA */
+.ctaband{margin:50px 0 0;background:var(--green);border-radius:18px;padding:34px 32px;color:var(--white);text-align:center}
+.ctaband h2{font-size:25px;margin-bottom:8px}
+.ctaband p{font-size:14px;color:#d7e6dd;margin-bottom:20px}
+.ctaband .btn{display:inline-block;background:var(--white);color:var(--deep);padding:13px 32px;border-radius:11px;text-decoration:none;font-weight:700;font-size:15px}
+.ctaband .btn:hover{background:#e2eee7}
+.ctaband small{display:block;margin-top:12px;font-size:12px;color:#bcd8c8}
+
+footer{margin-top:40px;border-top:1px solid var(--line);padding:20px 0 26px}
+footer .wrap{display:flex;justify-content:space-between;font-size:12px;color:var(--muted);flex-wrap:wrap;gap:8px}
+footer a{color:var(--green);text-decoration:none}
+@media(max-width:760px){.flagship{grid-template-columns:1fr}.searchline{flex-direction:column}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <a class="brand" href="/">
+      <span class="mark">DL</span>
+      <span><b>DistillLab 蒸馏研究室</b><small>AI 与企业握手的地方</small></span>
+    </a>
+    <div class="links">
+      <a href="/">← 封面</a>
+      <a class="free" href="#contact">免费诊断 ↗</a>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+  <h1>八个场景，都是真的</h1>
+  <p class="sub">没有一个概念性条目——每张卡背后都有可运行的能力或已开源的产出。输入关键词，直接筛你要的场景。</p>
+  <div class="searchline">
+    <input id="q" type="text" placeholder="试试：焊接 / 看板 / 研报 / 手艺 / AI……" autocomplete="off">
+  </div>
+  <div class="count" id="count"></div>
+
+  <a class="flagship scard" href="scenarios/experience.html" data-k="老师傅 经验 交接 传承 手册 折弯 焊接 注塑 师傅 退休 上岗 培训 旗舰 主打" style="display:block">
+    <div class="fl">
+      <span class="tag">今日主打 · 场景 01</span>
+      <h2>老师傅经验萃取<br>把老师傅的手艺，做成新人照着做的手册</h2>
+      <p>视频访谈 + 现场核对 + 新人验收，从一个反复出问题的关键工序开始，全程线上交付。48 小时免费诊断。</p>
+      <span class="go">进入完整介绍 →</span>
+    </div>
+    <div class="fr">
+      <b>单工序交接包含</b>
+      <span>上岗手册（人读版+机器可读版）</span>
+      <span>异常判断速查表（贴现场）</span>
+      <span>新人验证记录与通过标准</span>
+      <span>季度复核，手册持续更新</span>
+      <small>验收方式：贵厂 20 个真实问题，按手册答得上才算交</small>
+    </div>
+  </a>
+
+  <div class="grids" id="cards">
+    <details class="scard" data-k="看板 数据 台账 老板 返工 废品 停机 经营 一页 试验田">
+      <summary><span class="head"><span class="no">场景 02</span><span class="no">试验田</span></span><h3>小厂经营一页看板</h3><div class="one">数据都在台账上，没人汇总——老板周一早上五分钟看懂全厂。</div><span class="more">展开细节 ▾</span></summary>
+      <div class="body">收拢厂里现有的<b>返工本、报废单、设备台账、出货单</b>，整理成每周一页的关键数字，<b>每个数字带来源</b>，看得懂也查得到。建板 + 月度更新（续费）。<a class="cta" href="samples/ops-dashboard.html">看演示看板 →</a></div>
+    </details>
+
+    <details class="scard" data-k="研报 蒸馏 报告 投资者 机构 复盘 一页">
+      <summary><span class="head"><span class="no">场景 03</span></span><h3>研报蒸馏</h3><div class="one">百页研报蒸成一页干货，每条标源页码，附核验记录。</div><span class="more">展开细节 ▾</span></summary>
+      <div class="body">四分身流水线（选题→蒸馏→<b>审校</b>→归档），审校打回闭环。实战核验 <b>31/31 全命中</b>。适合：投研个人复盘、企业情报简报。<a class="cta" href="https://github.com/distilllab/yanbao-distill">方法论已开源 →</a></div>
+    </details>
+
+    <details class="scard" data-k="书籍 蒸馏 读书 知识卡 引流 学习">
+      <summary><span class="head"><span class="no">场景 04</span></span><h3>书籍蒸馏</h3><div class="one">一本厚书，蒸成几张能用的知识卡——为你自己，也为内容素材。</div><span class="more">展开细节 ▾</span></summary>
+      <div class="body">三块结构（核心结论/可复用方法/关键数据）+ 源页码 + 迁移注记。支持制造业主题定制：把一本管理书蒸成<b>贵厂场景</b>的行动清单。<a class="cta" href="mailto:hello@distilllab.cn?subject=书籍蒸馏咨询">咨询 →</a></div>
+    </details>
+
+    <details class="scard" data-k="知识库 整理 维护 文档 资产 更新 企业">
+      <summary><span class="head"><span class="no">场景 05</span></span><h3>企业知识库整理与维护</h3><div class="one">文件很多，关键判断仍得问人——整理成能查、能更新、能用的结构。</div><span class="more">展开细节 ▾</span></summary>
+      <div class="body">散落的文档/记录收拢成结构化知识库，明确<b>版本、负责人、失效规则</b>。常作为经验萃取交付后的续费服务。<a class="cta" href="mailto:hello@distilllab.cn?subject=知识库整理咨询">咨询 →</a></div>
+    </details>
+
+    <details class="scard" data-k="AI 味 改写 文案 内容 品牌 语气 小红书">
+      <summary><span class="head"><span class="no">场景 06</span><span class="no">交付附项</span></span><h3>去 AI 味内容</h3><div class="one">让内容像人话——作为交付附项，也可单独谈。</div><span class="more">展开细节 ▾</span></summary>
+      <div class="body">附项定位：交接包、看板的文案部分默认打磨到"像人话"。独立需求（账号内容、品牌语气调音）按项目谈。<a class="cta" href="mailto:hello@distilllab.cn?subject=内容服务咨询">咨询 →</a></div>
+    </details>
+
+    <details class="scard" data-k="AI 工作流 定制 技能 agent 自动化 智能体">
+      <summary><span class="head"><span class="no">场景 07</span></span><h3>AI 工作流定制</h3><div class="one">给企业配一套自己的 AI 技能——从记忆体系到自动化流程。</div><span class="more">展开细节 ▾</span></summary>
+      <div class="body">我们把自己的 AI 协作体系开源了：防失忆记忆治理 + 跨窗口交接 + 智能体互联。可按贵厂场景定制<b>内部 AI 工作流与技能包</b>。<a class="cta" href="https://github.com/distilllab/workbuddy-memory-kit">看开源样例 →</a></div>
+    </details>
+
+    <details class="scard dim" data-k="设备 握手 平台 仪器 协议 在建">
+      <summary><span class="head"><span class="no">场景 08</span><span class="no">在建 · 预告</span></span><h3>设备握手平台</h3><div class="one">让 AI 与传统设备、仪器直接对话——下一站。</div><span class="more">展开细节 ▾</span></summary>
+      <div class="body"><span class="tbd">架构设计中（3 路接入 + 8 层协议栈）。此卡为预告，暂不接单——想聊聊的厂家，我们愿意听。</span><a class="cta" href="mailto:hello@distilllab.cn?subject=设备握手平台交流">交流 →</a></div>
+    </details>
+  </div>
+  <p class="count" id="empty" style="display:none">没找到匹配的场景——直接发邮件说你的需求，我们判断能不能做：hello@distilllab.cn</p>
+
+  <div class="demos">
+    <div class="label">会动的演示</div>
+    <h2>交接包是怎么诞生的</h2>
+    <p class="lead">四幕自动轮播，可点步骤切换、可暂停。这就是场景 01 的工作方式。</p>
+    <div class="workbench">
+      <div class="benchhead"><span>工序交接工作台</span><span class="live">流程演示 / 非客户案例</span></div>
+      <div class="viewport">
+        <article class="stage active"><div class="step-label">01 / 把经验问出来</div><h3>不只问"怎么做"，还问"什么时候不能这么做"。</h3><div class="quote"><small>访谈追问 · 示意</small>上次出现异常时，你先看哪里？</div><div class="quote"><small>继续追问 · 示意</small>换了材料或设备，这套判断还适用吗？</div><div class="scenefoot">视频访谈 + 贵厂提供的图纸、照片与记录</div></article>
+        <article class="stage" hidden><div class="step-label">02 / 把依据对清楚</div><h3>不清楚的地方，留待确认，不替师傅猜。</h3><div class="record"><b>操作要点</b><em>标注访谈来源</em></div><div class="record"><b>参数与适用条件</b><em>请贵厂复核</em></div><div class="record"><b>异常与处理例外</b><em>补充判断依据</em></div><div class="record"><b>未确认内容</b><em>单列待核验项</em></div><div class="scenefoot">演示的是核验方式，不代表已有现场核验结果</div></article>
+        <article class="stage" hidden><div class="step-label">03 / 把经验写成可查手册</div><h3>到用的时候，找得到。</h3><div class="sheet-title"><b>折弯工序 / 交接手册</b><span class="tag">结构示意</span></div><div class="record"><b>开始前</b><span>适用范围 / 准备检查</span></div><div class="record"><b>操作时</b><span>关键步骤 / 易错位置</span></div><div class="record"><b>遇到异常</b><span>判断线索 / 向谁确认</span></div><div class="record"><b>完成后</b><span>检查要求 / 版本记录</span></div><div class="scenefoot">把长资料组织为操作顺序，保留必要条件与例外</div></article>
+        <article class="stage" hidden><div class="step-label">04 / 把交接缺口找出来</div><h3>写完不是终点，接班人能不能用才是。</h3><ol class="validation"><li>贵厂选出真实交接问题</li><li>接班人按手册查找与回答</li><li>师傅确认，记录遗漏与歧义</li><li>修订手册，保留版本记录</li></ol><div class="scenefoot">现场操作与安全验收由贵厂负责，我们线上配合复核</div></article>
+      </div>
+      <div class="controls" role="group" aria-label="演示控制"><button type="button" aria-pressed="true" data-step="0">01 访谈</button><button type="button" aria-pressed="false" data-step="1">02 核对</button><button type="button" aria-pressed="false" data-step="2">03 手册</button><button type="button" aria-pressed="false" data-step="3">04 复核</button><button type="button" id="play">暂停</button></div>
+      <div class="progress running" aria-hidden="true"><span></span></div>
+      <p class="demo-note">可点击步骤切换；本动画仅展示工作方法，不提供生产参数。</p>
+    </div>
+  </div>
+
+  <div class="ctaband" id="contact">
+    <h2>没找到你的场景？说出来</h2>
+    <p>说清三件事——工序、卡点、交接给谁。48 小时内免费回复适不适合做；不合适直接告诉你。</p>
+    <a class="btn" href="mailto:hello@distilllab.cn?subject=免费评估：一个交接难题&body=工序（做什么、用什么设备）：&%2310;%0D%0A卡点（新人最容易错/师傅最不放心的地方）：&%2310;%0D%0A交接给谁（新员工/接班人）：">免费评估一个交接难题</a>
+    <small>全程线上完成，无需见面 ｜ 每单附核验记录</small>
+  </div>
+</div>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 DistillLab 蒸馏研究室</span>
+    <span>「蒸」——我们的本行：把厚的，蒸成薄的。</span>
+    <a href="https://github.com/distilllab">GitHub 开源</a>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var cards=[].slice.call(document.querySelectorAll(".scard"));
+  var count=document.getElementById("count"),empty=document.getElementById("empty"),input=document.getElementById("q");
+  function apply(){
+    var q=(input.value||"").trim().toLowerCase();
+    var shown=0;
+    cards.forEach(function(c){
+      var hit=!q||(c.dataset.k+" "+c.textContent).toLowerCase().indexOf(q)>-1;
+      c.style.display=hit?"":"none";
+      if(hit)shown++;
+    });
+    count.textContent=q?("筛选 \""+q+"\"：命中 "+shown+" 个场景"):("共 8 个场景 · 01 为今日主打");
+    empty.style.display=shown?"none":"block";
+  }
+  input.addEventListener("input",apply);
+  function fromURL(){
+    var m=location.hash.match(/k=([^&]+)/),p=new URLSearchParams(location.search).get("q");
+    var q=decodeURIComponent(m?m[1]:(p||""));
+    if(q){input.value=q;}
+    apply();
+  }
+  fromURL();
+  window.addEventListener("hashchange",fromURL);
+})();
+(function(){
+  var stages=[].slice.call(document.querySelectorAll(".stage")),tabs=[].slice.call(document.querySelectorAll("[data-step]")),play=document.getElementById("play"),bar=document.querySelector(".progress"),reduce=window.matchMedia("(prefers-reduced-motion: reduce)");var current=0,playing=!reduce.matches,timer;
+  function show(i){current=i;stages.forEach(function(s,k){s.hidden=k!==i;s.classList.toggle("active",k===i)});tabs.forEach(function(b,k){b.setAttribute("aria-pressed",String(k===i))});bar.classList.remove("running");void bar.offsetWidth;if(playing&&!document.hidden)bar.classList.add("running")}
+  function schedule(){clearInterval(timer);play.textContent=playing?"暂停":"播放";bar.classList.toggle("running",playing&&!document.hidden);if(playing&&!document.hidden)timer=setInterval(function(){show((current+1)%stages.length)},5000)}
+  tabs.forEach(function(b){b.addEventListener("click",function(){show(Number(b.dataset.step));schedule()})});
+  play.addEventListener("click",function(){playing=!playing;show(current);schedule()});
+  document.addEventListener("visibilitychange",schedule);
+  reduce.addEventListener("change",function(){if(reduce.matches){playing=false;schedule()}});
+  schedule();
+})();
+</script>
+</body>
+</html>

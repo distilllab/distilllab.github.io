@@ -1,28 +1,26 @@
 # DistillLab 蒸馏研究室
 
-> 把老师傅的关键经验，做成新人能照着用、工厂能持续更新的交接包。
+> 拥抱 AI，蒸出未来。AI 与企业握手的地方——把厚的，蒸成薄的。
 
-DistillLab 蒸馏研究室（distilllab.cn）专注制造业老师傅经验萃取：围绕一个反复出问题的关键工序，把操作要点、异常判断、易错处整理成新人能照着用、工厂能持续更新的交接包。每张卡带来源、适用条件与例外、负责人和更新时间；交付前经新人现场验证。方法论开源于 GitHub。
+DistillLab 蒸馏研究室（distilllab.cn）是 AI 与企业的握手平台，第一站：制造业老师傅经验萃取。站点为两层结构：封面（品牌愿景 + 场景搜索）与场景层（app.html，八场景并列 + 可切换工作台演示）。
 
-## 交付物（单工序交接包）
+## 场景（app.html）
 
-- 工序交接卡：人读版 + 机器可读版（供厂内 AI/知识库使用）
-- 异常判断速查表：可打印贴现场
-- 新人验证记录与通过标准
-- 季度复核服务：核对卡片与现场一致性，明确更新责任人与失效规则
+- 场景 01 · 老师傅经验萃取（今日主打，scenarios/experience.html）：视频访谈 + 现场核对 + 新人验收，单工序交接包，48 小时免费诊断
+- 场景 02 · 小厂经营一页看板（试验田）
+- 场景 03 · 研报蒸馏（方法论已开源）
+- 场景 04 · 书籍蒸馏
+- 场景 05 · 企业知识库整理与维护
+- 场景 06 · 去 AI 味内容（交付附项）
+- 场景 07 · AI 工作流定制
+- 场景 08 · 设备握手平台（在建预告）
 
-## 适用行业
+## 交付与验收
 
-钣金/机加工起步（折弯、焊接、装配等工序），同构扩展至注塑调机、模具维修等以老师傅隐性经验为核心的工序。演示样例见 https://distilllab.cn/samples/bending.html 、https://distilllab.cn/samples/injection-molding.html 、https://distilllab.cn/samples/welding.html
-
-## 验收方式
-
-拿工厂 20 个真实问题问新人：按卡能否答对。按结果交付，不按张数计费。每单附核验记录。
+单工序交接包含：上岗手册（人读版+机器可读版）、异常判断速查表、新人验证记录。验收：贵厂 20 个真实问题按手册答得上。全程线上完成，每单附核验记录。
 
 ## 联系
 
-- 邮箱：hello@distilllab.cn
-- 微信咨询：入口上线中（见主页）
-- 开源方法论（研报蒸馏）：https://github.com/distilllab/yanbao-distill
-- 开源工具（AI 防失忆技能）：https://github.com/distilllab/workbuddy-memory-kit
-- 工作日 24 小时内必回
+- 邮箱：hello@distilllab.cn（留言三件事：工序、卡点、交接给谁）
+- 微信入口：上线中
+- 开源：https://github.com/distilllab （yanbao-distill / workbuddy-memory-kit）
