@@ -99,7 +99,7 @@ footer a:hover{text-decoration:underline}
   </div>
 
   <div class="contactline">
-    <div class="cl-item"><img src="assets/wecom-qr.png" alt="企业微信二维码" onclick="return copyWecomQr();" title="点击复制，长按可保存"><div>企业微信 · 扫码添加<br><a class="qr-copy" id="qrCopy" href="javascript:void(0)" onclick="return copyWecomQr();">复制二维码</a></div></div>
+    <div class="cl-item"><img src="assets/wecom-qr.png" alt="企业微信二维码" id="qrImg" style="cursor:pointer" title="点击放大，长按识别或保存"><div>企业微信 · 扫码添加<br><a class="qr-copy" id="qrCopy" href="javascript:void(0)" onclick="return copyWecomLink();">复制名片链接</a></div></div>
     <div class="cl-item"><a class="clmail" href="mailto:hello@distilllab.cn">hello@distilllab.cn</a><div>邮件联系</div></div>
   </div>
   <p class="mark-line">拥抱 AI，蒸出未来</p>
@@ -136,11 +136,12 @@ footer a:hover{text-decoration:underline}
 </footer>
 
 <script>
-/* 兼容性方案由 Codex 生成、阿蒙验收集成：纯 ES5，图片→链接→textarea 三级降级，每阶段带超时，任何情况都有提示 */
+/* 方案定版（Codex 生成、阿蒙裁剪集成）：手机端弃"复制图片"（平台不支持），
+   改为：点二维码 → 弹大图层（长按识别/保存）；按钮/层内复制名片链接（writeText→textarea 降级）。
+   纯 ES5，每阶段超时，任何点击必有提示。 */
 (function () {
-    var imageUrl = "assets/wecom-qr.png";
     var cardUrl = "https://work.weixin.qq.com/u/vc6297f5424d74f51b?v=5.0.12.83835&bb=2812a3fa4e";
-    var failureText = "复制失败，请长按图片保存";
+    var failureText = "复制失败，请长按二维码图片";
     var busy = false;
 
     function toast(message) {
@@ -152,6 +153,9 @@ footer a:hover{text-decoration:underline}
             element.innerHTML = "";
             element.appendChild(document.createTextNode(message));
             element.style.display = "block";
+            window.setTimeout(function () {
+                try { element.style.display = "none"; } catch (ignored) {}
+            }, 2600);
         } catch (error) {
             try {
                 window.alert(message);
@@ -198,13 +202,9 @@ footer a:hover{text-decoration:underline}
             }
         }
 
-        function active() {
-            return !settled;
-        }
-
         try {
             timer = window.setTimeout(fail, timeoutMs);
-            work(succeed, fail, active);
+            work(succeed, fail);
         } catch (error) {
             fail();
         }
@@ -224,11 +224,9 @@ footer a:hover{text-decoration:underline}
 
     function copyWithTextarea() {
         var textarea = null;
-        var previousFocus = null;
         var copied = false;
 
         try {
-            previousFocus = document.activeElement;
             textarea = document.createElement("textarea");
             textarea.value = cardUrl;
             textarea.setAttribute("readonly", "readonly");
@@ -253,118 +251,59 @@ footer a:hover{text-decoration:underline}
                     textarea.parentNode.removeChild(textarea);
                 }
             } catch (ignoredRemoval) {}
-
-            try {
-                if (previousFocus &&
-                    typeof previousFocus.focus === "function") {
-                    previousFocus.focus();
-                }
-            } catch (ignoredFocus) {}
         }
 
-        finish(copied ? "已复制名片链接，粘贴到浏览器即可添加" : failureText);
+        finish(copied ? "名片链接已复制，粘贴到浏览器即可添加" : failureText);
     }
 
-    function copyLink() {
-        attempt(function (succeed, fail) {
-            try {
-                var clipboard = window.navigator.clipboard;
-                if (!clipboard ||
-                    typeof clipboard.writeText !== "function") {
-                    fail();
-                    return;
-                }
-                observe(clipboard.writeText(cardUrl), succeed, fail);
-            } catch (error) {
-                fail();
-            }
-        }, copyWithTextarea, "已复制名片链接，粘贴到浏览器即可添加", 2000);
-    }
-
-    function copyImage() {
-        attempt(function (succeed, fail, active) {
-            try {
-                var clipboard = window.navigator.clipboard;
-                var Item = window.ClipboardItem;
-                var xhr;
-
-                if (!clipboard ||
-                    typeof clipboard.write !== "function" ||
-                    typeof Item !== "function" ||
-                    typeof window.XMLHttpRequest === "undefined") {
-                    fail();
-                    return;
-                }
-
-                xhr = new window.XMLHttpRequest();
-                xhr.open("GET", imageUrl, true);
-                xhr.responseType = "blob";
-
-                if (xhr.responseType !== "blob") {
-                    fail();
-                    return;
-                }
-
-                xhr.onload = function () {
-                    if (!active()) {
-                        return;
-                    }
-                    try {
-                        var blob;
-                        var data;
-                        var item;
-
-                        if (!((xhr.status >= 200 && xhr.status < 300) ||
-                              xhr.status === 0)) {
-                            fail();
-                            return;
-                        }
-
-                        blob = xhr.response;
-                        if (!blob || !(blob.size > 0) ||
-                            typeof blob.type !== "string") {
-                            fail();
-                            return;
-                        }
-
-                        data = {};
-                        data["image/png"] = blob;
-
-                        item = new Item(data);
-                        observe(clipboard.write([item]), succeed, fail);
-                    } catch (error) {
-                        fail();
-                    }
-                };
-
-                xhr.onerror = function () {
-                    try { fail(); } catch (error) { finish(failureText); }
-                };
-                xhr.onabort = xhr.onerror;
-                xhr.ontimeout = xhr.onerror;
-                xhr.send(null);
-            } catch (error) {
-                fail();
-            }
-        }, copyLink, "二维码图片已复制，可粘贴给朋友或保存", 6000);
-    }
-
-    window.copyWecomQr = function () {
+    window.copyWecomLink = function () {
         try {
             if (busy) {
-                toast("正在复制，请稍候");
                 return false;
             }
             busy = true;
-            toast("正在复制，请稍候");
-            copyImage();
+            attempt(function (succeed, fail) {
+                try {
+                    var clipboard = window.navigator.clipboard;
+                    if (!clipboard ||
+                        typeof clipboard.writeText !== "function") {
+                        fail();
+                        return;
+                    }
+                    observe(clipboard.writeText(cardUrl), succeed, fail);
+                } catch (error) {
+                    fail();
+                }
+            }, copyWithTextarea, "名片链接已复制，粘贴到浏览器即可添加", 2000);
         } catch (error) {
             finish(failureText);
         }
         return false;
     };
+
+    /* 点二维码图 → 弹大图层（长按识别/保存） */
+    (function () {
+        var img = document.getElementById("qrImg");
+        var tip = document.getElementById("qrTip");
+        if (!img || !tip) {
+            return;
+        }
+        img.onclick = function () {
+            try { tip.style.display = "flex"; } catch (ignored) {}
+        };
+        tip.onclick = function () {
+            try { tip.style.display = "none"; } catch (ignored) {}
+        };
+    }());
 }());
 </script>
+
+<div id="qrTip" style="display:none;position:fixed;inset:0;z-index:2147483646;background:rgba(0,0,0,.75);flex-direction:column;align-items:center;justify-content:center;gap:14px;padding:24px;cursor:pointer;">
+  <img src="assets/wecom-qr.png" alt="企业微信二维码" style="width:min(70vw,280px);height:auto;border-radius:12px;border:3px solid #fff;background:#fff">
+  <p style="color:#fff;font-size:16px;line-height:1.7;text-align:center;margin:0">长按上方图片<br>微信内选「识别图中二维码」直接添加<br>浏览器内选「保存图片」存入相册</p>
+  <a href="javascript:void(0)" onclick="return copyWecomLink();" style="color:#fff;font-size:14px;border:1px solid rgba(255,255,255,.8);border-radius:16px;padding:3px 16px;text-decoration:none;">复制名片链接</a>
+  <p style="color:rgba(255,255,255,.75);font-size:13px;margin:0">点击任意处关闭</p>
+</div>
 
 <div id="qr-copy-toast" role="status" aria-live="polite"
      style="display:none;position:fixed;left:50%;bottom:32px;transform:translateX(-50%);-webkit-transform:translateX(-50%);z-index:2147483647;max-width:85%;box-sizing:border-box;padding:12px 18px;background:#222;color:#fff;border-radius:10px;font-size:14px;line-height:1.5;text-align:center;pointer-events:none;">
