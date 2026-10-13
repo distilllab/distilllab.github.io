@@ -99,7 +99,7 @@ footer a:hover{text-decoration:underline}
   </div>
 
   <div class="contactline">
-    <div class="cl-item"><img src="assets/wecom-qr.png" alt="企业微信二维码" title="长按图片可保存到相册"><div>企业微信 · 扫码添加<br><a class="qr-copy" id="qrCopy" href="javascript:void(0)">复制联系方式</a></div></div>
+    <div class="cl-item"><img src="assets/wecom-qr.png" alt="企业微信二维码" title="长按图片可保存到相册"><div>企业微信 · 扫码添加<br><a class="qr-copy" id="qrCopy" href="javascript:void(0)">复制二维码</a></div></div>
     <div class="cl-item"><a class="clmail" href="mailto:hello@distilllab.cn">hello@distilllab.cn</a><div>邮件联系</div></div>
   </div>
   <p class="mark-line">拥抱 AI，蒸出未来</p>
@@ -143,20 +143,29 @@ footer a:hover{text-decoration:underline}
   var QR_URL='https://work.weixin.qq.com/u/vc6297f5424d74f51b?v=5.0.12.83835&bb=2812a3fa4e';
   var t1;
   function say(m){if(!toast)return;toast.textContent=m;toast.hidden=false;clearTimeout(t1);t1=setTimeout(function(){toast.hidden=true},2600)}
-  function fallback(){
-    var t=document.createElement('textarea');t.value=QR_URL;t.style.cssText='position:fixed;opacity:0';
-    document.body.appendChild(t);t.select();
-    try{document.execCommand('copy')}catch(err){}
-    t.remove();say('已复制联系方式，粘贴到微信/浏览器即可添加');
+  function copyLink(){
+    function done(){say('该浏览器不支持复制图片，已改为复制名片链接')}
+    if(navigator.clipboard&&navigator.clipboard.writeText){
+      navigator.clipboard.writeText(QR_URL).then(done,function(){fallback()});return;
+    }
+    fallback();
+    function fallback(){
+      var t=document.createElement('textarea');t.value=QR_URL;t.style.cssText='position:fixed;opacity:0';
+      document.body.appendChild(t);t.select();
+      try{document.execCommand('copy')}catch(err){}
+      t.remove();done();
+    }
   }
   btn.addEventListener('click',function(e){
     e.preventDefault();
-    if(navigator.clipboard&&navigator.clipboard.writeText){
-      navigator.clipboard.writeText(QR_URL).then(
-        function(){say('已复制联系方式，粘贴到微信/浏览器即可添加')},fallback);
-      return;
-    }
-    fallback();
+    fetch('assets/wecom-qr.png').then(function(r){return r.blob()}).then(function(b){
+      if(navigator.clipboard&&window.ClipboardItem){
+        navigator.clipboard.write([new ClipboardItem({'image/png':b})]).then(
+          function(){say('二维码图片已复制，可粘贴给朋友或保存')},copyLink);
+        return;
+      }
+      copyLink();
+    },copyLink);
   });
 })();
 </script>
