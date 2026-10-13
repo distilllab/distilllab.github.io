@@ -99,7 +99,7 @@ footer a:hover{text-decoration:underline}
   </div>
 
   <div class="contactline">
-    <div class="cl-item"><img src="assets/wecom-qr.png" alt="企业微信二维码" title="长按图片可保存到相册"><div>企业微信 · 扫码添加<br><a class="qr-copy" id="qrCopy" href="javascript:void(0)">复制二维码</a></div></div>
+    <div class="cl-item"><img src="assets/wecom-qr.png" alt="企业微信二维码" onclick="return copyWecomQr();" title="点击复制，长按可保存"><div>企业微信 · 扫码添加<br><a class="qr-copy" id="qrCopy" href="javascript:void(0)" onclick="return copyWecomQr();">复制二维码</a></div></div>
     <div class="cl-item"><a class="clmail" href="mailto:hello@distilllab.cn">hello@distilllab.cn</a><div>邮件联系</div></div>
   </div>
   <p class="mark-line">拥抱 AI，蒸出未来</p>
@@ -136,49 +136,239 @@ footer a:hover{text-decoration:underline}
 </footer>
 
 <script>
-(function(){
-  var btn=document.getElementById('qrCopy');
-  var toast=document.getElementById('qrToast');
-  if(!btn)return;
-  var img=document.querySelector('.cl-item img[src*="wecom-qr"]');
-  var QR_URL='https://work.weixin.qq.com/u/vc6297f5424d74f51b?v=5.0.12.83835&bb=2812a3fa4e';
-  var t1;
-  function say(m){if(!toast)return;toast.textContent=m;toast.hidden=false;clearTimeout(t1);t1=setTimeout(function(){toast.hidden=true},2600)}
-  function fallback(){
-    try{
-      var t=document.createElement('textarea');t.value=QR_URL;t.style.cssText='position:fixed;opacity:0';
-      document.body.appendChild(t);t.select();document.execCommand('copy');t.remove();
-    }catch(e){}
-    say('已复制名片链接，粘贴到浏览器即可添加');
-  }
-  function copyLink(){
-    if(navigator.clipboard&&navigator.clipboard.writeText){
-      navigator.clipboard.writeText(QR_URL).then(
-        function(){say('已复制名片链接，粘贴到浏览器即可添加')},fallback);
-      return;
+/* 兼容性方案由 Codex 生成、阿蒙验收集成：纯 ES5，图片→链接→textarea 三级降级，每阶段带超时，任何情况都有提示 */
+(function () {
+    var imageUrl = "assets/wecom-qr.png";
+    var cardUrl = "https://work.weixin.qq.com/u/vc6297f5424d74f51b?v=5.0.12.83835&bb=2812a3fa4e";
+    var failureText = "复制失败，请长按图片保存";
+    var busy = false;
+
+    function toast(message) {
+        try {
+            var element = document.getElementById("qr-copy-toast");
+            if (!element) {
+                throw new Error("Toast element missing");
+            }
+            element.innerHTML = "";
+            element.appendChild(document.createTextNode(message));
+            element.style.display = "block";
+        } catch (error) {
+            try {
+                window.alert(message);
+            } catch (ignored) {}
+        }
     }
-    fallback();
-  }
-  function tryImg(){
-    return fetch('assets/wecom-qr.png').then(function(r){return r.blob()}).then(function(b){
-      return new Promise(function(res,rej){
-        if(!(navigator.clipboard&&window.ClipboardItem))return rej();
-        var item;
-        try{item=new ClipboardItem({'image/png':b})}catch(err){return rej()}
-        navigator.clipboard.write([item]).then(function(){say('二维码图片已复制，可粘贴给朋友或保存');res()},rej);
-      });
-    });
-  }
-  function handler(e){
-    e.preventDefault();
-    tryImg().catch(copyLink);
-  }
-  btn.addEventListener('click',handler);
-  if(img)img.addEventListener('click',handler);
-})();
+
+    function finish(message) {
+        busy = false;
+        toast(message);
+    }
+
+    function attempt(work, fallback, successText, timeoutMs) {
+        var settled = false;
+        var timer = null;
+
+        function clearTimer() {
+            try {
+                if (timer !== null) {
+                    window.clearTimeout(timer);
+                }
+            } catch (ignored) {}
+        }
+
+        function succeed() {
+            if (settled) {
+                return;
+            }
+            settled = true;
+            clearTimer();
+            finish(successText);
+        }
+
+        function fail() {
+            if (settled) {
+                return;
+            }
+            settled = true;
+            clearTimer();
+            try {
+                fallback();
+            } catch (error) {
+                finish(failureText);
+            }
+        }
+
+        function active() {
+            return !settled;
+        }
+
+        try {
+            timer = window.setTimeout(fail, timeoutMs);
+            work(succeed, fail, active);
+        } catch (error) {
+            fail();
+        }
+    }
+
+    function observe(result, succeed, fail) {
+        try {
+            if (!result || typeof result.then !== "function") {
+                fail();
+                return;
+            }
+            result.then(succeed, fail);
+        } catch (error) {
+            fail();
+        }
+    }
+
+    function copyWithTextarea() {
+        var textarea = null;
+        var previousFocus = null;
+        var copied = false;
+
+        try {
+            previousFocus = document.activeElement;
+            textarea = document.createElement("textarea");
+            textarea.value = cardUrl;
+            textarea.setAttribute("readonly", "readonly");
+            textarea.style.cssText =
+                "position:fixed;top:0;left:0;width:1px;height:1px;" +
+                "padding:0;border:0;opacity:0;font-size:16px;";
+            document.body.appendChild(textarea);
+
+            textarea.focus();
+            textarea.select();
+
+            try {
+                textarea.setSelectionRange(0, textarea.value.length);
+            } catch (ignoredSelection) {}
+
+            copied = document.execCommand("copy") === true;
+        } catch (error) {
+            copied = false;
+        } finally {
+            try {
+                if (textarea && textarea.parentNode) {
+                    textarea.parentNode.removeChild(textarea);
+                }
+            } catch (ignoredRemoval) {}
+
+            try {
+                if (previousFocus &&
+                    typeof previousFocus.focus === "function") {
+                    previousFocus.focus();
+                }
+            } catch (ignoredFocus) {}
+        }
+
+        finish(copied ? "已复制名片链接，粘贴到浏览器即可添加" : failureText);
+    }
+
+    function copyLink() {
+        attempt(function (succeed, fail) {
+            try {
+                var clipboard = window.navigator.clipboard;
+                if (!clipboard ||
+                    typeof clipboard.writeText !== "function") {
+                    fail();
+                    return;
+                }
+                observe(clipboard.writeText(cardUrl), succeed, fail);
+            } catch (error) {
+                fail();
+            }
+        }, copyWithTextarea, "已复制名片链接，粘贴到浏览器即可添加", 2000);
+    }
+
+    function copyImage() {
+        attempt(function (succeed, fail, active) {
+            try {
+                var clipboard = window.navigator.clipboard;
+                var Item = window.ClipboardItem;
+                var xhr;
+
+                if (!clipboard ||
+                    typeof clipboard.write !== "function" ||
+                    typeof Item !== "function" ||
+                    typeof window.XMLHttpRequest === "undefined") {
+                    fail();
+                    return;
+                }
+
+                xhr = new window.XMLHttpRequest();
+                xhr.open("GET", imageUrl, true);
+                xhr.responseType = "blob";
+
+                if (xhr.responseType !== "blob") {
+                    fail();
+                    return;
+                }
+
+                xhr.onload = function () {
+                    if (!active()) {
+                        return;
+                    }
+                    try {
+                        var blob;
+                        var data;
+                        var item;
+
+                        if (!((xhr.status >= 200 && xhr.status < 300) ||
+                              xhr.status === 0)) {
+                            fail();
+                            return;
+                        }
+
+                        blob = xhr.response;
+                        if (!blob || !(blob.size > 0) ||
+                            typeof blob.type !== "string") {
+                            fail();
+                            return;
+                        }
+
+                        data = {};
+                        data["image/png"] = blob;
+
+                        item = new Item(data);
+                        observe(clipboard.write([item]), succeed, fail);
+                    } catch (error) {
+                        fail();
+                    }
+                };
+
+                xhr.onerror = function () {
+                    try { fail(); } catch (error) { finish(failureText); }
+                };
+                xhr.onabort = xhr.onerror;
+                xhr.ontimeout = xhr.onerror;
+                xhr.send(null);
+            } catch (error) {
+                fail();
+            }
+        }, copyLink, "二维码图片已复制，可粘贴给朋友或保存", 6000);
+    }
+
+    window.copyWecomQr = function () {
+        try {
+            if (busy) {
+                toast("正在复制，请稍候");
+                return false;
+            }
+            busy = true;
+            toast("正在复制，请稍候");
+            copyImage();
+        } catch (error) {
+            finish(failureText);
+        }
+        return false;
+    };
+}());
 </script>
 
-<div id="qrToast" hidden style="position:fixed;left:50%;bottom:12%;transform:translateX(-50%);z-index:9999;background:rgba(17,17,17,.88);color:#fff;font-size:14px;padding:10px 18px;border-radius:24px;white-space:nowrap;max-width:88vw;overflow:hidden;text-overflow:ellipsis"></div>
+<div id="qr-copy-toast" role="status" aria-live="polite"
+     style="display:none;position:fixed;left:50%;bottom:32px;transform:translateX(-50%);-webkit-transform:translateX(-50%);z-index:2147483647;max-width:85%;box-sizing:border-box;padding:12px 18px;background:#222;color:#fff;border-radius:10px;font-size:14px;line-height:1.5;text-align:center;pointer-events:none;">
+</div>
 
 </body>
 </html>
