@@ -55,8 +55,6 @@ h1 .zheng{color:var(--green)}
 .contactline{display:flex;gap:46px;align-items:center;justify-content:center;flex-wrap:wrap;padding-block:14px 2px}
 .cl-item{display:flex;gap:12px;align-items:center;font-size:14px}
 .cl-item img{width:56px;height:56px;border-radius:6px;border:1px solid var(--line)}
-.qr-copy{display:inline-block;margin-top:2px;font-size:12px;font-weight:700;color:var(--green2);border:1px solid var(--green);border-radius:14px;padding:1px 10px;cursor:pointer;text-decoration:none}
-.qr-copy:active{background:var(--tint)}
 .clmail{font-weight:700;color:var(--ink)}
 .mark-line{font-size:12px;color:var(--muted);letter-spacing:3px;margin:10px 0 0;text-align:center}
 .trust{border-top:1px solid var(--line);margin-top:42px;padding:22px 0 8px}
@@ -99,7 +97,7 @@ footer a:hover{text-decoration:underline}
   </div>
 
   <div class="contactline">
-    <div class="cl-item"><img src="assets/wecom-qr.png" alt="企业微信二维码" id="qrImg" style="cursor:pointer" title="点击放大，长按识别或保存"><div>企业微信 · 扫码添加<br><a class="qr-copy" id="qrCopy" href="javascript:void(0)" onclick="return copyWecomLink();">复制名片链接</a></div></div>
+    <div class="cl-item"><a id="qrDl" href="assets/wecom-qr.png" download="阿蒙-蒸馏研究室-企业微信.png" style="line-height:0"><img src="assets/wecom-qr.png" alt="企业微信二维码" id="qrImg" style="cursor:pointer" title="手机点击放大长按识别；电脑点击下载"></a><div>企业微信 · 扫码添加</div></div>
     <div class="cl-item"><a class="clmail" href="mailto:hello@distilllab.cn">hello@distilllab.cn</a><div>邮件联系</div></div>
   </div>
   <p class="mark-line">拥抱 AI，蒸出未来</p>
@@ -136,177 +134,34 @@ footer a:hover{text-decoration:underline}
 </footer>
 
 <script>
-/* 方案定版（Codex 生成、阿蒙裁剪集成）：手机端弃"复制图片"（平台不支持），
-   改为：点二维码 → 弹大图层（长按识别/保存）；按钮/层内复制名片链接（writeText→textarea 降级）。
-   纯 ES5，每阶段超时，任何点击必有提示。 */
+/* 定版（简化收尾）：手机点二维码 → 弹大图层（长按识别/保存，系统原生能力零依赖）；
+   电脑点击 → 直接下载 png。剪贴板方案全部退场（手机平台不支持复制图片、企微链接浏览器打不开）。 */
 (function () {
-    var cardUrl = "https://work.weixin.qq.com/u/vc6297f5424d74f51b?v=5.0.12.83835&bb=2812a3fa4e";
-    var failureText = "复制失败，请长按二维码图片";
-    var busy = false;
-
-    function toast(message) {
-        try {
-            var element = document.getElementById("qr-copy-toast");
-            if (!element) {
-                throw new Error("Toast element missing");
-            }
-            element.innerHTML = "";
-            element.appendChild(document.createTextNode(message));
-            element.style.display = "block";
-            window.setTimeout(function () {
-                try { element.style.display = "none"; } catch (ignored) {}
-            }, 2600);
-        } catch (error) {
-            try {
-                window.alert(message);
-            } catch (ignored) {}
-        }
+    var isMobile = /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent);
+    var a = document.getElementById("qrDl");
+    var tip = document.getElementById("qrTip");
+    if (!a || !tip) {
+        return;
     }
-
-    function finish(message) {
-        busy = false;
-        toast(message);
-    }
-
-    function attempt(work, fallback, successText, timeoutMs) {
-        var settled = false;
-        var timer = null;
-
-        function clearTimer() {
-            try {
-                if (timer !== null) {
-                    window.clearTimeout(timer);
-                }
-            } catch (ignored) {}
-        }
-
-        function succeed() {
-            if (settled) {
-                return;
+    if (isMobile) {
+        a.onclick = function (e) {
+            if (e && e.preventDefault) {
+                e.preventDefault();
             }
-            settled = true;
-            clearTimer();
-            finish(successText);
-        }
-
-        function fail() {
-            if (settled) {
-                return;
-            }
-            settled = true;
-            clearTimer();
-            try {
-                fallback();
-            } catch (error) {
-                finish(failureText);
-            }
-        }
-
-        try {
-            timer = window.setTimeout(fail, timeoutMs);
-            work(succeed, fail);
-        } catch (error) {
-            fail();
-        }
-    }
-
-    function observe(result, succeed, fail) {
-        try {
-            if (!result || typeof result.then !== "function") {
-                fail();
-                return;
-            }
-            result.then(succeed, fail);
-        } catch (error) {
-            fail();
-        }
-    }
-
-    function copyWithTextarea() {
-        var textarea = null;
-        var copied = false;
-
-        try {
-            textarea = document.createElement("textarea");
-            textarea.value = cardUrl;
-            textarea.setAttribute("readonly", "readonly");
-            textarea.style.cssText =
-                "position:fixed;top:0;left:0;width:1px;height:1px;" +
-                "padding:0;border:0;opacity:0;font-size:16px;";
-            document.body.appendChild(textarea);
-
-            textarea.focus();
-            textarea.select();
-
-            try {
-                textarea.setSelectionRange(0, textarea.value.length);
-            } catch (ignoredSelection) {}
-
-            copied = document.execCommand("copy") === true;
-        } catch (error) {
-            copied = false;
-        } finally {
-            try {
-                if (textarea && textarea.parentNode) {
-                    textarea.parentNode.removeChild(textarea);
-                }
-            } catch (ignoredRemoval) {}
-        }
-
-        finish(copied ? "名片链接已复制，粘贴到浏览器即可添加" : failureText);
-    }
-
-    window.copyWecomLink = function () {
-        try {
-            if (busy) {
-                return false;
-            }
-            busy = true;
-            attempt(function (succeed, fail) {
-                try {
-                    var clipboard = window.navigator.clipboard;
-                    if (!clipboard ||
-                        typeof clipboard.writeText !== "function") {
-                        fail();
-                        return;
-                    }
-                    observe(clipboard.writeText(cardUrl), succeed, fail);
-                } catch (error) {
-                    fail();
-                }
-            }, copyWithTextarea, "名片链接已复制，粘贴到浏览器即可添加", 2000);
-        } catch (error) {
-            finish(failureText);
-        }
-        return false;
-    };
-
-    /* 点二维码图 → 弹大图层（长按识别/保存） */
-    (function () {
-        var img = document.getElementById("qrImg");
-        var tip = document.getElementById("qrTip");
-        if (!img || !tip) {
-            return;
-        }
-        img.onclick = function () {
             try { tip.style.display = "flex"; } catch (ignored) {}
+            return false;
         };
-        tip.onclick = function () {
-            try { tip.style.display = "none"; } catch (ignored) {}
-        };
-    }());
+    }
+    tip.onclick = function () {
+        try { tip.style.display = "none"; } catch (ignored) {}
+    };
 }());
 </script>
 
 <div id="qrTip" style="display:none;position:fixed;inset:0;z-index:2147483646;background:rgba(0,0,0,.75);flex-direction:column;align-items:center;justify-content:center;gap:14px;padding:24px;cursor:pointer;">
   <img src="assets/wecom-qr.png" alt="企业微信二维码" style="width:min(70vw,280px);height:auto;border-radius:12px;border:3px solid #fff;background:#fff">
   <p style="color:#fff;font-size:16px;line-height:1.7;text-align:center;margin:0">长按上方图片<br>微信内选「识别图中二维码」直接添加<br>浏览器内选「保存图片」存入相册</p>
-  <a href="javascript:void(0)" onclick="return copyWecomLink();" style="color:#fff;font-size:14px;border:1px solid rgba(255,255,255,.8);border-radius:16px;padding:3px 16px;text-decoration:none;">复制名片链接</a>
   <p style="color:rgba(255,255,255,.75);font-size:13px;margin:0">点击任意处关闭</p>
-</div>
-
-<div id="qr-copy-toast" role="status" aria-live="polite"
-     style="display:none;position:fixed;left:50%;bottom:32px;transform:translateX(-50%);-webkit-transform:translateX(-50%);z-index:2147483647;max-width:85%;box-sizing:border-box;padding:12px 18px;background:#222;color:#fff;border-radius:10px;font-size:14px;line-height:1.5;text-align:center;pointer-events:none;">
 </div>
 
 </body>
