@@ -39,7 +39,7 @@ h1{font-size:30px;margin:36px 0 6px}
 .flagship .fr span{font-size:13px;color:#e2eee7;border-bottom:1px dashed #4d6b58;padding:5px 0}
 .flagship .fr small{font-size:11px;color:#9db3a6;margin-top:6px}
 
-.grids{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:14px;margin-bottom:8px}
+.grids{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(320px,100%),1fr));gap:14px;margin-bottom:8px}
 .scard{background:var(--white);border:1px solid var(--line);border-radius:14px;overflow:hidden}
 .scard summary{list-style:none;cursor:pointer;padding:16px 18px;display:block}
 .scard summary::-webkit-details-marker{display:none}
@@ -232,7 +232,7 @@ footer a{color:var(--green);text-decoration:none}
     fetch("https://formsubmit.co/ajax/0f6a24b0bad51243e86954dcf52b8dae",{method:"POST",headers:{"Content-Type":"application/json",Accept:"application/json"},body:JSON.stringify(p)})
     .then(function(r){return r.json()})
     .then(function(j){if(j.success==="true"){st.textContent="留言已发出。48 小时内回复——不合适直接说。";btn.textContent="已发送 ✓";}else{throw 0}})
-    .catch(function(){btn.disabled=false;btn.textContent="发留言";st.textContent="网络不通。备用：复制留言内容发到 hello@distilllab.cn";});
+    .catch(function(){btn.disabled=false;btn.textContent="发留言";st.innerHTML="网络不通。备用：<a href='mailto:hello@distilllab.cn' style='color:var(--green);font-weight:700;text-decoration:underline'>邮件咨询</a>";});
   });
 })();
 (function(){
