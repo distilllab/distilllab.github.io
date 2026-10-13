@@ -58,7 +58,7 @@ h1 .zheng{color:var(--green)}
 a.qr-dl{display:block;line-height:0;cursor:pointer}
 a.qr-dl img{transition:transform .15s ease,box-shadow .15s ease}
 a.qr-dl:hover img{transform:scale(1.06);box-shadow:0 2px 10px rgba(0,0,0,.12)}
-a.qr-dl:hover + div::after{content:"（点击下载）";font-size:12px;color:var(--muted)}
+a.qr-dl:hover + div::after{content:"（点击复制）";font-size:12px;color:var(--muted)}
 .clmail{font-weight:700;color:var(--ink)}
 .mark-line{font-size:12px;color:var(--muted);letter-spacing:3px;margin:10px 0 0;text-align:center}
 .trust{border-top:1px solid var(--line);margin-top:42px;padding:22px 0 8px}
@@ -101,7 +101,7 @@ footer a:hover{text-decoration:underline}
   </div>
 
   <div class="contactline">
-    <div class="cl-item"><a class="qr-dl" id="qrDl" href="assets/wecom-qr.png" download="阿蒙-蒸馏研究室-企业微信.png" title="点击下载二维码"><img src="assets/wecom-qr.png" alt="企业微信二维码"></a><div>企业微信 · 扫码添加</div></div>
+    <div class="cl-item"><a class="qr-dl" id="qrDl" href="assets/wecom-qr.png" title="点击复制二维码"><img src="assets/wecom-qr.png" alt="企业微信二维码"></a><div>企业微信 · 扫码添加</div></div>
     <div class="cl-item"><a class="clmail" href="mailto:hello@distilllab.cn">hello@distilllab.cn</a><div>邮件联系</div></div>
   </div>
   <p class="mark-line">拥抱 AI，蒸出未来</p>
@@ -140,32 +140,34 @@ footer a:hover{text-decoration:underline}
 <script>
 (function(){
   var a=document.getElementById('qrDl');
+  var toast=document.getElementById('qrToast');
   if(!a)return;
-  var tip=document.getElementById('qrTip');
-  function showTip(){if(tip){tip.hidden=false}}
-  tip && tip.addEventListener('click',function(){tip.hidden=true});
-  var isMobile=/Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent);
+  var QR_URL='https://work.weixin.qq.com/u/vc6297f5424d74f51b?v=5.0.12.83835&bb=2812a3fa4e';
+  var t1;
+  function say(msg){if(!toast)return;toast.textContent=msg;toast.hidden=false;clearTimeout(t1);t1=setTimeout(function(){toast.hidden=true},2600)}
+  function copyText(s){
+    if(navigator.clipboard&&navigator.clipboard.writeText){return navigator.clipboard.writeText(s)}
+    var t=document.createElement('textarea');t.value=s;t.style.cssText='position:fixed;opacity:0';document.body.appendChild(t);t.select();
+    try{document.execCommand('copy')}catch(e){}t.remove();return Promise.resolve();
+  }
+  function copyImage(b){
+    if(navigator.clipboard&&window.ClipboardItem){
+      navigator.clipboard.write([new ClipboardItem({'image/png':b})]).then(
+        function(){say('二维码已复制，可粘贴给朋友或保存')},
+        copyLink);
+      return;
+    }
+    copyLink();
+  }
+  function copyLink(){copyText(QR_URL).then(function(){say('已复制名片链接，粘贴后可添加企微')})}
   a.addEventListener('click',function(e){
-    if(!isMobile)return; /* 电脑：走默认下载 */
     e.preventDefault();
-    fetch('assets/wecom-qr.png').then(function(r){return r.blob()}).then(function(b){
-      var f=new File([b],'ameng-distilllab-wecom.png',{type:'image/png'});
-      /* 首选：系统分享面板 → 存储图像/保存到相册 */
-      if(navigator.canShare && navigator.canShare({files:[f]})){
-        return navigator.share({files:[f],title:'阿蒙·蒸馏研究室 企业微信二维码'});
-      }
-      /* 兜底：弹出大图，长按保存（微信内置等浏览器均支持） */
-      showTip();
-    }).catch(showTip);
+    fetch('assets/wecom-qr.png').then(function(r){return r.blob()}).then(copyImage,copyLink);
   });
 })();
 </script>
 
-<div id="qrTip" hidden style="position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,.72);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;padding:24px;cursor:pointer">
-  <img src="assets/wecom-qr.png" alt="企业微信二维码" style="width:min(70vw,280px);height:auto;border-radius:12px;border:3px solid #fff;background:#fff">
-  <p style="color:#fff;font-size:16px;text-align:center;margin:0">长按上方图片<br>选择「保存图片 / 存储图像」<br>即可存入手机相册</p>
-  <p style="color:rgba(255,255,255,.75);font-size:13px;margin:0">点击任意处关闭</p>
-</div>
+<div id="qrToast" hidden style="position:fixed;left:50%;bottom:12%;transform:translateX(-50%);z-index:9999;background:rgba(17,17,17,.88);color:#fff;font-size:14px;padding:10px 18px;border-radius:24px;white-space:nowrap;max-width:88vw;overflow:hidden;text-overflow:ellipsis"></div>
 
 </body>
 </html>
