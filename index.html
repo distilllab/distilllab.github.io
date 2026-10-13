@@ -55,10 +55,8 @@ h1 .zheng{color:var(--green)}
 .contactline{display:flex;gap:46px;align-items:center;justify-content:center;flex-wrap:wrap;padding-block:14px 2px}
 .cl-item{display:flex;gap:12px;align-items:center;font-size:14px}
 .cl-item img{width:56px;height:56px;border-radius:6px;border:1px solid var(--line)}
-a.qr-dl{display:block;line-height:0;cursor:pointer}
-a.qr-dl img{transition:transform .15s ease,box-shadow .15s ease}
-a.qr-dl:hover img{transform:scale(1.06);box-shadow:0 2px 10px rgba(0,0,0,.12)}
-a.qr-dl:hover + div::after{content:"（点击复制）";font-size:12px;color:var(--muted)}
+.qr-copy{display:inline-block;margin-top:2px;font-size:12px;font-weight:700;color:var(--green2);border:1px solid var(--green);border-radius:14px;padding:1px 10px;cursor:pointer;text-decoration:none}
+.qr-copy:active{background:var(--tint)}
 .clmail{font-weight:700;color:var(--ink)}
 .mark-line{font-size:12px;color:var(--muted);letter-spacing:3px;margin:10px 0 0;text-align:center}
 .trust{border-top:1px solid var(--line);margin-top:42px;padding:22px 0 8px}
@@ -101,7 +99,7 @@ footer a:hover{text-decoration:underline}
   </div>
 
   <div class="contactline">
-    <div class="cl-item"><a class="qr-dl" id="qrDl" href="assets/wecom-qr.png" title="点击复制二维码"><img src="assets/wecom-qr.png" alt="企业微信二维码"></a><div>企业微信 · 扫码添加</div></div>
+    <div class="cl-item"><img src="assets/wecom-qr.png" alt="企业微信二维码" title="长按图片可保存到相册"><div>企业微信 · 扫码添加<br><a class="qr-copy" id="qrCopy" href="javascript:void(0)">复制联系方式</a></div></div>
     <div class="cl-item"><a class="clmail" href="mailto:hello@distilllab.cn">hello@distilllab.cn</a><div>邮件联系</div></div>
   </div>
   <p class="mark-line">拥抱 AI，蒸出未来</p>
@@ -139,30 +137,26 @@ footer a:hover{text-decoration:underline}
 
 <script>
 (function(){
-  var a=document.getElementById('qrDl');
+  var btn=document.getElementById('qrCopy');
   var toast=document.getElementById('qrToast');
-  if(!a)return;
+  if(!btn)return;
   var QR_URL='https://work.weixin.qq.com/u/vc6297f5424d74f51b?v=5.0.12.83835&bb=2812a3fa4e';
   var t1;
-  function say(msg){if(!toast)return;toast.textContent=msg;toast.hidden=false;clearTimeout(t1);t1=setTimeout(function(){toast.hidden=true},2600)}
-  function copyText(s){
-    if(navigator.clipboard&&navigator.clipboard.writeText){return navigator.clipboard.writeText(s)}
-    var t=document.createElement('textarea');t.value=s;t.style.cssText='position:fixed;opacity:0';document.body.appendChild(t);t.select();
-    try{document.execCommand('copy')}catch(e){}t.remove();return Promise.resolve();
+  function say(m){if(!toast)return;toast.textContent=m;toast.hidden=false;clearTimeout(t1);t1=setTimeout(function(){toast.hidden=true},2600)}
+  function fallback(){
+    var t=document.createElement('textarea');t.value=QR_URL;t.style.cssText='position:fixed;opacity:0';
+    document.body.appendChild(t);t.select();
+    try{document.execCommand('copy')}catch(err){}
+    t.remove();say('已复制联系方式，粘贴到微信/浏览器即可添加');
   }
-  function copyImage(b){
-    if(navigator.clipboard&&window.ClipboardItem){
-      navigator.clipboard.write([new ClipboardItem({'image/png':b})]).then(
-        function(){say('二维码已复制，可粘贴给朋友或保存')},
-        copyLink);
+  btn.addEventListener('click',function(e){
+    e.preventDefault();
+    if(navigator.clipboard&&navigator.clipboard.writeText){
+      navigator.clipboard.writeText(QR_URL).then(
+        function(){say('已复制联系方式，粘贴到微信/浏览器即可添加')},fallback);
       return;
     }
-    copyLink();
-  }
-  function copyLink(){copyText(QR_URL).then(function(){say('已复制名片链接，粘贴后可添加企微')})}
-  a.addEventListener('click',function(e){
-    e.preventDefault();
-    fetch('assets/wecom-qr.png').then(function(r){return r.blob()}).then(copyImage,copyLink);
+    fallback();
   });
 })();
 </script>
