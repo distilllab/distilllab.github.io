@@ -137,5 +137,26 @@ footer a:hover{text-decoration:underline}
   </div>
 </footer>
 
+<script>
+(function(){
+  var a=document.getElementById('qrDl');
+  if(!a)return;
+  a.addEventListener('click',function(e){
+    if(!navigator.canShare)return; /* 电脑：走默认下载 */
+    e.preventDefault();
+    fetch('assets/wecom-qr.png').then(function(r){return r.blob()}).then(function(b){
+      var f=new File([b],'ameng-distilllab-wecom.png',{type:'image/png'});
+      /* 手机：弹系统分享面板，选「存储图像/保存到相册」确认 */
+      if(navigator.canShare({files:[f]})){
+        return navigator.share({files:[f],title:'阿蒙·蒸馏研究室 企业微信二维码'});
+      }
+      var u=URL.createObjectURL(b),t=document.createElement('a');
+      t.href=u;t.download=f.name;document.body.appendChild(t);t.click();t.remove();
+      setTimeout(function(){URL.revokeObjectURL(u)},3000);
+    }).catch(function(){});
+  });
+})();
+</script>
+
 </body>
 </html>
