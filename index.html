@@ -52,6 +52,11 @@ h1 .zheng{color:var(--green)}
  @keyframes fl{to{stroke-dashoffset:-28}}
 }
 
+.contactline{display:flex;gap:38px;align-items:center;flex-wrap:wrap;padding-block:8px 4px}
+.cl-item{display:flex;gap:14px;align-items:center;font-size:16px}
+.cl-item img{width:84px;height:84px;border-radius:8px;border:1px solid var(--line)}
+.clmail{font-weight:700;color:var(--ink)}
+.mark-line{font-size:13px;color:var(--muted);letter-spacing:3px;margin:12px 0 0}
 .trust{border-top:1px solid var(--line);margin-top:42px;padding:22px 0 8px}
 .trust .wrap{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px}
 .trust div{font-size:12.5px;color:var(--muted);text-align:center}
@@ -84,7 +89,7 @@ footer a:hover{text-decoration:underline}
 
 <main class="wrap">
   <div class="eyebrow">DISTILLLAB · 握手平台第一站</div>
-  <h1>拥抱 AI <span class="zheng">蒸</span>出未来</h1>
+  <h1>您给问题，<span class="zheng">我给答案</span></h1>
   <p class="vision">互联网连接了人与人；AI 时代，AI 要与企业、设备、经验握手。<br>我们把老师傅的手艺、企业的细节数据、厚厚的资料，<b>蒸馏成一页一页用得上的知识</b>。</p>
 
   <div class="quick">
@@ -97,8 +102,15 @@ footer a:hover{text-decoration:underline}
     <a href="app.html#sc07">AI 工作流定制</a>
   </div>
   <div class="actions">
-    <a class="cta" href="app.html#contact">定制场景</a>
+    <a class="cta" href="app.html">案例</a>
+    <a class="cta" href="custom.html" style="background:#fff;color:var(--green)">您的问题？</a>
   </div>
+
+  <div class="contactline">
+    <div class="cl-item"><img src="assets/wecom-qr.png" alt="企业微信二维码"><div><b>联系我们</b><br>企业微信 · 扫码添加</div></div>
+    <div class="cl-item"><a class="clmail" href="mailto:hello@distilllab.cn">hello@distilllab.cn</a><div>邮件联系</div></div>
+  </div>
+  <p class="mark-line">拥抱 AI，蒸出未来</p>
 
   <div class="bridge">
     <svg viewBox="0 0 640 150" width="100%" role="img" aria-label="AI 与企业经验握手的示意">
