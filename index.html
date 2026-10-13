@@ -55,6 +55,10 @@ h1 .zheng{color:var(--green)}
 .contactline{display:flex;gap:46px;align-items:center;justify-content:center;flex-wrap:wrap;padding-block:14px 2px}
 .cl-item{display:flex;gap:12px;align-items:center;font-size:14px}
 .cl-item img{width:56px;height:56px;border-radius:6px;border:1px solid var(--line)}
+a.qr-dl{display:block;line-height:0;cursor:pointer}
+a.qr-dl img{transition:transform .15s ease,box-shadow .15s ease}
+a.qr-dl:hover img{transform:scale(1.06);box-shadow:0 2px 10px rgba(0,0,0,.12)}
+a.qr-dl:hover + div::after{content:"（点击下载）";font-size:12px;color:var(--muted)}
 .clmail{font-weight:700;color:var(--ink)}
 .mark-line{font-size:12px;color:var(--muted);letter-spacing:3px;margin:10px 0 0;text-align:center}
 .trust{border-top:1px solid var(--line);margin-top:42px;padding:22px 0 8px}
@@ -97,7 +101,7 @@ footer a:hover{text-decoration:underline}
   </div>
 
   <div class="contactline">
-    <div class="cl-item"><img src="assets/wecom-qr.png" alt="企业微信二维码"><div>企业微信 · 扫码添加</div></div>
+    <div class="cl-item"><a class="qr-dl" href="assets/wecom-qr.png" download="阿蒙-蒸馏研究室-企业微信.png" title="点击下载二维码"><img src="assets/wecom-qr.png" alt="企业微信二维码"></a><div>企业微信 · 扫码添加</div></div>
     <div class="cl-item"><a class="clmail" href="mailto:hello@distilllab.cn">hello@distilllab.cn</a><div>邮件联系</div></div>
   </div>
   <p class="mark-line">拥抱 AI，蒸出未来</p>
