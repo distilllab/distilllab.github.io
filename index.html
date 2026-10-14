@@ -67,11 +67,11 @@ h1 .zheng{color:var(--green);white-space:nowrap}
 .cl-item{display:flex;gap:12px;align-items:center;font-size:14px}
 .cl-item.item-qr{flex-direction:column;gap:8px;text-align:center}
 .cl-item img{width:80px;height:80px;border-radius:8px;border:1px solid var(--line);background:#fff;padding:4px}
-.clmail-wrap{display:flex;gap:12px;align-items:center}
+.clmail-wrap{display:flex;gap:12px;align-items:center;text-decoration:none}
+.clmail-wrap:hover .clmail,.clmail-wrap:focus-visible .clmail{color:var(--green)}
 .clmail-ico{flex:none;width:44px;height:44px;border-radius:10px;background:#fff;border:1px solid var(--line);display:flex;align-items:center;justify-content:center}
-.clmail{font-weight:700;color:var(--ink);text-decoration:none}
-.clmail:hover{color:var(--green)}
-.cl-sub{font-size:12.5px;color:var(--muted)}
+.clmail{display:block;font-weight:700;color:var(--ink)}
+.cl-sub{display:block;font-size:12.5px;color:var(--muted)}
 .trust{border-top:1px solid var(--line);margin-top:42px;padding:22px 0 8px}
 .trust .wrap{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px}
 .trust div{font-size:12.5px;color:var(--muted);text-align:center}
@@ -120,10 +120,10 @@ footer a:hover{text-decoration:underline}
 
   <div class="contact-card">
     <div class="cl-item item-qr"><span style="line-height:0;display:inline-block"><img src="assets/wecom-qr.png" alt="企业微信二维码" id="qrImg"></span><div id="qrCap">企业微信 · 扫码添加</div></div>
-    <div class="cl-item clmail-wrap">
+    <a class="cl-item clmail-wrap" href="mailto:hello@distilllab.cn">
       <span class="clmail-ico" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><rect x="3" y="5.5" width="18" height="13" rx="2.5" stroke="#639922" stroke-width="1.8"/><path d="M4 7l8 6 8-6" stroke="#639922" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-      <span><a class="clmail" href="mailto:hello@distilllab.cn">hello@distilllab.cn</a><div class="cl-sub">邮件联系 · 48 小时内回复</div></span>
-    </div>
+      <span><span class="clmail">hello@distilllab.cn</span><span class="cl-sub">邮件联系 · 48 小时内回复</span></span>
+    </a>
   </div>
 
   <div class="bridge">
