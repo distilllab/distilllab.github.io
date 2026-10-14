@@ -5,10 +5,18 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>DistillLab 蒸馏研究室 · 拥抱 AI 蒸出未来</title>
 <meta name="description" content="AI 与企业握手的地方。我们把老师傅的手艺、企业的数据、厚厚的资料，蒸馏成一页一页用得上的知识。第一个落地案例：制造业老师傅经验萃取。全程线上交付。">
+<link rel="icon" type="image/png" href="assets/favicon.png">
+<meta property="og:type" content="website">
+<meta property="og:title" content="DistillLab 蒸馏研究室 · 您给问题，我给答案">
+<meta property="og:description" content="把老师傅的手艺、企业的数据、厚厚的资料，蒸馏成用得上、可复核的知识。48 小时免费诊断一个交接难题。">
+<meta property="og:image" content="https://distilllab.cn/assets/og-card.png">
+<meta property="og:url" content="https://distilllab.cn/">
+<meta name="twitter:card" content="summary_large_image">
 <style>
-:root{--paper:#fffef9;--ink:#25352e;--green:#639922;--green2:#3B6D11;--muted:#68726a;--line:#d9d6c8;--tint:#eaf0ea}
+:root{--paper:#fffef9;--ink:#25352e;--green:#639922;--green2:#3B6D11;--muted:#5c665e;--line:#d9d6c8;--tint:#eaf0ea}
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
+:focus-visible{outline:2px solid var(--green);outline-offset:3px;border-radius:4px}
 html,body{overflow-x:clip}
 body{margin:0;background:var(--paper);color:var(--ink);font-family:"Microsoft YaHei","PingFang SC",sans-serif;line-height:1.75;min-height:100vh;display:flex;flex-direction:column}
 a{color:inherit}
@@ -33,11 +41,13 @@ h1 .zheng{color:var(--green);white-space:nowrap}
 .vision{text-align:center;color:var(--muted);font-size:15px;margin:22px auto 30px;max-width:580px;text-wrap:balance}
 .vision b{color:var(--ink)}
 
-.actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin:36px 0 28px}
-.cta{display:inline-block;padding:14px 34px;border-radius:12px;background:var(--green);color:#fff;text-decoration:none;font-size:15.5px;font-weight:700;letter-spacing:1px}
-.cta:hover{background:#27500a}
+.actions{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin:36px 0 28px}
+.cta{display:inline-block;padding:14px 34px;border-radius:12px;background:var(--green);color:#fff;text-decoration:none;font-size:15.5px;font-weight:700;letter-spacing:1px;transition:background .15s ease,transform .15s ease,box-shadow .15s ease}
+.cta:hover{background:#27500a;transform:translateY(-1px);box-shadow:0 4px 12px rgba(59,109,17,.25)}
+.cta--ghost{background:#fff;color:var(--green2);border:2px solid var(--green);padding:12px 32px}
+.cta--ghost:hover{background:var(--tint);color:var(--green2)}
 .quick{max-width:640px;margin:0 auto;display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
-.quick a{font-size:12.5px;color:var(--muted);text-decoration:none;border:1px solid var(--line);border-radius:999px;padding:4px 14px;background:#fff}
+.quick a{font-size:12.5px;color:var(--muted);text-decoration:none;border:1px solid var(--line);border-radius:999px;padding:8px 16px;background:#fff}
 .quick a:hover{border-color:var(--green);color:var(--green)}
 .quick a.flag{color:var(--green);border-color:var(--green);font-weight:700;background:var(--tint)}
 
@@ -52,12 +62,15 @@ h1 .zheng{color:var(--green);white-space:nowrap}
  @keyframes fl{to{stroke-dashoffset:-28}}
 }
 
-.contactline{display:flex;gap:46px;align-items:center;justify-content:center;flex-wrap:wrap;padding-block:14px 2px}
+.contact-card{max-width:600px;margin:0 auto;background:var(--tint);border-radius:14px;padding:22px 20px;display:flex;gap:18px;align-items:center;justify-content:center;flex-wrap:wrap}
 .cl-item{display:flex;gap:12px;align-items:center;font-size:14px}
 .cl-item.item-qr{flex-direction:column;gap:8px;text-align:center}
 .cl-item img{width:80px;height:80px;border-radius:8px;border:1px solid var(--line);background:#fff;padding:4px}
-.clmail{font-weight:700;color:var(--ink)}
-.mark-line{font-size:12px;color:var(--muted);letter-spacing:3px;margin:10px 0 0;text-align:center}
+.clmail-wrap{display:flex;gap:12px;align-items:center}
+.clmail-ico{flex:none;width:44px;height:44px;border-radius:10px;background:#fff;border:1px solid var(--line);display:flex;align-items:center;justify-content:center}
+.clmail{font-weight:700;color:var(--ink);text-decoration:none}
+.clmail:hover{color:var(--green)}
+.cl-sub{font-size:12.5px;color:var(--muted)}
 .trust{border-top:1px solid var(--line);margin-top:42px;padding:22px 0 8px}
 .trust .wrap{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px}
 .trust div{font-size:12.5px;color:var(--muted);text-align:center}
@@ -69,7 +82,11 @@ footer a{color:var(--green);text-decoration:none}
 footer a:hover{text-decoration:underline}
 @media(max-width:680px){
  h1{font-size:34px}
- header .links a.free{display:none}
+ header .links a.free{font-size:12.5px;padding:6px 10px;border:1px solid var(--green);border-radius:8px}
+}
+@media(max-width:560px){
+ .bridge{display:none}
+ .contact-card{flex-direction:column;gap:20px}
 }
 </style>
 </head>
@@ -89,29 +106,51 @@ footer a:hover{text-decoration:underline}
 </header>
 
 <main class="wrap">
-  <div class="eyebrow">DISTILLLAB · 握手平台第一站</div>
+  <div class="eyebrow">DISTILLAB · 握手平台第一站</div>
   <h1>您给问题，<span class="zheng">我给答案</span></h1>
 
   <div class="actions">
-    <a class="cta" href="app.html">案例</a>
-    <a class="cta" href="custom.html">您的问题？</a>
+    <a class="cta" href="app.html#contact">免费诊断一个问题</a>
+    <a class="cta cta--ghost" href="app.html">看交付案例</a>
   </div>
 
-  <div class="contactline">
+  <div class="contact-card">
     <div class="cl-item item-qr"><span style="line-height:0;display:inline-block"><img src="assets/wecom-qr.png" alt="企业微信二维码" id="qrImg"></span><div id="qrCap">企业微信 · 扫码添加</div></div>
-    <div class="cl-item"><a class="clmail" href="mailto:hello@distilllab.cn">hello@distilllab.cn</a><div>邮件联系</div></div>
+    <div class="cl-item clmail-wrap">
+      <span class="clmail-ico" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><rect x="3" y="5.5" width="18" height="13" rx="2.5" stroke="#639922" stroke-width="1.8"/><path d="M4 7l8 6 8-6" stroke="#639922" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+      <span><a class="clmail" href="mailto:hello@distilllab.cn">hello@distilllab.cn</a><div class="cl-sub">邮件联系 · 48 小时内回复</div></span>
+    </div>
   </div>
-  <p class="mark-line">拥抱 AI，蒸出未来</p>
 
   <div class="bridge">
-    <svg viewBox="0 0 640 150" width="100%" role="img" aria-label="AI 与企业经验握手的示意">
-      <line x1="30" y1="60" x2="290" y2="60" stroke="#639922" stroke-width="2" class="flow"/>
-      <line x1="350" y1="60" x2="610" y2="60" stroke="#8a8f88" stroke-width="2" class="flow"/>
-      <circle cx="320" cy="60" r="7" fill="#639922" class="pulse"/>
-      <text x="30" y="34" font-size="13" fill="#536056">老师傅的经验 · 企业的数据</text>
-      <text x="610" y="34" font-size="13" fill="#536056" text-anchor="end">AI 的整理与核验能力</text>
-      <text x="320" y="96" font-size="13" fill="#639922" text-anchor="middle" font-weight="700">握手 →</text>
-      <text x="320" y="120" font-size="12" fill="#68726a" text-anchor="middle">产出：一页一页用得上、查得到、可复核的知识</text>
+    <svg viewBox="0 0 640 170" width="100%" role="img" aria-label="AI 与企业经验握手的示意">
+      <!-- 左端：文档堆意象 -->
+      <g stroke="#639922" stroke-width="2" fill="#fffef9">
+        <rect x="22" y="44" width="30" height="38" rx="4"/>
+        <rect x="30" y="38" width="30" height="38" rx="4" fill="#eaf0ea"/>
+      </g>
+      <g stroke="#8fae6b" stroke-width="2" stroke-linecap="round">
+        <line x1="37" y1="48" x2="53" y2="48"/>
+        <line x1="37" y1="55" x2="53" y2="55"/>
+        <line x1="37" y1="62" x2="48" y2="62"/>
+      </g>
+      <!-- 右端：AI 芯片意象 -->
+      <g stroke="#536056" stroke-width="2" fill="#eaf0ea">
+        <rect x="588" y="44" width="34" height="34" rx="5"/>
+        <rect x="598" y="54" width="14" height="14" rx="2" fill="#639922" stroke="none"/>
+      </g>
+      <g stroke="#8a8f88" stroke-width="2" stroke-linecap="round">
+        <line x1="595" y1="38" x2="595" y2="32"/><line x1="615" y1="38" x2="615" y2="32"/>
+        <line x1="595" y1="84" x2="595" y2="90"/><line x1="615" y1="84" x2="615" y2="90"/>
+      </g>
+      <!-- 握手连线 -->
+      <line x1="68" y1="61" x2="280" y2="61" stroke="#639922" stroke-width="3" class="flow"/>
+      <line x1="360" y1="61" x2="578" y2="61" stroke="#8a8f88" stroke-width="3" class="flow"/>
+      <circle cx="320" cy="61" r="10" fill="#639922" class="pulse"/>
+      <text x="70" y="26" font-size="15" font-weight="700" fill="#25352e">老师傅的经验 · 企业的数据</text>
+      <text x="576" y="26" font-size="15" font-weight="700" fill="#25352e" text-anchor="end">AI 的整理与核验能力</text>
+      <text x="320" y="100" font-size="15" fill="#639922" text-anchor="middle" font-weight="700">握手 →</text>
+      <text x="320" y="128" font-size="14" fill="#536056" text-anchor="middle">产出：一页一页用得上、查得到、可复核的知识</text>
     </svg>
   </div>
 
