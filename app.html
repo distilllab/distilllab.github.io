@@ -99,6 +99,23 @@ h1{font-size:30px;margin:36px 0 6px}
 .ctaband .btn:hover{background:#e2eee7}
 .ctaband small{display:block;margin-top:12px;font-size:12px;color:#bcd8c8}
 
+#contact textarea,#contact input[type=text]{display:block;width:100%;max-width:560px;margin:0 auto 12px;padding:13px 14px;border-radius:10px;border:1px solid #4d6b58;background:#fffef9;color:var(--ink);font:inherit;font-size:14px}
+#contact textarea{resize:vertical;min-height:110px}
+#contact ::placeholder{color:#8a9a90}
+.mrow{display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap}
+#pick{padding:9px 18px;border-radius:10px;border:1.5px dashed #bcd8c8;background:transparent;color:#fffef9;font:inherit;font-size:13.5px;cursor:pointer}
+#pick:hover{border-color:#fff;background:rgba(255,255,255,.08)}
+#fsum{font-size:12px;color:#bcd8c8}
+#thumbs{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;max-width:560px;margin:0 auto}
+#thumbs:not(:empty){margin-bottom:12px}
+#thumbs .th{display:inline-flex;align-items:center;gap:6px;background:#fffef9;color:var(--ink);border-radius:8px;padding:4px 8px;font-size:12px;max-width:220px}
+#thumbs .th img{width:34px;height:34px;object-fit:cover;border-radius:5px;flex:none}
+#thumbs .th span{overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+#thumbs .th button{border:none;background:none;color:#a55;font-weight:700;cursor:pointer;font-size:15px;padding:0 2px;flex:none}
+#send{padding:13px 44px;border-radius:11px;border:none;background:var(--white);color:var(--deep);font-weight:700;font-size:15px;cursor:pointer}
+#send:disabled{opacity:.6}
+#st{min-height:20px;font-size:13px;color:#cde8d8;margin:12px 0 0}
+
 footer{margin-top:40px;border-top:1px solid var(--line);padding:20px 0 26px}
 footer .wrap{display:flex;justify-content:space-between;font-size:12px;color:var(--muted);flex-wrap:wrap;gap:8px}
 footer a{color:var(--green);text-decoration:none}
@@ -196,18 +213,18 @@ footer a{color:var(--green);text-decoration:none}
   </div>
 
   <div class="ctaband" id="contact">
-    <h2>定制你的场景，留言给我们</h2>
-    <p>企业的任何困惑都可以说——四格填好，点「发留言」，48 小时内免费回复适不适合做；不合适直接告诉你。</p>
-    <div style="font-size:12.5px;color:#bcd8c8;margin:0 auto 6px;max-width:560px;text-align:left">① 工序：做什么、用什么设备</div>
-    <input id="f-process" type="text" style="display:block;width:100%;max-width:560px;margin:0 auto 10px;padding:12px 14px;border-radius:10px;border:1px solid #4d6b58;background:#fffef9;color:var(--ink);font:inherit;font-size:13.5px">
-    <div style="font-size:12.5px;color:#bcd8c8;margin:0 auto 6px;max-width:560px;text-align:left">② 最难交接的地方 + 交接给谁</div>
-    <textarea id="f-pain" style="display:block;width:100%;max-width:560px;margin:0 auto 10px;padding:12px 14px;border-radius:10px;border:1px solid #4d6b58;background:#fffef9;color:var(--ink);font:inherit;font-size:13.5px;resize:vertical;min-height:70px"></textarea>
-    <div style="font-size:12.5px;color:#bcd8c8;margin:0 auto 6px;max-width:560px;text-align:left">③ 其他想说的（选填：设备型号、师傅人数、已有资料、想做成什么样……）</div>
-    <textarea id="f-other" style="display:block;width:100%;max-width:560px;margin:0 auto 10px;padding:12px 14px;border-radius:10px;border:1px solid #4d6b58;background:#fffef9;color:var(--ink);font:inherit;font-size:13.5px;resize:vertical;min-height:60px"></textarea>
-    <div style="font-size:12.5px;color:#bcd8c8;margin:0 auto 6px;max-width:560px;text-align:left">④ 联系方式：微信号或邮箱（必填，用于回复你）</div>
-    <input id="f-contact" type="text" style="display:block;width:100%;max-width:560px;margin:0 auto 14px;padding:12px 14px;border-radius:10px;border:1px solid #4d6b58;background:#fffef9;color:var(--ink);font:inherit;font-size:13.5px">
-    <button id="send" type="button" style="padding:13px 40px;border-radius:11px;border:none;background:var(--white);color:var(--deep);font-weight:700;font-size:15px;cursor:pointer">发留言</button>
-    <p id="st" style="min-height:20px;font-size:13px;color:#cde8d8;margin:12px 0 0"></p>
+    <h2>想到什么写什么</h2>
+    <p>不用想格式、不用填格子——困惑、想法，随手拍的照片或视频，直接留下就行。48 小时内回复适不适合做；不合适直接告诉你。</p>
+    <textarea id="f-msg" placeholder="想到什么写什么。比如：车间里哪一步最头疼？想把手艺交给谁？手头有什么资料、想做成什么样？……"></textarea>
+    <div class="mrow">
+      <button id="pick" type="button">＋ 图片 / 视频</button>
+      <span id="fsum"></span>
+    </div>
+    <input id="f-files" type="file" accept="image/*,video/*" multiple hidden>
+    <div id="thumbs"></div>
+    <input id="f-contact" type="text" placeholder="联系方式（微信号 / 手机 / 邮箱），选填，回复你用">
+    <button id="send" type="button">发出去</button>
+    <p id="st"></p>
     <small>留言后 48 小时内回复 ｜ 全程线上完成，无需见面 ｜ 每单附核验记录</small>
   </div>
 </div>
@@ -222,17 +239,83 @@ footer a{color:var(--green);text-decoration:none}
 
 <script>
 (function(){
-  var btn=document.getElementById("send"),st=document.getElementById("st");
-  function g(id){return document.getElementById(id).value.trim()}
+  var MAXTOTAL=9.5*1024*1024,MAXFILES=5;
+  var btn=document.getElementById("send"),st=document.getElementById("st"),
+      pick=document.getElementById("pick"),inp=document.getElementById("f-files"),
+      thumbs=document.getElementById("thumbs"),fsum=document.getElementById("fsum"),
+      files=[];
+  function fmt(n){return n>=1048576?(n/1048576).toFixed(1)+"MB":Math.max(1,Math.round(n/1024))+"KB"}
+  function total(){return files.reduce(function(s,f){return s+f.size},0)}
+  function render(){
+    thumbs.innerHTML="";
+    files.forEach(function(f,i){
+      var d=document.createElement("span");d.className="th";
+      if(f.thumb){var im=document.createElement("img");im.src=f.thumb;d.appendChild(im)}
+      var t=document.createElement("span");
+      t.textContent=(f.video?"[视频] ":"")+f.name+"（"+fmt(f.size)+"）";
+      d.appendChild(t);
+      var x=document.createElement("button");x.type="button";x.textContent="×";x.setAttribute("aria-label","删除附件");
+      x.onclick=function(){if(f.thumb)URL.revokeObjectURL(f.thumb);files.splice(i,1);render()};
+      d.appendChild(x);thumbs.appendChild(d);
+    });
+    fsum.textContent=files.length?"已选 "+files.length+" 个，共 "+fmt(total())+"（上限 10MB）":"";
+  }
+  function compress(file){
+    return new Promise(function(res){
+      if(!/^image\//.test(file.type)){res(file);return}
+      var img=new Image(),url=URL.createObjectURL(file);
+      img.onload=function(){
+        try{
+          var max=1600,sc=Math.min(1,max/Math.max(img.width,img.height));
+          var c=document.createElement("canvas");
+          c.width=Math.max(1,Math.round(img.width*sc));c.height=Math.max(1,Math.round(img.height*sc));
+          c.getContext("2d").drawImage(img,0,0,c.width,c.height);
+          c.toBlob(function(b){
+            URL.revokeObjectURL(url);
+            if(b&&b.size<file.size){res(new File([b],file.name.replace(/\.\w+$/,"")+".jpg",{type:"image/jpeg"}))}
+            else{res(file)}
+          },"image/jpeg",0.82);
+        }catch(e){URL.revokeObjectURL(url);res(file)}
+      };
+      img.onerror=function(){URL.revokeObjectURL(url);res(file)};
+      img.src=url;
+    });
+  }
+  pick.addEventListener("click",function(){inp.click()});
+  inp.addEventListener("change",function(){
+    var list=[].slice.call(inp.files);inp.value="";
+    var big=list.filter(function(f){return f.size>MAXTOTAL&&/^video\//.test(f.type)});
+    var rest=list.filter(function(f){return!(f.size>MAXTOTAL&&/^video\//.test(f.type))});
+    if(big.length){st.textContent="「"+big[0].name+"」超过 10MB，邮件带不动——大视频扫上方企微码发更快。"}
+    rest.forEach(function(f){if(files.length<MAXFILES)files.push({raw:f,done:false})});
+    if(rest.length&&files.length>=MAXFILES){st.textContent="一次最多 5 个文件。"}
+    Promise.all(files.filter(function(f){return!f.done}).map(function(f){
+      return compress(f.raw).then(function(b){
+        f.file=b;f.size=b.size;f.name=f.raw.name;
+        f.video=/^video\//.test(f.raw.type);
+        if(/^image\//.test(f.raw.type))f.thumb=URL.createObjectURL(b);
+        f.done=true;
+      });
+    })).then(render).catch(render);
+  });
   btn.addEventListener("click",function(){
-    var p={"工序":g("f-process"),"最难交接的地方":g("f-pain"),"交接给谁":g("f-target"),"其他想说的":g("f-other"),"联系方式（微信或邮箱）":g("f-contact"),"_subject":"官网留言：交接难题免费诊断","_captcha":"false","_honey":""};
-    if(!p["联系方式（微信或邮箱）"]){st.textContent="留个联系方式（微信号或邮箱），我们才能回复你。";return}
-    if(!p["工序"]){st.textContent="先说说工序：做什么、用什么设备。";return}
+    var msg=document.getElementById("f-msg").value.trim();
+    var contact=document.getElementById("f-contact").value.trim();
+    if(!msg){st.textContent="写点什么再发——一句话也行。";return}
+    if(total()>MAXTOTAL){st.textContent="附件总共超过 10MB，删掉几个再发（大视频可以扫企微码发）。";return}
+    var fd=new FormData();
+    fd.append("留言内容",msg);
+    fd.append("联系方式",contact||"未填");
+    fd.append("_subject","官网留言（免费诊断）");
+    fd.append("_captcha","false");
+    fd.append("_honey","");
+    if(contact.indexOf("@")>0)fd.append("_replyto",contact);
+    files.forEach(function(f){fd.append("attachment",f.file||f.raw,f.name)});
     btn.disabled=true;btn.textContent="发送中…";st.textContent="";
-    fetch("https://formsubmit.co/ajax/0f6a24b0bad51243e86954dcf52b8dae",{method:"POST",headers:{"Content-Type":"application/json",Accept:"application/json"},body:JSON.stringify(p)})
+    fetch("https://formsubmit.co/ajax/0f6a24b0bad51243e86954dcf52b8dae",{method:"POST",body:fd,headers:{Accept:"application/json"}})
     .then(function(r){return r.json()})
-    .then(function(j){if(j.success==="true"){st.textContent="留言已发出。48 小时内回复——不合适直接说。";btn.textContent="已发送 ✓";}else{throw 0}})
-    .catch(function(){btn.disabled=false;btn.textContent="发留言";st.innerHTML="网络不通。备用：<a href='mailto:hello@distilllab.cn' style='color:var(--green);font-weight:700;text-decoration:underline'>邮件咨询</a>";});
+    .then(function(j){if(j.success==="true"){st.textContent="已发出。48 小时内回复——不合适直接说。";btn.textContent="已发送 ✓";files=[];render();}else{throw 0}})
+    .catch(function(){btn.disabled=false;btn.textContent="发出去";st.innerHTML="网络不通？备用：<a href='mailto:hello@distilllab.cn' style='color:#fffef9;font-weight:700;text-decoration:underline'>发邮件</a> 或扫企微码。";});
   });
 })();
 (function(){
