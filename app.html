@@ -300,7 +300,16 @@ footer a{color:var(--green);text-decoration:none}
   function finishAdd(){
     Promise.all(files.filter(function(f){return!f.done}).map(function(f){
       return compress(f.raw).then(function(b){
-        f.file=b;f.size=b.size;f.name=f.raw.name;
+        f.file=b;f.size=b.size;
+        /* 附件统一改安全英文文件名（中文名会被邮件通道吞）；原名单独进正文 */
+        var ext="jpg";
+        if(f.video){var m=/\.(\w{2,4})$/.exec(f.raw.name);ext=m?m[1].toLowerCase():"mp4"}
+        else if(/\.png$/i.test(f.raw.name))ext="png";
+        else if(/\.gif$/i.test(f.raw.name))ext="gif";
+        else if(/\.webp$/i.test(f.raw.name))ext="webp";
+        else if(/\.heic$/i.test(f.raw.name))ext="heic";
+        f.name=(f.video?"vid-":"img-")+Date.now()+"-"+Math.floor(Math.random()*900+100)+"."+ext;
+        f.mime=f.video?"video/"+(ext==="mov"?"quicktime":ext):"image/"+ext;
         if(!f.video&&/^image\//.test(f.raw.type))f.thumb=URL.createObjectURL(b);
         f.done=true;
       });
@@ -331,6 +340,10 @@ footer a{color:var(--green);text-decoration:none}
     fd.append("_honey","");
     fd.append("_template","table");
     if(contact.indexOf("@")>0)fd.append("_replyto",contact);
+    if(files.length){
+      fd.append("附件原名",files.map(function(f){return f.raw.name}).join("；"));
+      fd.append("附件信息",files.map(function(f){return f.name+" "+f.size+"B "+(f.mime||(f.file||f.raw).type||"未知")}).join("；"));
+    }
     /* AJAX通道只认JSON会丢附件：有文件必须走标准表单通道 */
     var url="https://formsubmit.co/ajax/0f6a24b0bad51243e86954dcf52b8dae";
     if(files.length){
