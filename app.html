@@ -103,8 +103,8 @@ h1{font-size:30px;margin:36px 0 6px}
 #contact textarea{resize:vertical;min-height:110px}
 #contact ::placeholder{color:#8a9a90}
 .mrow{display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap}
-#pick{padding:9px 18px;border-radius:10px;border:1.5px dashed #bcd8c8;background:transparent;color:#fffef9;font:inherit;font-size:13.5px;cursor:pointer}
-#pick:hover{border-color:#fff;background:rgba(255,255,255,.08)}
+.mrow button{padding:9px 18px;border-radius:10px;border:1.5px dashed #bcd8c8;background:transparent;color:#fffef9;font:inherit;font-size:13.5px;cursor:pointer}
+.mrow button:hover{border-color:#fff;background:rgba(255,255,255,.08)}
 #fsum{font-size:12px;color:#bcd8c8}
 #thumbs{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;max-width:560px;margin:0 auto}
 #thumbs:not(:empty){margin-bottom:12px}
@@ -217,10 +217,12 @@ footer a{color:var(--green);text-decoration:none}
     <p>不用想格式、不用填格子——困惑、想法，随手拍的照片或视频，直接留下就行。48 小时内回复适不适合做；不合适直接告诉你。</p>
     <textarea id="f-msg" placeholder="想到什么写什么。比如：车间里哪一步最头疼？想把手艺交给谁？手头有什么资料、想做成什么样？……"></textarea>
     <div class="mrow">
-      <button id="pick" type="button">＋ 图片 / 视频</button>
+      <button id="picki" type="button">＋ 图片</button>
+      <button id="pickv" type="button">＋ 视频</button>
       <span id="fsum"></span>
     </div>
-    <input id="f-files" type="file" accept="image/*,video/*" multiple hidden>
+    <input id="f-imgs" type="file" accept="image/*" multiple hidden>
+    <input id="f-vids" type="file" accept="video/*" hidden>
     <div id="thumbs"></div>
     <input id="f-contact" type="text" placeholder="联系方式（微信号 / 手机 / 邮箱），选填，回复你用">
     <button id="send" type="button">发出去</button>
@@ -241,11 +243,19 @@ footer a{color:var(--green);text-decoration:none}
 (function(){
   var MAXTOTAL=9.5*1024*1024,MAXFILES=5;
   var btn=document.getElementById("send"),st=document.getElementById("st"),
-      pick=document.getElementById("pick"),inp=document.getElementById("f-files"),
+      msgEl=document.getElementById("f-msg"),ctEl=document.getElementById("f-contact"),
       thumbs=document.getElementById("thumbs"),fsum=document.getElementById("fsum"),
       files=[];
   function fmt(n){return n>=1048576?(n/1048576).toFixed(1)+"MB":Math.max(1,Math.round(n/1024))+"KB"}
   function total(){return files.reduce(function(s,f){return s+f.size},0)}
+  function say(t){st.style.color="#cde8d8";st.textContent=t}
+  function warn(t){st.style.color="#ffd479";st.textContent=t}
+  function isVid(f){return /^video\//.test(f.type)||/\.(mp4|mov|3gp|webm|avi|mkv|m4v)$/i.test(f.name)}
+  /* 草稿自动保存：转页面/切走再回来内容还在，发成功才清 */
+  try{var d=JSON.parse(localStorage.getItem("dl_draft")||"{}");if(d.m)msgEl.value=d.m;if(d.c)ctEl.value=d.c}catch(e){}
+  function saveDraft(){try{localStorage.setItem("dl_draft",JSON.stringify({m:msgEl.value,c:ctEl.value}))}catch(e){}}
+  msgEl.addEventListener("input",saveDraft);
+  ctEl.addEventListener("input",saveDraft);
   function render(){
     thumbs.innerHTML="";
     files.forEach(function(f,i){
@@ -281,28 +291,38 @@ footer a{color:var(--green);text-decoration:none}
       img.src=url;
     });
   }
-  pick.addEventListener("click",function(){inp.click()});
-  inp.addEventListener("change",function(){
-    var list=[].slice.call(inp.files);inp.value="";
-    var big=list.filter(function(f){return f.size>MAXTOTAL&&/^video\//.test(f.type)});
-    var rest=list.filter(function(f){return!(f.size>MAXTOTAL&&/^video\//.test(f.type))});
-    if(big.length){st.textContent="「"+big[0].name+"」超过 10MB，邮件带不动——大视频扫上方企微码发更快。"}
-    rest.forEach(function(f){if(files.length<MAXFILES)files.push({raw:f,done:false})});
-    if(rest.length&&files.length>=MAXFILES){st.textContent="一次最多 5 个文件。"}
+  function pushFile(f){
+    if(files.length>=MAXFILES){warn("一次最多 5 个文件。");return false}
+    if(isVid(f)&&f.size>MAXTOTAL){warn("「"+f.name+"」超过 10MB，邮件带不动——扫上方企微码发更快，或拍短一点。");return false}
+    files.push({raw:f,done:false,video:isVid(f)});
+    return true;
+  }
+  function finishAdd(){
     Promise.all(files.filter(function(f){return!f.done}).map(function(f){
       return compress(f.raw).then(function(b){
         f.file=b;f.size=b.size;f.name=f.raw.name;
-        f.video=/^video\//.test(f.raw.type);
-        if(/^image\//.test(f.raw.type))f.thumb=URL.createObjectURL(b);
+        if(!f.video&&/^image\//.test(f.raw.type))f.thumb=URL.createObjectURL(b);
         f.done=true;
       });
     })).then(render).catch(render);
+  }
+  document.getElementById("picki").addEventListener("click",function(){document.getElementById("f-imgs").click()});
+  document.getElementById("pickv").addEventListener("click",function(){document.getElementById("f-vids").click()});
+  document.getElementById("f-imgs").addEventListener("change",function(){
+    var list=[].slice.call(this.files);this.value="";
+    var ok=list.some(function(f){return pushFile(f)});
+    finishAdd();if(ok)say("");
+  });
+  document.getElementById("f-vids").addEventListener("change",function(){
+    var list=[].slice.call(this.files);this.value="";
+    var ok=list.some(function(f){return pushFile(f)});
+    finishAdd();if(ok)say("");
   });
   btn.addEventListener("click",function(){
-    var msg=document.getElementById("f-msg").value.trim();
-    var contact=document.getElementById("f-contact").value.trim();
-    if(!msg){st.textContent="写点什么再发——一句话也行。";return}
-    if(total()>MAXTOTAL){st.textContent="附件总共超过 10MB，删掉几个再发（大视频可以扫企微码发）。";return}
+    var msg=msgEl.value.trim();
+    var contact=ctEl.value.trim();
+    if(!msg){warn("写点什么再发——一句话也行。");return}
+    if(total()>MAXTOTAL){warn("附件总共超过 10MB，删掉几个再发（大视频可以扫企微码发）。");return}
     var fd=new FormData();
     fd.append("留言内容",msg);
     fd.append("联系方式",contact||"未填");
@@ -311,11 +331,11 @@ footer a{color:var(--green);text-decoration:none}
     fd.append("_honey","");
     if(contact.indexOf("@")>0)fd.append("_replyto",contact);
     files.forEach(function(f){fd.append("attachment",f.file||f.raw,f.name)});
-    btn.disabled=true;btn.textContent="发送中…";st.textContent="";
+    btn.disabled=true;btn.textContent="发送中…";say("");
     fetch("https://formsubmit.co/ajax/0f6a24b0bad51243e86954dcf52b8dae",{method:"POST",body:fd,headers:{Accept:"application/json"}})
     .then(function(r){return r.json()})
-    .then(function(j){if(j.success==="true"){st.textContent="已发出。48 小时内回复——不合适直接说。";btn.textContent="已发送 ✓";files=[];render();}else{throw 0}})
-    .catch(function(){btn.disabled=false;btn.textContent="发出去";st.innerHTML="网络不通？备用：<a href='mailto:hello@distilllab.cn' style='color:#fffef9;font-weight:700;text-decoration:underline'>发邮件</a> 或扫企微码。";});
+    .then(function(j){if(j.success==="true"){say("已发出。48 小时内回复——不合适直接说。");btn.textContent="已发送 ✓";files=[];render();try{localStorage.removeItem("dl_draft")}catch(e){};msgEl.value="";ctEl.value="";}else{throw 0}})
+    .catch(function(){btn.disabled=false;btn.textContent="发出去";st.innerHTML="<span style='color:#ffd479'>网络不通？</span>备用：<a href='mailto:hello@distilllab.cn' style='color:#fffef9;font-weight:700;text-decoration:underline'>发邮件</a> 或扫企微码。";});
   });
 })();
 (function(){
