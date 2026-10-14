@@ -349,7 +349,7 @@ footer a{color:var(--green);text-decoration:none}
     if(files.length){
       url="https://formsubmit.co/0f6a24b0bad51243e86954dcf52b8dae";
       fd.append("_next","https://distilllab.cn/app.html?sent=1");
-      files.forEach(function(f){fd.append("attachment",f.file||f.raw,f.name)});
+      files.forEach(function(f,i){fd.append("attachment"+(i+1),f.file||f.raw,f.name)});
     }
     btn.disabled=true;btn.textContent="发送中…";say("");
     fetch(url,{method:"POST",body:fd,headers:{Accept:"application/json"}})
