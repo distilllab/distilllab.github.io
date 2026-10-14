@@ -329,11 +329,18 @@ footer a{color:var(--green);text-decoration:none}
     fd.append("_subject","官网留言（免费诊断）");
     fd.append("_captcha","false");
     fd.append("_honey","");
+    fd.append("_template","table");
     if(contact.indexOf("@")>0)fd.append("_replyto",contact);
-    files.forEach(function(f){fd.append("attachment",f.file||f.raw,f.name)});
+    /* AJAX通道只认JSON会丢附件：有文件必须走标准表单通道 */
+    var url="https://formsubmit.co/ajax/0f6a24b0bad51243e86954dcf52b8dae";
+    if(files.length){
+      url="https://formsubmit.co/0f6a24b0bad51243e86954dcf52b8dae";
+      fd.append("_next","https://distilllab.cn/app.html?sent=1");
+      files.forEach(function(f){fd.append("attachment",f.file||f.raw,f.name)});
+    }
     btn.disabled=true;btn.textContent="发送中…";say("");
-    fetch("https://formsubmit.co/ajax/0f6a24b0bad51243e86954dcf52b8dae",{method:"POST",body:fd,headers:{Accept:"application/json"}})
-    .then(function(r){return r.json()})
+    fetch(url,{method:"POST",body:fd,headers:{Accept:"application/json"}})
+    .then(function(r){if(!r.ok)throw 0;return files.length?{success:"true"}:r.json()})
     .then(function(j){if(j.success==="true"){say("已发出。48 小时内回复——不合适直接说。");btn.textContent="已发送 ✓";files=[];render();try{localStorage.removeItem("dl_draft")}catch(e){};msgEl.value="";ctEl.value="";}else{throw 0}})
     .catch(function(){btn.disabled=false;btn.textContent="发出去";st.innerHTML="<span style='color:#ffd479'>网络不通？</span>备用：<a href='mailto:hello@distilllab.cn' style='color:#fffef9;font-weight:700;text-decoration:underline'>发邮件</a> 或扫企微码。";});
   });
