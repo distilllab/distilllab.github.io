@@ -21,7 +21,8 @@ html,body{overflow-x:clip}
 body{margin:0;background:var(--paper);color:var(--ink);font-family:"Microsoft YaHei","PingFang SC",sans-serif;line-height:1.75;min-height:100vh;display:flex;flex-direction:column}
 a{color:inherit}
 .wrap{max-width:980px;margin:0 auto;padding:0 26px;width:100%}
-@media(max-width:560px){.brand small{display:none}header .links{gap:14px}}
+@media(max-width:700px){.brand small{display:none}.brand b{white-space:nowrap}header .links{gap:14px}}
+@media(max-width:560px){.brand b{font-size:14px}header .links a:not(.free){display:none}}
 
 header{padding:20px 0}
 header .wrap{display:flex;align-items:center;justify-content:space-between}
