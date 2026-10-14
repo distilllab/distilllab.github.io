@@ -97,7 +97,7 @@ footer a:hover{text-decoration:underline}
   </div>
 
   <div class="contactline">
-    <div class="cl-item"><a id="qrDl" href="assets/wecom-qr.png" download="阿蒙-蒸馏研究室-企业微信.png" style="line-height:0"><img src="assets/wecom-qr.png" alt="企业微信二维码" id="qrImg" style="cursor:pointer" title="手机点击放大长按识别；电脑点击下载"></a><div>企业微信 · 扫码添加</div></div>
+    <div class="cl-item"><a id="qrDl" href="assets/wecom-qr.png" style="line-height:0"><img src="assets/wecom-qr.png" alt="企业微信二维码" id="qrImg" style="cursor:pointer" title="点击放大二维码"></a><div id="qrCap">企业微信 · 扫码添加</div></div>
     <div class="cl-item"><a class="clmail" href="mailto:hello@distilllab.cn">hello@distilllab.cn</a><div>邮件联系</div></div>
   </div>
   <p class="mark-line">拥抱 AI，蒸出未来</p>
@@ -134,24 +134,33 @@ footer a:hover{text-decoration:underline}
 </footer>
 
 <script>
-/* 定版（简化收尾）：手机点二维码 → 弹大图层（长按识别/保存，系统原生能力零依赖）；
-   电脑点击 → 直接下载 png。剪贴板方案全部退场（手机平台不支持复制图片、企微链接浏览器打不开）。 */
+/* v2（2026-10-14）：下载功能退场。手机/电脑点击二维码 → 统一弹大图层；
+   电脑文案「请用手机微信扫一扫」，手机文案「长按二维码加企微」（微信内长按识别直达）。
+   二维码下方文字按设备自适应。 */
 (function () {
     var isMobile = /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent);
     var a = document.getElementById("qrDl");
     var tip = document.getElementById("qrTip");
+    var tipTxt = document.getElementById("qrTipTxt");
+    var cap = document.getElementById("qrCap");
+    if (cap && isMobile) {
+        cap.textContent = "长按二维码加企微";
+    }
     if (!a || !tip) {
         return;
     }
-    if (isMobile) {
-        a.onclick = function (e) {
-            if (e && e.preventDefault) {
-                e.preventDefault();
-            }
-            try { tip.style.display = "flex"; } catch (ignored) {}
-            return false;
-        };
-    }
+    a.onclick = function (e) {
+        if (e && e.preventDefault) {
+            e.preventDefault();
+        }
+        if (tipTxt) {
+            tipTxt.innerHTML = isMobile
+                ? "长按上方二维码<br>微信内选「识别图中二维码」直接添加"
+                : "请用手机微信「扫一扫」<br>扫描上方二维码，添加企业微信";
+        }
+        try { tip.style.display = "flex"; } catch (ignored) {}
+        return false;
+    };
     tip.onclick = function () {
         try { tip.style.display = "none"; } catch (ignored) {}
     };
@@ -160,7 +169,7 @@ footer a:hover{text-decoration:underline}
 
 <div id="qrTip" style="display:none;position:fixed;inset:0;z-index:2147483646;background:rgba(0,0,0,.75);flex-direction:column;align-items:center;justify-content:center;gap:14px;padding:24px;cursor:pointer;">
   <img src="assets/wecom-qr.png" alt="企业微信二维码" style="width:min(70vw,280px);height:auto;border-radius:12px;border:3px solid #fff;background:#fff">
-  <p style="color:#fff;font-size:16px;line-height:1.7;text-align:center;margin:0">长按上方图片<br>微信内选「识别图中二维码」直接添加<br>浏览器内选「保存图片」存入相册</p>
+  <p id="qrTipTxt" style="color:#fff;font-size:16px;line-height:1.7;text-align:center;margin:0">长按上方二维码<br>识别并添加企业微信</p>
   <p style="color:rgba(255,255,255,.75);font-size:13px;margin:0">点击任意处关闭</p>
 </div>
 
