@@ -54,7 +54,8 @@ h1 .zheng{color:var(--green)}
 
 .contactline{display:flex;gap:46px;align-items:center;justify-content:center;flex-wrap:wrap;padding-block:14px 2px}
 .cl-item{display:flex;gap:12px;align-items:center;font-size:14px}
-.cl-item img{width:170px;height:170px;border-radius:8px;border:1px solid var(--line);background:#fff;padding:4px}
+.cl-item.item-qr{flex-direction:column;gap:8px;text-align:center}
+.cl-item img{width:150px;height:150px;border-radius:10px;border:1px solid var(--line);background:#fff;padding:5px}
 .clmail{font-weight:700;color:var(--ink)}
 .mark-line{font-size:12px;color:var(--muted);letter-spacing:3px;margin:10px 0 0;text-align:center}
 .trust{border-top:1px solid var(--line);margin-top:42px;padding:22px 0 8px}
@@ -97,7 +98,7 @@ footer a:hover{text-decoration:underline}
   </div>
 
   <div class="contactline">
-    <div class="cl-item"><span style="line-height:0;display:inline-block"><img src="assets/wecom-qr.png" alt="企业微信二维码" id="qrImg"></span><div id="qrCap">企业微信 · 扫码添加</div></div>
+    <div class="cl-item item-qr"><span style="line-height:0;display:inline-block"><img src="assets/wecom-qr.png" alt="企业微信二维码" id="qrImg"></span><div id="qrCap">企业微信 · 扫码添加</div></div>
     <div class="cl-item"><a class="clmail" href="mailto:hello@distilllab.cn">hello@distilllab.cn</a><div>邮件联系</div></div>
   </div>
   <p class="mark-line">拥抱 AI，蒸出未来</p>
