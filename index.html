@@ -70,6 +70,12 @@ footer a:hover{text-decoration:underline}
  h1{font-size:34px}
  header .links a.free{display:none}
 }
+/* v3 弹层（2026-10-14）：居中小白卡 + 轻遮罩，兼容旧浏览器（不用 inset/min() 等新语法） */
+#qrTip{position:fixed !important;top:0 !important;left:0 !important;right:0 !important;bottom:0 !important;z-index:2147483646 !important;background:rgba(15,18,25,.4) !important;display:none;flex-direction:column !important;align-items:center !important;justify-content:center !important;gap:14px !important;padding:24px !important;cursor:pointer !important;}
+#qrTipCard{background:#fff;border-radius:16px;padding:18px 18px 14px;box-shadow:0 12px 40px rgba(0,0,0,.35);text-align:center;}
+#qrTipImg{display:block;width:220px !important;height:220px !important;border-radius:8px;}
+#qrTipTxt{color:#333;font-size:15px;line-height:1.7;text-align:center;margin:10px 0 0 !important;}
+#qrTipClose{color:rgba(255,255,255,.9);font-size:13px;margin:0;text-shadow:0 1px 2px rgba(0,0,0,.5);}
 </style>
 </head>
 <body>
@@ -167,10 +173,12 @@ footer a:hover{text-decoration:underline}
 }());
 </script>
 
-<div id="qrTip" style="display:none;position:fixed;inset:0;z-index:2147483646;background:rgba(0,0,0,.75);flex-direction:column;align-items:center;justify-content:center;gap:14px;padding:24px;cursor:pointer;">
-  <img src="assets/wecom-qr.png" alt="企业微信二维码" style="width:280px;max-width:70vw;max-height:60vh;height:auto;border-radius:12px;border:3px solid #fff;background:#fff">
-  <p id="qrTipTxt" style="color:#fff;font-size:16px;line-height:1.7;text-align:center;margin:0">长按上方二维码<br>识别并添加企业微信</p>
-  <p style="color:rgba(255,255,255,.75);font-size:13px;margin:0">点击任意处关闭</p>
+<div id="qrTip">
+  <div id="qrTipCard">
+    <img id="qrTipImg" src="assets/wecom-qr.png" alt="企业微信二维码">
+    <p id="qrTipTxt">长按上方二维码<br>识别并添加企业微信</p>
+  </div>
+  <p id="qrTipClose">点击任意处关闭</p>
 </div>
 
 </body>
