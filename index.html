@@ -70,12 +70,6 @@ footer a:hover{text-decoration:underline}
  h1{font-size:34px}
  header .links a.free{display:none}
 }
-/* v3 弹层（2026-10-14）：居中小白卡 + 轻遮罩，兼容旧浏览器（不用 inset/min() 等新语法） */
-#qrTip{position:fixed !important;top:0 !important;left:0 !important;right:0 !important;bottom:0 !important;z-index:2147483646 !important;background:rgba(15,18,25,.4) !important;display:none;flex-direction:column !important;align-items:center !important;justify-content:center !important;gap:14px !important;padding:24px !important;cursor:pointer !important;}
-#qrTipCard{background:#fff;border-radius:16px;padding:18px 18px 14px;box-shadow:0 12px 40px rgba(0,0,0,.35);text-align:center;}
-#qrTipImg{display:block;width:220px !important;height:220px !important;border-radius:8px;}
-#qrTipTxt{color:#333;font-size:15px;line-height:1.7;text-align:center;margin:10px 0 0 !important;}
-#qrTipClose{color:rgba(255,255,255,.9);font-size:13px;margin:0;text-shadow:0 1px 2px rgba(0,0,0,.5);}
 </style>
 </head>
 <body>
@@ -103,7 +97,7 @@ footer a:hover{text-decoration:underline}
   </div>
 
   <div class="contactline">
-    <div class="cl-item"><a id="qrDl" href="assets/wecom-qr.png" style="line-height:0"><img src="assets/wecom-qr.png" alt="企业微信二维码" id="qrImg" style="cursor:pointer" title="点击放大二维码"></a><div id="qrCap">企业微信 · 扫码添加</div></div>
+    <div class="cl-item"><span style="line-height:0;display:inline-block"><img src="assets/wecom-qr.png" alt="企业微信二维码" id="qrImg"></span><div id="qrCap">企业微信 · 扫码添加</div></div>
     <div class="cl-item"><a class="clmail" href="mailto:hello@distilllab.cn">hello@distilllab.cn</a><div>邮件联系</div></div>
   </div>
   <p class="mark-line">拥抱 AI，蒸出未来</p>
@@ -140,46 +134,15 @@ footer a:hover{text-decoration:underline}
 </footer>
 
 <script>
-/* v2（2026-10-14）：下载功能退场。手机/电脑点击二维码 → 统一弹大图层；
-   电脑文案「请用手机微信扫一扫」，手机文案「长按二维码加企微」（微信内长按识别直达）。
-   二维码下方文字按设备自适应。 */
+/* 定版v4（2026-10-14）：放大弹层整体退场。手机点图走微信/浏览器原生看图（长按识别），
+   电脑点图无动作；二维码下方文字按设备自适应。 */
 (function () {
-    var isMobile = /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent);
-    var a = document.getElementById("qrDl");
-    var tip = document.getElementById("qrTip");
-    var tipTxt = document.getElementById("qrTipTxt");
     var cap = document.getElementById("qrCap");
-    if (cap && isMobile) {
+    if (cap && /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent)) {
         cap.textContent = "长按二维码加企微";
     }
-    if (!a || !tip) {
-        return;
-    }
-    a.onclick = function (e) {
-        if (e && e.preventDefault) {
-            e.preventDefault();
-        }
-        if (tipTxt) {
-            tipTxt.innerHTML = isMobile
-                ? "长按上方二维码<br>微信内选「识别图中二维码」直接添加"
-                : "请用手机微信「扫一扫」<br>扫描上方二维码，添加企业微信";
-        }
-        try { tip.style.display = "flex"; } catch (ignored) {}
-        return false;
-    };
-    tip.onclick = function () {
-        try { tip.style.display = "none"; } catch (ignored) {}
-    };
 }());
 </script>
-
-<div id="qrTip">
-  <div id="qrTipCard">
-    <img id="qrTipImg" src="assets/wecom-qr.png" alt="企业微信二维码">
-    <p id="qrTipTxt">长按上方二维码<br>识别并添加企业微信</p>
-  </div>
-  <p id="qrTipClose">点击任意处关闭</p>
-</div>
 
 </body>
 </html>
