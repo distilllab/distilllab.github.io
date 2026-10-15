@@ -66,6 +66,10 @@ header .links a.free{color:var(--green);font-weight:700}
 #totop.show{display:inline-flex}
 #totop:hover{background:#4d7d1a}
 #totop:focus-visible{outline:3px solid var(--deep);outline-offset:3px}
+#vp{position:fixed;left:0;top:0;right:0;bottom:0;background:rgba(16,19,12,.95);z-index:100;display:none;align-items:center;justify-content:center;padding:20px}
+#vp.on{display:flex}
+#vp video{max-width:100%;max-height:88%;width:auto;border-radius:10px}
+#vpc{position:fixed;top:16px;right:16px;width:44px;height:44px;border-radius:50%;border:none;background:var(--white);color:var(--deep);font-size:22px;font-weight:700;z-index:101}
 
 footer{border-top:1px solid var(--line);padding:22px 0 30px}
 footer .wrap{display:flex;gap:18px;flex-wrap:wrap;align-items:center;font-size:12px;color:var(--muted)}
@@ -129,6 +133,7 @@ footer a{color:var(--green);text-decoration:none}
 </main>
 
 <button id="totop" type="button" aria-label="回到留言板">↑</button>
+<div id="vp" role="dialog" aria-label="视频播放"><button id="vpc" type="button" aria-label="关闭">×</button><video id="vpv" src="" controls autoplay playsinline></video></div>
 <footer><div class="wrap">
   <span>© 2026 DistillLab 蒸馏研究室</span>
   <span>「蒸」——我们的本行：把厚的，蒸成薄的。</span>
@@ -254,16 +259,7 @@ footer a{color:var(--green);text-decoration:none}
     .catch(function(){btn.disabled=false;btn.textContent="发出去";st.innerHTML="<span style='color:#ffd479'>网络不通？</span>备用：<a href='mailto:hello@distilllab.cn' style='color:#fffef9;font-weight:700;text-decoration:underline'>发邮件</a> 或扫企微码。";});
   });
 })();
-(function(){
-  var stages=[].slice.call(document.querySelectorAll(".stage")),tabs=[].slice.call(document.querySelectorAll("[data-step]")),play=document.getElementById("play"),bar=document.querySelector(".progress"),reduce=window.matchMedia("(prefers-reduced-motion: reduce)");var current=0,playing=!reduce.matches,timer;
-  function show(i){current=i;stages.forEach(function(s,k){s.hidden=k!==i;s.classList.toggle("active",k===i)});tabs.forEach(function(b,k){b.setAttribute("aria-pressed",String(k===i))});bar.classList.remove("running");void bar.offsetWidth;if(playing&&!document.hidden)bar.classList.add("running")}
-  function schedule(){clearInterval(timer);play.textContent=playing?"暂停":"播放";bar.classList.toggle("running",playing&&!document.hidden);if(playing&&!document.hidden)timer=setInterval(function(){show((current+1)%stages.length)},5000)}
-  tabs.forEach(function(b){b.addEventListener("click",function(){show(Number(b.dataset.step));schedule()})});
-  play.addEventListener("click",function(){playing=!playing;show(current);schedule()});
-  document.addEventListener("visibilitychange",schedule);
-  reduce.addEventListener("change",function(){if(reduce.matches){playing=false;schedule()}});
-  schedule();
-})();
+
 </script>
 <script>
 (function(){
@@ -287,17 +283,35 @@ footer a{color:var(--green);text-decoration:none}
   });
 })();
 (function(){
-  /* 悬浮回顶：不管下拉多深，一点回到留言板 */
-  var b=document.getElementById("totop"),msg=document.getElementById("msg");
-  function onScroll(){
-    if(window.pageYOffset>600){b.classList.add("show")}else{b.classList.remove("show")}
+  /* 视频流：进视口静音自动播；点卡片 = 进全屏播放层 */
+  var vids=[].slice.call(document.querySelectorAll('.vcard video'));
+  var vp=document.getElementById('vp'),vpv=document.getElementById('vpv'),vpc=document.getElementById('vpc');
+  var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function openVP(v){
+    vpv.src=v.currentSrc||v.src;
+    vp.classList.add('on');
+    vpv.play().catch(function(){});
   }
-  window.addEventListener("scroll",onScroll,{passive:true});
-  onScroll();
-  b.addEventListener("click",function(){
-    if(msg&&msg.scrollIntoView){msg.scrollIntoView({behavior:/smooth/,block:/start/})}
-    else{window.scrollTo(0,0)}
+  function closeVP(){
+    vp.classList.remove('on');
+    vpv.pause();vpv.removeAttribute('src');vpv.load();
+  }
+  if('IntersectionObserver' in window && !reduce){
+    var io=new IntersectionObserver(function(es){
+      es.forEach(function(e){
+        var v=e.target;
+        if(e.isIntersecting && e.intersectionRatio>=0.6){v.play().catch(function(){})}
+        else{v.pause();try{v.currentTime=0}catch(err){}}
+      });
+    },{threshold:[0,0.6,1]});
+    vids.forEach(function(v){io.observe(v)});
+  }
+  vids.forEach(function(v){
+    v.addEventListener('click',function(){openVP(v)});
   });
+  vpc.addEventListener('click',function(e){e.stopPropagation();closeVP()});
+  vp.addEventListener('click',function(e){if(e.target===vp){closeVP()}});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape'){closeVP()}});
 })();
 </script>
 </body>
