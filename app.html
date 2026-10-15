@@ -313,6 +313,19 @@ footer a{color:var(--green);text-decoration:none}
   vp.addEventListener('click',function(e){if(e.target===vp){closeVP()}});
   document.addEventListener('keydown',function(e){if(e.key==='Escape'){closeVP()}});
 })();
+
+(function(){
+  /* 悬浮回顶：滚过600px出现，点一下平滑回留言板 */
+  var b=document.getElementById('totop');
+  function onScroll(){
+    if(window.pageYOffset>600){b.classList.add('show')}else{b.classList.remove('show')}
+  }
+  window.addEventListener('scroll',onScroll,{passive:true});
+  onScroll();
+  b.addEventListener('click',function(){
+    window.scrollTo({top:0,behavior:'smooth'});
+  });
+})();
 </script>
 </body>
 </html>
