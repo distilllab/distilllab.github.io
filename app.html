@@ -62,6 +62,10 @@ header .links a.free{color:var(--green);font-weight:700}
 .vcard figcaption{padding:9px 11px;font-size:13px;font-weight:700;line-height:1.45}
 .vcard .no{color:var(--green);font-size:11px;font-weight:700;margin-right:6px}
 .vcard.soon{border:1.5px dashed var(--line);background:none;display:flex;align-items:center;justify-content:center;height:200px;color:var(--muted);font-size:13px}
+#totop{position:fixed;right:18px;bottom:18px;width:46px;height:46px;border-radius:50%;border:none;background:var(--green);color:#fff;font-size:22px;line-height:1;box-shadow:0 4px 14px rgba(31,58,44,.35);z-index:50;display:none;align-items:center;justify-content:center}
+#totop.show{display:inline-flex}
+#totop:hover{background:#4d7d1a}
+#totop:focus-visible{outline:3px solid var(--deep);outline-offset:3px}
 
 footer{border-top:1px solid var(--line);padding:22px 0 30px}
 footer .wrap{display:flex;gap:18px;flex-wrap:wrap;align-items:center;font-size:12px;color:var(--muted)}
@@ -124,6 +128,7 @@ footer a{color:var(--green);text-decoration:none}
   </section>
 </main>
 
+<button id="totop" type="button" aria-label="回到留言板">↑</button>
 <footer><div class="wrap">
   <span>© 2026 DistillLab 蒸馏研究室</span>
   <span>「蒸」——我们的本行：把厚的，蒸成薄的。</span>
@@ -279,6 +284,19 @@ footer a{color:var(--green);text-decoration:none}
     v.addEventListener('click',function(){
       if(v.paused){v.play().catch(function(){})}else{v.pause()}
     });
+  });
+})();
+(function(){
+  /* 悬浮回顶：不管下拉多深，一点回到留言板 */
+  var b=document.getElementById("totop"),msg=document.getElementById("msg");
+  function onScroll(){
+    if(window.pageYOffset>600){b.classList.add("show")}else{b.classList.remove("show")}
+  }
+  window.addEventListener("scroll",onScroll,{passive:true});
+  onScroll();
+  b.addEventListener("click",function(){
+    if(msg&&msg.scrollIntoView){msg.scrollIntoView({behavior:/smooth/,block:/start/})}
+    else{window.scrollTo(0,0)}
   });
 })();
 </script>
