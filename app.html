@@ -5,6 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>留言板 + 案例视频 · DistillLab 蒸馏研究室</title>
 <meta name="description" content="DistillLab 蒸馏研究室：想到什么写什么的留言板，和持续更新的案例视频。48 小时免费诊断一个交接难题。">
+<link rel="icon" type="image/png" href="assets/favicon.png">
+<link rel="apple-touch-icon" href="assets/favicon.png">
 <style>
 :root{--paper:#f4f2eb;--ink:#25352e;--green:#639922;--deep:#1f3a2c;--muted:#68726a;--line:#cbd0c6;--white:#fffef9;--soft:#e9efe8}
 *{margin:0;padding:0;box-sizing:border-box}
@@ -57,11 +59,15 @@ header .links a.free{color:var(--green);font-weight:700}
 .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
 @media(min-width:760px){.grid{grid-template-columns:repeat(3,1fr)}}
 @media(min-width:1040px){.grid{grid-template-columns:repeat(4,1fr)}}
-.vcard{margin:0;background:var(--white);border:1px solid var(--line);border-radius:12px;overflow:hidden}
-.vcard video{display:block;width:100%;background:#14170f;cursor:pointer}
+.vcard{margin:0;position:relative;background:var(--white);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+.vcard video{display:block;width:100%;aspect-ratio:9/16;object-fit:cover;background:#14170f;cursor:pointer}
+/* 封面上的播放提示：纯装饰，点击穿透到 video */
+.vcard .play{position:absolute;left:50%;top:36%;transform:translate(-50%,-50%);width:52px;height:52px;border-radius:50%;background:rgba(20,23,15,.5);border:2px solid rgba(255,255,255,.92);display:flex;align-items:center;justify-content:center;pointer-events:none;box-shadow:0 2px 12px rgba(0,0,0,.3)}
+.vcard .play::before{content:"";width:0;height:0;border-left:15px solid #fff;border-top:9px solid transparent;border-bottom:9px solid transparent;margin-left:4px}
+.vcard:hover .play{background:rgba(99,153,34,.85)}
 .vcard figcaption{padding:9px 11px;font-size:13px;font-weight:700;line-height:1.45}
 .vcard .no{color:var(--green);font-size:11px;font-weight:700;margin-right:6px}
-.vcard.soon{border:1.5px dashed var(--line);background:none;display:flex;align-items:center;justify-content:center;height:200px;color:var(--muted);font-size:13px}
+.vcard.soon{border:1.5px dashed var(--line);background:none;display:flex;align-items:center;justify-content:center;min-height:120px;color:var(--muted);font-size:13px}
 #totop{position:fixed;right:18px;bottom:18px;width:46px;height:46px;border-radius:50%;border:none;background:var(--green);color:#fff;font-size:22px;line-height:1;box-shadow:0 4px 14px rgba(31,58,44,.35);z-index:50;display:none;align-items:center;justify-content:center}
 #totop.show{display:inline-flex}
 #totop:hover{background:#4d7d1a}
@@ -113,18 +119,21 @@ footer a{color:var(--green);text-decoration:none}
   <!-- 案例视频：全部是视频，没有文字说明，做一条放一条 -->
   <section id="videos" class="wrap">
     <div class="vhead"><h2>案例视频</h2><span class="vchip">3 条 · 做一条放一条</span></div>
-    <p class="vhint">刷到哪个看哪个：点一下播放，再点一下停。声音默认关着，地铁上也能刷。</p>
+    <p class="vhint">点一下封面，看完整案例（每条约 1 分钟），关掉回到这里。</p>
     <div class="grid">
       <figure class="vcard">
-        <video src="assets/videos/v01.mp4" poster="assets/videos/v01.jpg" muted loop playsinline preload="none" aria-label="案例视频：老师傅一请假，厂里谁敢接他的活"></video>
+        <video src="assets/videos/v01.mp4" poster="assets/videos/v01.jpg" muted loop playsinline preload="metadata" aria-label="案例视频：老师傅一请假，厂里谁敢接他的活"></video>
+        <span class="play" aria-hidden="true"></span>
         <figcaption><span class="no">置顶 01</span>老师傅一请假，厂里谁敢接他的活？</figcaption>
       </figure>
       <figure class="vcard">
-        <video src="assets/videos/v02.mp4" poster="assets/videos/v02.jpg" muted loop playsinline preload="none" aria-label="案例视频：一道折弯工序，看AI能不能接住"></video>
+        <video src="assets/videos/v02.mp4" poster="assets/videos/v02.jpg" muted loop playsinline preload="metadata" aria-label="案例视频：一道折弯工序，看AI能不能接住"></video>
+        <span class="play" aria-hidden="true"></span>
         <figcaption><span class="no">置顶 02</span>一道折弯工序，看AI能不能接住</figcaption>
       </figure>
       <figure class="vcard">
-        <video src="assets/videos/v03.mp4" poster="assets/videos/v03.jpg" muted loop playsinline preload="none" aria-label="案例视频：帮1000家工厂，把老师傅经验留下来"></video>
+        <video src="assets/videos/v03.mp4" poster="assets/videos/v03.jpg" muted loop playsinline preload="metadata" aria-label="案例视频：帮1000家工厂，把老师傅经验留下来"></video>
+        <span class="play" aria-hidden="true"></span>
         <figcaption><span class="no">置顶 03</span>帮1000家工厂，把老师傅经验留下来</figcaption>
       </figure>
       <div class="vcard soon">下一条，正在做</div>
@@ -263,55 +272,29 @@ footer a{color:var(--green);text-decoration:none}
 </script>
 <script>
 (function(){
-  /* 视频流：进视口自动播（静音），出视口停并回位；点按=播放/暂停 */
-  var vids=[].slice.call(document.querySelectorAll('.vcard video'));
-  var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if('IntersectionObserver' in window && !reduce){
-    var io=new IntersectionObserver(function(es){
-      es.forEach(function(e){
-        var v=e.target;
-        if(e.isIntersecting && e.intersectionRatio>=0.6){v.play().catch(function(){})}
-        else{v.pause();try{v.currentTime=0}catch(err){}}
-      });
-    },{threshold:[0,0.6,1]});
-    vids.forEach(function(v){io.observe(v)});
-  }
-  vids.forEach(function(v){
-    v.addEventListener('click',function(){
-      if(v.paused){v.play().catch(function(){})}else{v.pause()}
-    });
-  });
-})();
-(function(){
-  /* 视频流：进视口静音自动播；点卡片 = 进全屏播放层 */
-  var vids=[].slice.call(document.querySelectorAll('.vcard video'));
+  /* 案例视频：封面不自动播（封面才稳），点一下进全屏播放 */
+  var cards=[].slice.call(document.querySelectorAll('.vcard video'));
   var vp=document.getElementById('vp'),vpv=document.getElementById('vpv'),vpc=document.getElementById('vpc');
-  var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   function openVP(v){
-    vpv.src=v.currentSrc||v.src;
+    var s=v.getAttribute('src');
+    if(!s)return;
+    vpv.src=s;
     vp.classList.add('on');
+    document.body.style.overflow='hidden';
+    try{vpv.currentTime=0}catch(err){}
     vpv.play().catch(function(){});
   }
   function closeVP(){
     vp.classList.remove('on');
     vpv.pause();vpv.removeAttribute('src');vpv.load();
+    document.body.style.overflow='';
   }
-  if('IntersectionObserver' in window && !reduce){
-    var io=new IntersectionObserver(function(es){
-      es.forEach(function(e){
-        var v=e.target;
-        if(e.isIntersecting && e.intersectionRatio>=0.6){v.play().catch(function(){})}
-        else{v.pause();try{v.currentTime=0}catch(err){}}
-      });
-    },{threshold:[0,0.6,1]});
-    vids.forEach(function(v){io.observe(v)});
-  }
-  vids.forEach(function(v){
+  cards.forEach(function(v){
     v.addEventListener('click',function(){openVP(v)});
   });
   vpc.addEventListener('click',function(e){e.stopPropagation();closeVP()});
   vp.addEventListener('click',function(e){if(e.target===vp){closeVP()}});
-  document.addEventListener('keydown',function(e){if(e.key==='Escape'){closeVP()}});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape'&&vp.classList.contains('on')){closeVP()}});
 })();
 
 (function(){
