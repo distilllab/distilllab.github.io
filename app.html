@@ -74,7 +74,7 @@ header .links a.free{color:var(--green);font-weight:700}
 #totop:focus-visible{outline:3px solid var(--deep);outline-offset:3px}
 #vp{position:fixed;left:0;top:0;right:0;bottom:0;background:rgba(16,19,12,.95);z-index:100;display:none;align-items:center;justify-content:center;padding:20px;overscroll-behavior:contain;touch-action:none}
 #vp.on{display:flex}
-#vp video{max-width:100%;max-height:88%;width:auto;border-radius:10px}
+#vp video{width:auto;height:auto;max-width:min(100%,calc(88vh * 9 / 16));max-height:88vh;object-fit:contain;border-radius:10px}
 #vpc{position:fixed;top:16px;right:16px;width:44px;height:44px;border-radius:50%;border:none;background:var(--white);color:var(--deep);font-size:22px;font-weight:700;z-index:101}
 
 footer{border-top:1px solid var(--line);padding:22px 0 30px}
@@ -278,6 +278,19 @@ footer a{color:var(--green);text-decoration:none}
   var cards=[].slice.call(document.querySelectorAll('.vcard video'));
   var vp=document.getElementById('vp'),vpv=document.getElementById('vpv'),vpc=document.getElementById('vpc');
   var vpOpen=false;
+  /* 播放器尺寸按视频真实比例算：矮视口（微信标题栏等）下不会被 max-height 压扁 */
+  function fitVP(){
+    if(!vpv.videoWidth||!vpv.videoHeight)return;
+    var availW=window.innerWidth-40;
+    var availH=window.innerHeight*0.9-40;
+    var r=vpv.videoWidth/vpv.videoHeight;
+    var w=Math.min(availW,availH*r);
+    vpv.style.width=Math.round(w)+'px';
+    vpv.style.height=Math.round(w/r)+'px';
+  }
+  vpv.addEventListener('loadedmetadata',fitVP);
+  window.addEventListener('resize',fitVP);
+  window.addEventListener('orientationchange',fitVP);
   function openVP(v){
     var s=v.getAttribute('src');
     if(!s)return;
@@ -286,12 +299,14 @@ footer a{color:var(--green);text-decoration:none}
     document.body.style.overflow='hidden';
     if(!vpOpen){history.pushState({vp:1},'',location.href);}
     vpOpen=true;
+    fitVP();
     try{vpv.currentTime=0}catch(err){}
     vpv.play().catch(function(){});
   }
   function doClose(nav){
     vp.classList.remove('on');
     vpv.pause();vpv.removeAttribute('src');vpv.load();
+    vpv.style.width='';vpv.style.height='';
     document.body.style.overflow='';
     if(nav && vpOpen){history.back();}  // 用户点 X/遮罩：撤销 push，URL 复原
     vpOpen=false;
