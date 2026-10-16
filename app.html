@@ -72,7 +72,7 @@ header .links a.free{color:var(--green);font-weight:700}
 #totop.show{display:inline-flex}
 #totop:hover{background:#4d7d1a}
 #totop:focus-visible{outline:3px solid var(--deep);outline-offset:3px}
-#vp{position:fixed;left:0;top:0;right:0;bottom:0;background:rgba(16,19,12,.95);z-index:100;display:none;align-items:center;justify-content:center;padding:20px}
+#vp{position:fixed;left:0;top:0;right:0;bottom:0;background:rgba(16,19,12,.95);z-index:100;display:none;align-items:center;justify-content:center;padding:20px;overscroll-behavior:contain;touch-action:none}
 #vp.on{display:flex}
 #vp video{max-width:100%;max-height:88%;width:auto;border-radius:10px}
 #vpc{position:fixed;top:16px;right:16px;width:44px;height:44px;border-radius:50%;border:none;background:var(--white);color:var(--deep);font-size:22px;font-weight:700;z-index:101}
@@ -272,29 +272,39 @@ footer a{color:var(--green);text-decoration:none}
 </script>
 <script>
 (function(){
-  /* 案例视频：封面不自动播（封面才稳），点一下进全屏播放 */
+  /* 案例视频：封面不自动播（封面才稳），点一下进全屏播放
+     防误触：手机边缘左滑=系统返回，易误退。用 history.pushState 拦截——
+     开全屏时压一条历史，左滑先消费它关掉全屏（popstate），再滑一次才真退出页面。 */
   var cards=[].slice.call(document.querySelectorAll('.vcard video'));
   var vp=document.getElementById('vp'),vpv=document.getElementById('vpv'),vpc=document.getElementById('vpc');
+  var vpOpen=false;
   function openVP(v){
     var s=v.getAttribute('src');
     if(!s)return;
     vpv.src=s;
     vp.classList.add('on');
     document.body.style.overflow='hidden';
+    if(!vpOpen){history.pushState({vp:1},'',location.href);}
+    vpOpen=true;
     try{vpv.currentTime=0}catch(err){}
     vpv.play().catch(function(){});
   }
-  function closeVP(){
+  function doClose(nav){
     vp.classList.remove('on');
     vpv.pause();vpv.removeAttribute('src');vpv.load();
     document.body.style.overflow='';
+    if(nav && vpOpen){history.back();}  // 用户点 X/遮罩：撤销 push，URL 复原
+    vpOpen=false;
   }
+  window.addEventListener('popstate',function(){
+    if(vpOpen){doClose(false);}  // 左滑返回：关全屏即可，不再额外退页
+  });
   cards.forEach(function(v){
     v.addEventListener('click',function(){openVP(v)});
   });
-  vpc.addEventListener('click',function(e){e.stopPropagation();closeVP()});
-  vp.addEventListener('click',function(e){if(e.target===vp){closeVP()}});
-  document.addEventListener('keydown',function(e){if(e.key==='Escape'&&vp.classList.contains('on')){closeVP()}});
+  vpc.addEventListener('click',function(e){e.stopPropagation();doClose(true)});
+  vp.addEventListener('click',function(e){if(e.target===vp){doClose(true)}});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape'&&vpOpen){doClose(true)}});
 })();
 
 (function(){
