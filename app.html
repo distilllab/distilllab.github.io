@@ -67,6 +67,10 @@ header .links a.free{color:var(--green);font-weight:700}
 .vcard:hover .play{background:rgba(99,153,34,.85)}
 .vcard figcaption{padding:9px 11px;font-size:13px;font-weight:700;line-height:1.45}
 .vcard .no{color:var(--green);font-size:11px;font-weight:700;margin-right:6px}
+.vcard .no.warn{color:var(--orange,#b6532b)}
+.vcard figcaption .tag{display:block;margin-top:4px;font-size:11px;font-weight:400;color:var(--orange,#b6532b);letter-spacing:.02em}
+.vcard.plan video{filter:saturate(.82)}
+.vcard.plan{border-color:#d8c6b8}
 .vcard.soon{border:1.5px dashed var(--line);background:none;display:flex;align-items:center;justify-content:center;min-height:120px;color:var(--muted);font-size:13px}
 #totop{position:fixed;right:18px;bottom:18px;width:46px;height:46px;border-radius:50%;border:none;background:var(--green);color:#fff;font-size:22px;line-height:1;box-shadow:0 4px 14px rgba(31,58,44,.35);z-index:50;display:none;align-items:center;justify-content:center}
 #totop.show{display:inline-flex}
@@ -118,23 +122,48 @@ footer a{color:var(--green);text-decoration:none}
 
   <!-- 案例视频：全部是视频，没有文字说明，做一条放一条 -->
   <section id="videos" class="wrap">
-    <div class="vhead"><h2>案例视频</h2><span class="vchip">3 条 · 做一条放一条</span></div>
+    <div class="vhead"><h2>案例视频</h2><span class="vchip">8 条 · 做一条放一条</span></div>
     <p class="vhint">点一下封面，看完整案例（每条约 1 分钟），关掉回到这里。</p>
     <div class="grid">
       <figure class="vcard">
-        <video src="assets/videos/v01-v5.mp4" poster="assets/videos/v01-v5.jpg" muted loop playsinline preload="metadata" aria-label="案例视频：老师傅经验萃取，把最难交接的手艺留给接班人"></video>
+        <video src="assets/videos/v01-v6.mp4" poster="assets/videos/v01-v6.jpg" muted loop playsinline preload="metadata" aria-label="案例视频：老师傅经验萃取，把最难交接的手艺留给接班人"></video>
         <span class="play" aria-hidden="true"></span>
         <figcaption><span class="no">置顶 01</span>老师傅一走，手艺就断档</figcaption>
       </figure>
       <figure class="vcard">
-        <video src="assets/videos/v02-v5.mp4" poster="assets/videos/v02-v5.jpg" muted loop playsinline preload="metadata" aria-label="案例视频：小厂经营一页看板，每周一页一眼看完"></video>
+        <video src="assets/videos/v02-v6.mp4" poster="assets/videos/v02-v6.jpg" muted loop playsinline preload="metadata" aria-label="案例视频：小厂经营一页看板，每周一页一眼看完"></video>
         <span class="play" aria-hidden="true"></span>
         <figcaption><span class="no">置顶 02</span>数字都在，就是没人汇总</figcaption>
       </figure>
       <figure class="vcard">
-        <video src="assets/videos/v03-v5.mp4" poster="assets/videos/v03-v5.jpg" muted loop playsinline preload="metadata" aria-label="案例视频：研报蒸馏，百页研报蒸成一页干货"></video>
+        <video src="assets/videos/v03-v6.mp4" poster="assets/videos/v03-v6.jpg" muted loop playsinline preload="metadata" aria-label="案例视频：研报蒸馏，百页研报蒸成一页干货"></video>
         <span class="play" aria-hidden="true"></span>
         <figcaption><span class="no">置顶 03</span>百页研报，没时间看</figcaption>
+      </figure>
+      <figure class="vcard">
+        <video src="assets/videos/v04-v6.mp4" poster="assets/videos/v04-v6.jpg" muted loop playsinline preload="metadata" aria-label="案例视频：书籍蒸馏，一本厚书蒸成几张能用的知识卡"></video>
+        <span class="play" aria-hidden="true"></span>
+        <figcaption><span class="no">04</span>一本厚书，吃透要一个月</figcaption>
+      </figure>
+      <figure class="vcard">
+        <video src="assets/videos/v05-v6.mp4" poster="assets/videos/v05-v6.jpg" muted loop playsinline preload="metadata" aria-label="案例视频：企业知识库整理，文件很多关键还得问人"></video>
+        <span class="play" aria-hidden="true"></span>
+        <figcaption><span class="no">05</span>文件很多，关键还得问人</figcaption>
+      </figure>
+      <figure class="vcard">
+        <video src="assets/videos/v06-v6.mp4" poster="assets/videos/v06-v6.jpg" muted loop playsinline preload="metadata" aria-label="案例视频：去AI味内容，逐句改成人话，附对照表"></video>
+        <span class="play" aria-hidden="true"></span>
+        <figcaption><span class="no">06</span>一眼就是AI写的</figcaption>
+      </figure>
+      <figure class="vcard">
+        <video src="assets/videos/v07-v6.mp4" poster="assets/videos/v07-v6.jpg" muted loop playsinline preload="metadata" aria-label="案例视频：AI工作流定制，交付能带走的技能包"></video>
+        <span class="play" aria-hidden="true"></span>
+        <figcaption><span class="no">07</span>AI用着用着就忘了</figcaption>
+      </figure>
+      <figure class="vcard plan">
+        <video src="assets/videos/v08-v6.mp4" poster="assets/videos/v08-v6.jpg" muted loop playsinline preload="metadata" aria-label="在建预告：设备握手平台，目前暂不接单"></video>
+        <span class="play" aria-hidden="true"></span>
+        <figcaption><span class="no warn">08</span>老设备，不会说话<em class="tag">在建 · 暂不接单</em></figcaption>
       </figure>
       <div class="vcard soon">下一条，正在做</div>
     </div>
